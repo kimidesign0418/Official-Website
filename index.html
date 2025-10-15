@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kimi Design | 想いを、やさしく かたちに。</title>
+    
+    <!-- ⚡ 改善点 1: Google Fontsの読み込みを高速化 (preconnect / preload) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDNを読み込み -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* デザインガイドに基づくカスタムカラーとフォントの定義 */
+        :root {
+            /* メインカラー: ミントグリーン (#A7C4A0) */
+            --color-mint-green: #A7C4A0;
+            /* サブカラー: 生成り・アイボリー (#F9F7F2) */
+            --color-off-white: #F9F7F2;
+            /* アクセントカラー: ゴールドベージュ/スモーキーブラウン (今回はより上品な#D4B898を採用) */
+            --color-accent: #D4B898; 
+            /* テキストカラー: 落ち着いたチャコール */
+            --color-text-dark: #4A4A4A;
+        }
+
+        body {
+            /* 全体の背景色をサブカラーに設定 */
+            background-color: var(--color-off-white);
+            color: var(--color-text-dark);
+        }
+        
+        /* 日本語フォント: Shippori Mincho (優しさと上品さ) */
+        .font-jp {
+            font-family: 'Shippori Mincho', 'Noto Serif JP', serif;
+        }
+        /* 英字フォント: Cormorant Garamond (柔らかい女性的な印象) */
+        .font-en {
+            font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+        }
+
+        /* カスタムTailwindクラスの定義 */
+        .bg-mint { background-color: var(--color-mint-green); }
+        .text-mint { color: var(--color-mint-green); }
+        .border-mint { border-color: var(--color-mint-green); }
+        .bg-accent { background-color: var(--color-accent); }
+
+        /* ヒーローセクションの背景 (自然光・淡い被写界深度のイメージ) */
+        .hero-bg-texture {
+            /* 淡い被写界深度の印象を出すためのオーバーレイ */
+            background: linear-gradient(rgba(249, 247, 242, 0.6), rgba(249, 247, 242, 0.9)), 
+                        url('https://images.unsplash.com/photo-1542438510-91a02931201d?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-position: bottom;
+            background-size: cover;
+        }
+
+        /* セクション見出しのスタイル */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50%;
+            height: 2px;
+            background-color: var(--color-mint-green);
+        }
+
+        /* サービスリストの装飾 */
+        .service-list-item {
+            border-bottom: 1px solid rgba(167, 196, 160, 0.4); /* 薄いミントグリーンの下線 */
+        }
+    </style>
+
+    <script>
+        // Tailwindのカスタム設定（色をTailwindクラスとして使えるように定義）
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'mint': 'var(--color-mint-green)',
+                        'off-white': 'var(--color-off-white)',
+                        'accent': 'var(--color-accent)',
+                        'dark-text': 'var(--color-text-dark)',
+                    },
+                },
+            }
+        }
+    </script>
+</head>
+
+<body class="font-jp antialiased">
+    <!-- ヘッダー (ナビゲーション) -->
+    <header class="sticky top-0 z-50 bg-off-white bg-opacity-95 shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- ロゴ/屋号 -->
+            <a href="#home" class="font-en text-3xl font-bold text-mint tracking-wider">
+                Kimi Design
+            </a>
+            
+            <!-- ナビゲーションリンク -->
+            <nav class="hidden md:block">
+                <ul class="flex space-x-6 text-base font-medium">
+                    <li><a href="#concept" class="hover:text-mint transition duration-200">Concept</a></li>
+                    <li><a href="#service" class="hover:text-mint transition duration-200">Service</a></li>
+                    <li><a href="#about" class="hover:text-mint transition duration-200">About</a></li>
+                    <li><a href="#contact" class="hover:text-mint transition duration-200">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <!-- お問い合わせボタン（モバイル・デスクトップ共通） -->
+            <a href="#contact" class="px-4 py-2 bg-mint text-white text-sm font-medium rounded-full hover:bg-opacity-80 transition duration-300 shadow-md">
+                お問い合わせ
+            </a>
+        </div>
+    </header>
+
+    <main>
+        
+        <!-- 🌸 ファーストビュー (ヒーローセクション) -->
+        <section id="home" class="hero-bg-texture w-full min-h-[70vh] flex items-center justify-center p-8 text-center">
+            <div class="max-w-4xl">
+                <!-- メインコピー -->
+                <h1 class="font-jp text-5xl md:text-7xl font-bold text-dark-text leading-snug mb-6">
+                    想いを、やさしく かたちに。
+                </h1>
+                <!-- サブコピー -->
+                <p class="font-jp text-lg md:text-xl text-dark-text mb-10">
+                    あなたの中にある「伝えたい気持ち」を、<br>
+                    やわらかなデザインで自然に届けます。
+                </p>
+                <!-- CTAボタン -->
+                <a href="#contact" class="inline-block px-10 py-4 bg-accent text-dark-text text-lg font-bold rounded-full shadow-lg hover:shadow-xl hover:bg-opacity-90 transition duration-300">
+                    やさしさを伝えるデザイン相談はこちら
+                </a>
+            </div>
+        </section>
+
+        <!-- 🌿 Concept (コンセプトセクション) -->
+        <section id="concept" class="container mx-auto px-6 py-20 md:py-32">
+            <div class="max-w-3xl mx-auto text-center">
+                <p class="text-mint text-sm font-medium tracking-widest mb-2">Kimi Design Philosophy</p>
+                <h2 class="font-jp text-3xl md:text-4xl font-bold mb-12">
+                    「あなたらしさ」を、そっと整えるデザインを。
+                </h2>
+
+                <div class="space-y-6 text-lg leading-relaxed">
+                    <p>
+                        Kimi Design は、人の“想い”を大切にしながら、言葉・色・形を”やさしく整える”デザイン室です。
+                    </p>
+                    <p>
+                        屋号やロゴ、ホームページなど、“はじまり”に寄り添うデザインをつくっています。
+                    </p>
+                    <p class="font-semibold text-mint pt-4">
+                        見た人の心に、あたたかな光が灯るように。<br>
+                        あなたの想いを、ていねいに形にしていきます。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ✨ Service (サービスセクション) -->
+        <section id="service" class="bg-white py-20 md:py-32">
+            <div class="container mx-auto px-6">
+                <div class="text-center">
+                    <p class="text-mint text-sm font-medium tracking-widest mb-2">Service Menu</p>
+                    <h2 class="section-title mx-auto font-en text-4xl text-dark-text mb-16">
+                        Services
+                    </h2>
+                </div>
+
+                <div class="max-w-4xl mx-auto space-y-12">
+                    
+                    <!-- サービス 01: 屋号・ロゴデザイン -->
+                    <div class="service-list-item p-6 md:p-8 hover:bg-off-white transition duration-300 rounded-lg">
+                        <p class="text-mint text-2xl font-en font-bold mb-2">01.</p>
+                        <h3 class="font-jp text-2xl font-semibold mb-4 text-dark-text">屋号・ロゴデザイン</h3>
+                        <p class="text-lg leading-relaxed text-gray-700">
+                            あなたの想いや世界観を丁寧にヒアリングし、心地よい色と形で「あなたらしさ」を表現します。名刺やショップカードにも使える“想いの印”を一緒につくりましょう。
+                        </p>
+                    </div>
+
+                    <!-- サービス 02: ホームページ制作 -->
+                    <div class="service-list-item p-6 md:p-8 hover:bg-off-white transition duration-300 rounded-lg">
+                        <p class="text-mint text-2xl font-en font-bold mb-2">02.</p>
+                        <h3 class="font-jp text-2xl font-semibold mb-4 text-dark-text">ホームページ制作</h3>
+                        <p class="text-lg leading-relaxed text-gray-700">
+                            どんな想いでこの仕事をしているのか。その背景を大切にしながら、構成・文章・色を整えます。訪問看護・サロン・福祉など、やさしさを伝えたい事業のホームページを得意としています。
+                        </p>
+                    </div>
+
+                    <!-- サービス 03: デザイン相談・アドバイス -->
+                    <div class="service-list-item p-6 md:p-8 hover:bg-off-white transition duration-300 rounded-lg">
+                        <p class="text-mint text-2xl font-en font-bold mb-2">03.</p>
+                        <h3 class="font-jp text-2xl font-semibold mb-4 text-dark-text">デザイン相談・アドバイス</h3>
+                        <p class="text-lg leading-relaxed text-gray-700">
+                            「デザインに自信がない」「方向性がわからない」方へ。色や言葉のトーンを一緒に見直し、見る人に安心感を与えるデザインを提案します。
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 🌕 About (Kimi Designについて) -->
+        <section id="about" class="container mx-auto px-6 py-20 md:py-32">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center">
+                    <p class="text-mint text-sm font-medium tracking-widest mb-2">Designer Profile</p>
+                    <h2 class="section-title mx-auto font-en text-4xl text-dark-text mb-16">
+                        About Kimi Design
+                    </h2>
+                </div>
+                
+                <div class="md:flex md:space-x-10 items-start">
+                    <!-- プロフィール写真のプレースホルダー -->
+                    <!-- ⚡ 改善点 3: loading="lazy" を追加し、スクロール後の画像読み込みを遅延させる -->
+                    <div class="w-full md:w-1/3 mb-8 md:mb-0 flex-shrink-0">
+                        <div class="w-48 h-48 mx-auto bg-mint rounded-full shadow-lg flex items-center justify-center text-white text-xl font-bold font-en opacity-80" 
+                             style="background-image: url('https://placehold.co/200x200/A7C4A0/F9F7F2?text=Designer+Photo'); background-size: cover;"
+                             loading="lazy"
+                             >
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- 自己紹介テキスト -->
+                    <div class="md:w-2/3 space-y-5 text-lg leading-relaxed text-gray-700">
+                        <p class="text-xl font-semibold text-mint">
+                            こんにちは。Kimi DesignのKimiです。
+                        </p>
+                        <p>
+                            訪問看護のサポートを通して、「人の想いを形にして伝えること」の大切さを感じてきました。
+                        </p>
+                        <p>
+                            ひとつひとつの想いを丁寧に受けとめ、“その人らしさ”が自然に伝わるデザインをつくる。それが、私の仕事です。
+                        </p>
+                        <p class="font-bold pt-2">
+                            小さな一歩を、やさしく丁寧に。<br>
+                            あなたの想いを形にするお手伝いをしています。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🌿 Contact (お問い合わせセクション) -->
+        <section id="contact" class="bg-mint py-20 md:py-32">
+            <div class="container mx-auto px-6 max-w-2xl text-center">
+                <h2 class="font-jp text-4xl font-bold text-white mb-6">
+                    想いを、次に繋げるために。
+                </h2>
+                <p class="text-white text-lg mb-10 leading-relaxed">
+                    「想いを伝えられるロゴを作りたい」「やさしい雰囲気のホームページをお願いしたい」<br class="hidden sm:inline">
+                    そんな方は、どうぞお気軽にご相談ください。
+                </p>
+                
+                <!-- 🌸【お問い合わせフォームへ】ボタン (YOUR_EMAIL_ADDRESS_HEREをあなたのメールアドレスに置き換えてください) -->
+                <a href="mailto:YOUR_EMAIL_ADDRESS_HERE?subject=%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E7%9B%B8%E8%AB%87%E3%81%AE%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B" 
+                   class="inline-block px-12 py-4 bg-accent text-dark-text text-xl font-bold rounded-full shadow-2xl hover:bg-opacity-80 transition duration-300 transform hover:-translate-y-0.5">
+                    お問い合わせフォームへ
+                </a>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-white py-10 border-t border-mint border-opacity-30">
+        <div class="container mx-auto px-6 text-center text-sm text-gray-600">
+            <div class="mb-4">
+                <a href="#home" class="font-en text-2xl font-bold text-mint tracking-wider hover:text-opacity-80 transition duration-200">
+                    Kimi Design
+                </a>
+            </div>
+            <p class="mb-2">
+                <a href="#concept" class="mr-4 hover:text-mint">Concept</a> | 
+                <a href="#service" class="mr-4 ml-4 hover:text-mint">Service</a> | 
+                <a href="#about" class="ml-4 hover:text-mint">About</a>
+            </p>
+            <p>&copy; 2024 Kimi Design. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- スムーズスクロール用のJavaScript (シンプル版) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    
+                    // #のみのリンク（例: お問い合わせのトップ）や無効なセレクタはスキップ
+                    if (targetId === '#' || targetId === '') {
+                        e.preventDefault();
+                        return;
+                    }
+
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        e.preventDefault();
+                        targetElement.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
