@@ -3,571 +3,307 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kimi Design | 想いを、やさしく かたちに。</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
-    <!-- Tailwind CSS CDN -->
+    <title>Kimi Design | 子育て世代の女性のためのメール相談</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 丸くておしゃれなフォント 'Zen Maru Gothic' を使用 --><link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Zen+Maru+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        /* デザインガイドに基づくカスタムカラーとフォントの定義 */
-        :root {
-            --color-mint-green: #A7C4A0;
-            --color-off-white: #F9F7F2;
-            --color-accent: #D4B898; /* 茶色/アクセントカラー */
-            --color-text-dark: #4A4A4A;
-        }
-
+        /* フォント設定: Zen Maru Gothicを日本語、Interをその他の文字に使用 */
         body {
-            background-color: var(--color-off-white);
-            color: var(--color-text-dark);
+            font-family: 'Zen Maru Gothic', 'Inter', sans-serif; /* 丸めのフォントに設定 */
+            background-color: #fcf8f0; /* ソフトベージュ (ロゴの背景色に寄せる) */
+            color: #4a4a4a;
         }
+        .header-bg {
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        /* メインコピーのスタイル */
+        .main-copy {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            line-height: 1.5;
+        }
+        .nav-link:hover {
+            color: #a3a3a3;
+            transition: color 0.3s;
+        }
+
+        /* --- 新しいアクセントカラー (ロゴのグリーンに調整: #82b27e) --- */
         
-        /* 日本語フォント: Shippori Mincho */
-        .font-jp {
-            font-family: 'Shippori Mincho', 'Noto Serif JP', serif;
+        /* ボタンのスタイル: 落ち着いたヒーリンググリーンに変更 (#82b27e) */
+        .primary-button {
+            background-color: #82b27e; /* ヒーリンググリーン (ロゴに寄せる) */
+            color: white;
+            padding: 1rem 3rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            transition: background-color 0.3s, transform 0.1s;
+            letter-spacing: 0.1em;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
         }
-        /* 英字フォント: Cormorant Garamond */
-        .font-en {
-            font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+        .primary-button:hover {
+            background-color: #6a9466; /* ホバー時の色 (少し濃くする) */
+            transform: translateY(-1px);
         }
-
-        /* カスタムTailwindクラスの定義 */
-        .bg-mint { background-color: var(--color-mint-green); }
-        .text-mint { color: var(--color-mint-green); }
-        .border-mint { border-color: var(--color-mint-green); }
-        .bg-accent { background-color: var(--color-accent); }
-
-        /* ヒーローセクションの背景 */
-        .hero-bg-texture {
-            background: linear-gradient(rgba(249, 247, 242, 0.6), rgba(249, 247, 242, 0.9)), 
-                        url('https://images.unsplash.com/photo-1542438510-91a02931201d?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-            background-position: bottom;
-            background-size: cover;
+        /* アクセントカラーをヒーリンググリーンに変更 */
+        .accent-color {
+            color: #82b27e;
         }
-
-        /* セクション見出しのスタイル */
-        .section-title {
-            position: relative;
-            display: inline-block;
-            padding-bottom: 0.5rem;
-            margin-bottom: 2rem;
-            font-weight: 600;
+        .border-accent {
+            border-color: #82b27e;
         }
-        .section-title::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 50%;
-            height: 2px;
-            background-color: var(--color-mint-green);
+        /* セクション背景色をより自然な色に調整 */
+        .bg-subtle {
+            background-color: #f5f0e9; /* ソフトベージュより少し濃い色 */
+        }
+        /* セクション内カードの背景色を調整 */
+        .bg-card {
+            background-color: #fcf8f0;
         }
 
-        /* サービスリストの装飾 */
-        .service-list-item {
-            border-bottom: 1px solid rgba(167, 196, 160, 0.4); 
-        }
-        
-        /* Fixed Header のための上部マージン */
-        .header-spacer {
-            height: 5rem; 
-        }
-        
-        /* お問い合わせフォーム開閉時のトランジション */
-        #contact-form-body {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
-            padding-top: 0;
-            padding-bottom: 0;
-        }
-        
-        /* フォームが開いた状態のスタイル */
-        #contact-form-body.is-open {
-            max-height: 1000px; /* 十分な高さを設定 */
-            padding-top: 2rem; /* 開いた時の上部パディング */
-        }
 
-        /* ロゴ画像のスタイル (横並びにするため、高さを固定) */
-        .header-logo-img {
-            height: 2rem; /* ロゴ画像の高さを調整 */
-            width: auto;
-            margin-right: 0.5rem; /* テキストとの間に少し隙間を作る */
-        }
-    </style>
-
-    <script>
-        // Tailwindのカスタム設定
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'mint': 'var(--color-mint-green)',
-                        'off-white': 'var(--color-off-white)',
-                        'accent': 'var(--color-accent)',
-                        'dark-text': 'var(--color-text-dark)',
-                    },
-                },
+        /* --- アニメーションの定義 (変更なし) --- */
+        /* ページロード時に下からフェードインするアニメーション */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
-    </script>
-</head>
 
-<body class="font-jp antialiased">
-    <!-- ヘッダー (ナビゲーション) -->
-    <header class="fixed top-0 w-full z-50 bg-off-white bg-opacity-95 shadow-sm">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- 🌟 ロゴ/屋号 (画像とテキストを横並びで表示) -->
-            <a href="#home" class="flex items-center">
-                <!-- 
-                    https://github.com/kimidesign0418/Official-Website/blob/main/rogo.jpeg?raw=true
-                -->
-                <img 
-                    src="https://github.com/kimidesign0418/Official-Website/blob/main/rogo.jpeg?raw=true" 
-                alt="Kimi Design ロゴ" 
-                class="header-logo-img"
-                onerror="this.style.display='none';"
-                >
-                <!-- Kimi Design テキスト -->
-                <span class="font-en text-2xl md:text-3xl font-bold text-mint tracking-wider">
-                    Kimi Design
-                </span>
+        /* アニメーションを適用するためのクラス */
+        /* opacity-0とtranslate-y-4は初期状態をTailwindで設定 */
+        .animated-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        /* 表示されたときに適用するクラス */
+        .animated-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* 遅延アニメーションのためのクラス */
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-800 { animation-delay: 0.8s; }
+        .delay-1000 { animation-delay: 1.0s; }
+        .delay-1200 { animation-delay: 1.2s; }
+
+    </style>
+</head>
+<body>
+
+    <!-- ヘッダー (ナビゲーション) --><header class="header-bg sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- ロゴ (rogo.jpegを参照): リンク先を #main に変更し、IDを付与 --><a href="#main" class="text-2xl font-bold tracking-widest accent-color" id="logo-link">
+                <!-- ロゴ画像が見つからない場合のフォールバックを維持 --><img src="rogo.jpeg" alt="Kimi Design ロゴ" class="h-8 md:h-10" onerror="this.onerror=null; this.src='https://placehold.co/150x40/82b27e/ffffff?text=Kimi+Design';" />
             </a>
-            
-            <!-- ナビゲーションリンク -->
-            <nav class="hidden md:block">
-                <ul class="flex space-x-6 text-base font-medium">
-                    <li><a href="#concept" class="hover:text-mint transition duration-200">Concept</a></li>
-                    <li><a href="#service" class="hover:text-mint transition duration-200">Service</a></li>
-                    <li><a href="#about" class="hover:text-mint transition duration-200">About</a></li>
-                    <li><a href="#contact" class="hover:text-mint transition duration-200">Contact</a></li>
-                </ul>
+            <!-- ナビゲーション: モバイルで文字サイズとスペースを調整し、見やすくしています --><nav class="space-x-2 sm:space-x-6 flex items-center">
+                <a href="#about" class="nav-link text-xs sm:text-sm font-medium">私たちについて</a>
+                <a href="#donation" class="nav-link text-xs sm:text-sm font-medium">寄付活動</a>
+                <a href="#service" class="nav-link text-xs sm:text-sm font-medium">サービス・料金</a> 
+                <!-- contact.htmlへリンク変更: モバイルでパディングを小さくして収まりやすくしています --><a href="contact.html" class="nav-link text-sm font-medium primary-button px-3 py-1.5 sm:px-4 sm:py-2 rounded-full">お申し込み</a>
             </nav>
-            
-            <!-- お問い合わせボタン -->
-            <a href="#contact" class="px-4 py-2 bg-mint text-white text-sm font-medium rounded-full hover:bg-opacity-80 transition duration-300 shadow-md js-contact-toggle">
-                お問い合わせ
-            </a>
         </div>
     </header>
 
-    <main>
-        <div class="header-spacer"></div>
-        
-        <!-- 🌸 ファーストビュー (ヒーローセクション) -->
-        <section id="home" class="hero-bg-texture w-full min-h-[70vh] flex items-center justify-center p-8 text-center">
-            <div class="max-w-4xl">
-                <h1 class="font-jp text-5xl md:text-7xl font-bold text-dark-text leading-snug mb-6">
-                    想いを、やさしく かたちに。
-                </h1>
-                <p class="font-jp text-lg md:text-xl text-dark-text mb-10">
-                    あなたの中にある「伝えたい気持ち」を、<br>
-                    やわらかなデザインで自然に届けます。
-                </p>
-                <a href="#contact" class="inline-block px-10 py-4 bg-accent text-dark-text text-lg font-bold rounded-full shadow-lg hover:shadow-xl hover:bg-opacity-90 transition duration-300 js-contact-toggle">
-                    やさしさを伝えるデザイン相談はこちら
-                </a>
-            </div>
-        </section>
-
-        <!-- 🌿 Concept (コンセプトセクション) -->
-        <section id="concept" class="container mx-auto px-6 py-20 md:py-32">
-            <div class="max-w-3xl mx-auto text-center">
-                <p class="text-mint text-sm font-medium tracking-widest mb-2">Kimi Design Philosophy</p>
-                <h2 class="font-jp text-3xl md:text-4xl font-bold mb-12">
-                    「あなたらしさ」を、そっと整えるデザインを。
-                </h2>
-
-                <div class="space-y-6 text-lg leading-relaxed">
-                    <p>
-                        Kimi Design は、人の“想い”を大切にしながら、言葉・色・形を”やさしく整える”デザイン室です。
-                    </p>
-                    <p>
-                        屋号やロゴ、ホームページなど、“はじまり”に寄り添うデザインをつくっています。
-                    </p>
-                    <p class="font-semibold text-mint pt-4">
-                        見た人の心に、あたたかな光が灯るように。<br>
-                        あなたの想いを、ていねいに形にしていきます。
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ✨ Service (サービスセクション) -->
-        <section id="service" class="bg-white py-20 md:py-32">
-            <div class="container mx-auto px-6">
-                <div class="text-center">
-                    <p class="text-mint text-sm font-medium tracking-widest mb-2">Service Menu</p>
-                    <h2 class="section-title mx-auto font-en text-4xl text-dark-text mb-16">
-                        Services
-                    </h2>
-                </div>
-
-                <div class="max-w-4xl mx-auto space-y-12">
-                    
-                    <!-- サービス 01: 屋号・ロゴデザイン -->
-                    <div class="service-list-item p-6 md:p-8 hover:bg-off-white transition duration-300 rounded-lg">
-                        <p class="text-mint text-2xl font-en font-bold mb-2">01.</p>
-                        <h3 class="font-jp text-2xl font-semibold mb-4 text-dark-text">屋号・ロゴデザイン</h3>
-                        <p class="text-lg leading-relaxed text-gray-700">
-                            あなたの想いや世界観を丁寧にヒアリングし、心地よい色と形で「あなたらしさ」を表現します。名刺やショップカードにも使える“想いの印”を一緒につくりましょう。
-                        </p>
-                    </div>
-
-                    <!-- サービス 02: ホームページ制作 -->
-                    <div class="service-list-item p-6 md:p-8 hover:bg-off-white transition duration-300 rounded-lg">
-                        <p class="text-mint text-2xl font-en font-bold mb-2">02.</p>
-                        <h3 class="font-jp text-2xl font-semibold mb-4 text-dark-text">ホームページ制作</h3>
-                        <p class="text-lg leading-relaxed text-gray-700">
-                            どんな想いでこの仕事をしているのか。その背景を大切にしながら、構成・文章・色を整えます。訪問看護・サロン・福祉など、やさしさを伝えたい事業のホームページを得意としています。
-                        </p>
-                    </div>
-
-                    <!-- サービス 03: デザイン相談・アドバイス -->
-                    <div class="service-list-item p-6 md:p-8 hover:bg-off-white transition duration-300 rounded-lg">
-                        <p class="text-mint text-2xl font-en font-bold mb-2">03.</p>
-                        <h3 class="font-jp text-2xl font-semibold mb-4 text-dark-text">デザイン相談・アドバイス</h3>
-                        <p class="text-lg leading-relaxed text-gray-700">
-                            「デザインに自信がない」「方向性がわからない」方へ。色や言葉のトーンを一緒に見直し、見る人に安心感を与えるデザインを提案します。
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- 🌕 About (Kimi Designについて) -->
-        <section id="about" class="container mx-auto px-6 py-20 md:py-32">
-            <div class="max-w-3xl mx-auto">
-                <div class="text-center">
-                    <p class="text-mint text-sm font-medium tracking-widest mb-2">Designer Profile</p>
-                    <h2 class="section-title mx-auto font-en text-4xl text-dark-text mb-16">
-                        About Kimi Design
-                    </h2>
-                </div>
-                
-                <div class="md:flex md:space-x-10 items-start">
-                    <!-- プロフィール写真のプレースホルダー -->
-                    <div class="w-full md:w-1/3 mb-8 md:mb-0 flex-shrink-0">
-                        <div class="w-48 h-48 mx-auto bg-mint rounded-full shadow-lg flex items-center justify-center text-white text-xl font-bold font-en opacity-80" 
-                             style="background-image: url('https://placehold.co/200x200/A7C4A0/F9F7F2?text=Designer+Photo'); background-size: cover;"
-                             loading="lazy"
-                             >
-                            
-                        </div>
-                    </div>
-                    
-                    <!-- 自己紹介テキスト -->
-                    <div class="md:w-2/3 space-y-5 text-lg leading-relaxed text-gray-700">
-                        <p class="text-xl font-semibold text-mint">
-                            こんにちは。Kimi DesignのKimiです。
-                        </p>
-                        <p>
-                            訪問看護のサポートを通して、「人の想いを形にして伝えること」の大切さを感じてきました。
-                        </p>
-                        <p>
-                            ひとつひとつの想いを丁寧に受けとめ、“その人らしさ”が自然に伝わるデザインをつくる。それが、私の仕事です。
-                        </p>
-                        <p class="font-bold pt-2">
-                            小さな一歩を、やさしく丁寧に。<br>
-                            あなたの想いを形にするお手伝いをしています。
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 🌿 Contact (お問い合わせセクション) - フォーム開閉機能と茶色ボタンを修正 -->
-        <section id="contact" class="bg-mint py-20 md:py-32">
-            <div class="container mx-auto px-6 max-w-3xl text-center">
-                
-                <!-- スクリーンショットのデザインに合わせた文言と配置 -->
-                <h2 class="font-jp text-5xl font-bold text-off-white mb-6">
-                    想いを、次に繋げるために。
-                </h2>
-                
-                <div class="text-off-white text-lg mb-10 leading-relaxed space-y-3">
-                    <p>
-                        「想いを伝えられるロゴを作りたい」「やさしい雰囲気のホームページをお願いしたい」
-                    </p>
-                    <p>
-                        そんな方は、どうぞお気軽にご相談ください。
-                    </p>
-                </div>
-                
-                <!-- フォーム開閉用ボタン (クリックするとフォームが開く) -->
-                <a id="contact-toggle-button" href="#contact" class="inline-block px-12 py-4 bg-accent text-dark-text text-2xl font-bold rounded-[3rem] shadow-xl hover:shadow-2xl hover:bg-opacity-90 transition duration-300 transform hover:-translate-y-1 js-contact-toggle">
-                    お問い合わせフォームへ
-                </a>
-                
-                <!-- フォーム/完了メッセージ本体 (初期状態で閉じている) -->
-                <!-- is-openクラスで開閉を制御 -->
-                <div id="contact-form-body">
-                    <div id="contact-inner-container" class="bg-off-white p-8 md:p-10 rounded-xl shadow-2xl text-left mt-8">
-                        
-                        <!-- フォーム本体 -->
-                        <form id="contact-form" action="https://formspree.io/f/sampleformid" method="POST" class="space-y-6">
-                            
-                            <p class="text-2xl font-semibold text-dark-text text-center font-en border-b pb-4 border-mint/50">
-                                Contact Form Details
-                            </p>
-
-                            <!-- 1. お名前 -->
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">
-                                    お名前 <span class="text-red-500">*</span>
-                                </label>
-                                <input type="text" name="name" id="name" required 
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-mint focus:border-mint transition duration-150 text-dark-text" 
-                                       placeholder="例: 山田 花子">
-                            </div>
-
-                            <!-- 2. メールアドレス -->
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">
-                                    メールアドレス <span class="text-red-500">*</span>
-                                </label>
-                                <input type="email" name="_replyto" id="email" required 
-                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-mint focus:border-mint transition duration-150 text-dark-text" 
-                                       placeholder="例: your-email@example.com">
-                            </div>
-
-                            <!-- 3. お問い合わせ内容 -->
-                            <div>
-                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">
-                                    お問い合わせ内容 <span class="text-red-500">*</span>
-                                </label>
-                                <textarea name="message" id="message" rows="5" required 
-                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-mint focus:border-mint transition duration-150 text-dark-text" 
-                                          placeholder="ご依頼内容、ご相談の概要などを具体的にご記入ください。"></textarea>
-                            </div>
-
-                            <!-- 4. 送信ボタン -->
-                            <div class="text-center pt-4">
-                                <button type="submit" id="submit-button"
-                                        class="inline-block px-12 py-4 bg-mint text-white text-xl font-bold rounded-full shadow-lg hover:bg-opacity-80 transition duration-300 transform hover:-translate-y-0.5 w-full md:w-auto">
-                                    送信する
-                                </button>
-                            </div>
-                        </form>
-                        
-                        <!-- 完了メッセージ (初期状態では非表示) -->
-                        <div id="thank-you-message" class="hidden text-center py-12 md:py-20">
-                            <div class="text-mint text-6xl mb-6">
-                                <!-- ✅ チェックマーク (SVG) -->
-                                <svg class="mx-auto w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                            </div>
-                            <p class="font-jp text-3xl font-bold text-dark-text mb-4">
-                                お問い合わせありがとうございました。
-                            </p>
-                            <p class="text-lg text-gray-700 mb-8">
-                                返信までしばらくお待ちください。
-                            </p>
-                            
-                            <!-- ホームに戻るためのボタン（フォームを閉じてリセット） -->
-                            <a href="#home" class="inline-block px-8 py-3 bg-accent text-dark-text text-lg font-bold rounded-full shadow-md hover:opacity-90 transition duration-300">
-                                ホームに戻る
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-                
-                <p class="text-white text-sm mt-4">
-                    ※ このフォームの送信には、<a href="https://formspree.io/" target="_blank" class="underline hover:text-accent">Formspree</a>などの外部サービスとの連携設定が必要です。
-                </p>
-
-            </div>
-        </section>
-        
+    <!-- ヒーローセクション (メインメッセージ): IDを付与 --><main id="main" class="text-center pt-24 pb-32 max-w-4xl mx-auto px-4">
+        <!-- H1にアニメーションと遅延を追加 --><h1 class="main-copy text-4xl md:text-5xl font-bold text-[#5c5c5c] mb-8 animated-section is-visible" style="transition-delay: 0.2s;">
+            あなたの言葉の奥にある、<br>まだ形になっていない想いを受けとめたい。
+        </h1>
+        <!-- Pタグにアニメーションと遅延を追加 --><p class="text-xl md:text-2xl text-gray-600 mb-12 main-copy animated-section is-visible" style="transition-delay: 0.4s;">
+            涙でも、ため息でも、それはすべて“あなたらしさ”のかけらです。<br>
+            Kimi Designは、**子育て世代の女性の「私」を整える、完全メール制の心の相談アトリエ**です。
+        </p>
+        <!-- ボタンにアニメーションと遅延を追加 --><a href="contact.html" class="primary-button inline-block text-lg w-full sm:w-auto animated-section is-visible" style="transition-delay: 0.6s;">
+            まずは初回お試しから始める
+        </a>
     </main>
 
-    <!-- フッター -->
-    <footer class="bg-white py-10 border-t border-mint border-opacity-30">
-        <div class="container mx-auto px-6 text-center text-sm text-gray-600">
-            <div class="mb-4 inline-flex items-center justify-center">
-                <a href="#home" class="font-en text-2xl font-bold text-mint tracking-wider hover:text-opacity-80 transition duration-200 flex items-center">
-                    <!-- 🌟 フッターのロゴも横並びに対応 -->
-                    <img 
-                        src="https://placehold.co/40x40/A7C4A0/F9F7F2?text=Logo" 
-                        alt="Kimi Design ロゴ" 
-                        class="header-logo-img"
-                        onerror="this.style.display='none';"
-                    >
-                    <span class="font-en text-2xl font-bold text-mint tracking-wider">
-                        Kimi Design
-                    </span>
-                </a>
+    <!-- 私たちについて/サービス概要 (About) --><section id="about" class="py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-12 border-b-2 border-accent pb-2 inline-block animated-section">子育てを頑張るあなたへ、静かに心を整える時間</h2>
+            <div class="grid md:grid-cols-3 gap-10 text-left">
+                <!-- 特徴 1: アニメーションと遅延を追加 --><div class="p-6 bg-card rounded-xl shadow-lg animated-section" data-delay="0.2">
+                    <div class="text-3xl accent-color mb-4">📝</div>
+                    <h3 class="text-xl font-bold mb-3">忙しい中でも「書く」ことで整理</h3>
+                    <p class="text-gray-600 text-sm">家事や育児の合間など、あなたのペースでご相談ください。時間を気にせず、じっくりとご自身の気持ちと向き合い、言葉にすることで心の整理を促します。</p>
+                </div>
+                <!-- 特徴 2: アニメーションと遅延を追加 --><div class="p-6 bg-card rounded-xl shadow-lg animated-section" data-delay="0.4">
+                    <div class="text-3xl accent-color mb-4">🫂</div>
+                    <h3 class="text-xl font-bold mb-3">当方の経験を活かした寄り添い</h3>
+                    <p class="text-gray-600 text-sm">子育て世代特有の悩みや葛藤（自分時間がない、理想とのギャップなど）に、当方の経験を活かし、共感と実用的な視点でお返しします。</p>
+                </div>
+                <!-- 特徴 3: アニメーションと遅延を追加 --><div class="p-6 bg-card rounded-xl shadow-lg animated-section" data-delay="0.6">
+                    <div class="text-3xl accent-color mb-4">🌸</div>
+                    <h3 class="text-xl font-bold mb-3">「母親」ではない私を取り戻す</h3>
+                    <p class="text-gray-600 text-sm">誰にも言えない葛藤や罪悪感を安心して話せる、女性専門の空間です。心を軽くして、「母親」ではない一人のあなた自身を取り戻すための時間を提供します。</p>
+                </div>
             </div>
-            <p class="mb-2">
-                <a href="#concept" class="mr-4 hover:text-mint">Concept</a> | 
-                <a href="#service" class="mr-4 ml-4 hover:text-mint">Service</a> | 
-                <a href="#about" class="ml-4 hover:text-mint">About</a>
+        </div>
+    </section>
+
+    <!-- 寄付活動 (Donation) --><section id="donation" class="py-24 bg-subtle">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-12 border-b-2 border-accent pb-2 inline-block animated-section">すべての優しさが、誰かの未来へ</h2>
+            <!-- Pタグにアニメーションと遅延を追加 --><p class="text-xl text-gray-700 mb-8 animated-section" data-delay="0.2">
+                Kimi Designのご利用料金の一部は、親御さんがいない子どもたちの支援を行う団体へ寄付されます。
             </p>
-            <p>&copy; 2024 Kimi Design. All Rights Reserved.</p>
+            <!-- カード全体にアニメーションと遅延を追加 --><div class="max-w-3xl mx-auto p-8 bg-white rounded-xl shadow-xl animated-section" data-delay="0.4">
+                <h3 class="text-2xl font-bold accent-color mb-4">売上の一部を子どもたちへ</h3>
+                <p class="text-gray-600 mb-6">
+                    あなたが心を整える時間が、次世代の希望を育む力に変わります。私たちの活動は、ご利用いただいたすべての皆様と共に、社会に優しさの輪を広げることを目指しています。
+                </p>
+                <!-- 寄付の進捗や詳細を今後追記する想定のプレースホルダー --><p class="text-sm text-gray-500 italic">※寄付の実績や詳細は、別途専用ページにて定期的にご報告いたします。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 料金とご利用の流れ (Service) --><section id="service" class="py-24">
+        <div class="max-w-5xl mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-12 border-b-2 border-accent pb-2 inline-block animated-section">ご利用の流れと料金プラン</h2>
+
+            <h3 class="text-2xl font-bold text-[#5c5c5c] mb-6 mt-16 animated-section" data-delay="0.2">ご利用の流れ (Flow)</h3>
+            <div class="flex flex-wrap justify-center gap-6">
+                <!-- モバイルで縦積みに --><div class="w-full sm:w-1/3 p-4 bg-white shadow-md rounded-lg animated-section" data-delay="0.4">
+                    <p class="text-4xl font-serif accent-color mb-2">1</p>
+                    <p class="font-bold">プランの選択とお申し込み</p>
+                    <p class="text-sm text-gray-600 mt-1">お問い合わせページからご希望のプランを選択し、ご相談内容を簡単にご記入ください。</p>
+                </div>
+                <div class="w-full sm:w-1/3 p-4 bg-white shadow-md rounded-lg animated-section" data-delay="0.6">
+                    <p class="text-4xl font-serif accent-color mb-2">2</p>
+                    <p class="font-bold">料金のお支払い</p>
+                    <p class="text-sm text-gray-600 mt-1">折り返しのメールにてお支払い方法（クレジットカード等）をご案内します。</p>
+                </div>
+                <div class="w-full sm:w-1/3 p-4 bg-white shadow-md rounded-lg animated-section" data-delay="0.8">
+                    <p class="text-4xl font-serif accent-color mb-2">3</p>
+                    <p class="font-bold">メールでのやり取り開始</p>
+                    <p class="text-sm text-gray-600 mt-1">ご入金確認後、専用メールアドレスをご案内し、サポートを開始します。</p>
+                </div>
+            </div>
+            
+            <h3 class="text-2xl font-bold text-[#5c5c5c] mb-6 mt-16 animated-section" data-delay="1.0">料金プラン (Price)</h3>
+            <p class="text-lg text-gray-700 mb-8 animated-section" data-delay="1.2">まずは初回お試しプランで、Kimi Designの相談体験をお試しください。</p>
+            
+            <!-- 料金プラン (モバイルで縦積みに) --><div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <!-- 初回お試しプラン: 色味を少し抑えてメインのグリーンを引き立たせる --><div class="p-8 border-2 border-pink-300 rounded-xl bg-card shadow-lg transform scale-105 animated-section" data-delay="1.4">
+                    <h4 class="text-2xl font-bold mb-2 text-pink-500">初回お試し</h4>
+                    <p class="text-4xl font-extrabold text-pink-500 mb-4">¥1,100</p>
+                    <p class="text-sm text-gray-600 mb-4">（メール往復1通セット）</p>
+                    <ul class="text-left space-y-2 text-gray-600 text-sm">
+                        <li>✅ サービス体験をしたい方向け</li>
+                        <li>✅ 1往復あたり最大1,200文字</li>
+                        <li>✅ 3営業日以内の返信</li>
+                    </ul>
+                </div>
+
+                <!-- ベーシックプラン --><div class="p-8 border-2 border-accent rounded-xl bg-card shadow-lg animated-section" data-delay="1.6">
+                    <h4 class="text-2xl font-bold mb-2">ベーシックプラン</h4>
+                    <p class="text-4xl font-extrabold accent-color mb-4">¥5,000</p>
+                    <p class="text-sm text-gray-600 mb-4">（メール往復3通セット）</p>
+                    <ul class="text-left space-y-2 text-gray-600 text-sm">
+                        <li>✅ お気軽にご相談したい方向け</li>
+                        <li>✅ 1往復あたり最大1,500文字</li>
+                        <li>✅ 3営業日以内の返信</li>
+                    </ul>
+                </div>
+
+                <!-- じっくりプラン --><div class="p-8 border-2 border-accent rounded-xl bg-card shadow-lg animated-section" data-delay="1.8">
+                    <h4 class="text-2xl font-bold mb-2">じっくりプラン</h4>
+                    <p class="text-4xl font-extrabold accent-color mb-4">¥9,000</p>
+                    <p class="text-sm text-gray-600 mb-4">（メール往復5通セット）</p>
+                    <ul class="text-left space-y-2 text-gray-600 text-sm">
+                        <li>✅ 深く悩みを整理したい方向け</li>
+                        <li>✅ 1往復あたり最大1,500文字</li>
+                        <li>✅ 2営業日以内の優先返信</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- contact.htmlへの誘導セクション --><section class="py-24 bg-subtle text-center">
+        <h2 class="text-3xl font-bold mb-6 animated-section">あなたの心の声を、私たちに聞かせてください。</h2>
+        <a href="contact.html" class="primary-button inline-block text-lg w-full sm:w-auto animated-section" data-delay="0.2">
+            初回お試しプランで相談を始める
+        </a>
+    </section>
+
+    <!-- フッター --><footer class="py-8 bg-[#f5f5f5] text-center text-sm text-gray-500">
+        <div class="max-w-7xl mx-auto px-4">
+            <nav class="mb-4 space-x-6">
+                <!-- hover色も調整 --><a href="#" class="hover:text-[#82b27e]">プライバシーポリシー</a>
+                <a href="#" class="hover:text-[#82b27e]">利用規約</a>
+                <a href="#" class="hover:text-[#82b27e]">特定商取引法に基づく表記</a>
+            </nav>
+            <p>&copy; 2025 Kimi Design. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- スムーズスクロールとフォーム制御用のJavaScript -->
     <script>
-        // フォーム関連要素の取得
-        const contactForm = document.getElementById('contact-form');
-        const thankYouMessage = document.getElementById('thank-you-message');
-        const submitButton = document.getElementById('submit-button');
-        const contactFormBody = document.getElementById('contact-form-body');
-        const contactToggleButton = document.getElementById('contact-toggle-button');
-
-        /**
-         * フォームコンテナの開閉状態を設定し、フォームを初期状態に戻す
-         * @param {boolean} isOpen - trueで開く、falseで閉じる
-         * @param {boolean} shouldScroll - スクロールが必要かどうか (デフォルト: true)
-         */
-        function setFormState(isOpen, shouldScroll = true) {
-            if (isOpen) {
-                // 開く処理: フォーム本体を開き、リセット
-                contactFormBody.classList.add('is-open');
-                contactToggleButton.classList.add('hidden'); // ボタンを隠す
-                contactForm.classList.remove('hidden'); // フォームを表示
-                thankYouMessage.classList.add('hidden'); // 完了メッセージを隠す
-                
-                // フォームの入力内容をリセット
-                contactForm.reset(); 
-                submitButton.textContent = '送信する';
-                submitButton.disabled = false;
-                
-                // エラーメッセージを削除
-                const messageContainer = document.getElementById('contact-inner-container');
-                const existingError = messageContainer.querySelector('.text-red-600');
-                if (existingError) existingError.remove();
-
-                // スクロールが必要な場合のみ実行
-                if (shouldScroll) {
-                    setTimeout(() => {
-                        const headerHeight = 80;
-                        const contactTop = document.getElementById('contact').offsetTop;
-                        window.scrollTo({
-                            top: contactTop - headerHeight,
-                            behavior: 'smooth'
-                        });
-                    }, 100);
-                }
-
-            } else {
-                // 閉じる処理: フォーム本体を閉じ、ボタンを表示
-                contactFormBody.classList.remove('is-open');
-                contactToggleButton.classList.remove('hidden'); // ボタンを表示
-            }
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- 0. フォーム開閉の専用クリックイベント ---
-            // 'js-contact-toggle' クラスを持つボタンに専用の開閉ロジックを設定
-            document.querySelectorAll('.js-contact-toggle').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    e.preventDefault(); 
-                    // shouldScroll=true: スクロールも実行
-                    setFormState(true, true); 
+            const animatedElements = document.querySelectorAll('.animated-section');
+
+            // Intersection Observerでスクロールイン時のアニメーションを制御
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const delay = entry.target.dataset.delay ? parseFloat(entry.target.dataset.delay) * 1000 : 0;
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, delay);
+                        observer.unobserve(entry.target); // 一度アニメーションしたら監視を停止
+                    }
                 });
+            }, { threshold: 0.2 }); // 20%以上表示されたらアニメーション
+
+            animatedElements.forEach(element => {
+                // ヒーローセクションの要素はページロード時にアニメーションするため、is-visibleを既に持つ
+                // その他のセクションは監視対象とする
+                if (!element.classList.contains('is-visible')) {
+                    observer.observe(element);
+                }
             });
 
-            // --- 1. スムーズスクロールの処理 (ナビゲーションリンク用) ---
-            // js-contact-toggle クラスを持つ要素は除外して、汎用的なアンカーリンクにのみ適用
-            document.querySelectorAll('a[href^="#"]:not(.js-contact-toggle)').forEach(anchor => {
+            // ヘッダーナビゲーションのページ内リンクとロゴをクリックした際のアニメーションを強制発火
+            // nav a[href^="#"] (ナビゲーションのページ内リンク) と a#logo-link (ロゴリンク) を対象とする
+            document.querySelectorAll('nav a[href^="#"], a#logo-link').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    const targetId = this.getAttribute('href');
-                    
-                    if (targetId === '#' || targetId === '') {
-                        e.preventDefault();
-                        return;
-                    }
+                    e.preventDefault(); // デフォルトのスクロール動作をキャンセル
 
-                    const targetElement = document.querySelector(targetId);
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
 
                     if (targetElement) {
-                        e.preventDefault();
-                        
-                        // #contact への移動の場合、フォームは「閉じる状態」にリセットする (ボタンが表示される状態)
-                        if (targetId === '#contact') {
-                            // shouldScroll=false: スクロールは行うが、フォームの開閉ロジック内のスクロールは行わない
-                            setFormState(false, false); 
-                        } else {
-                            // 他のセクションへの移動の場合は、フォームを閉じる
-                            setFormState(false, false); 
-                        }
-
-                        // スムーズスクロール実行
-                        const headerHeight = 80; 
-                        window.scrollTo({
-                            top: targetElement.offsetTop - headerHeight,
+                        // まずはスクロール
+                        targetElement.scrollIntoView({
                             behavior: 'smooth'
                         });
+
+                        // ターゲットセクション内のアニメーション要素を再発火させる
+                        // スクロール完了を待つために少し時間をおいてから実行
+                        setTimeout(() => {
+                            const childrenToAnimate = targetElement.querySelectorAll('.animated-section');
+                            childrenToAnimate.forEach(child => {
+                                // アニメーションをリセット
+                                child.classList.remove('is-visible'); 
+                                // 強制的にリフローさせてから再表示
+                                // これによりCSSアニメーションがリセットされ、再度実行される
+                                void child.offsetWidth; 
+                                const childDelay = child.dataset.delay ? parseFloat(child.dataset.delay) * 1000 : 0;
+                                setTimeout(() => {
+                                    child.classList.add('is-visible');
+                                }, childDelay);
+                            });
+                        }, 500); // スクロール完了を待つための時間
                     }
                 });
             });
-            
-            // 初期ロード時にもフォームを閉じている状態からスタート
-            setFormState(false, false); 
-
-            // --- 2. フォームの非同期送信（AJAX）と完了メッセージ表示の処理 ---
-            if (contactForm) {
-                contactForm.addEventListener('submit', async function (e) {
-                    e.preventDefault(); 
-
-                    submitButton.textContent = '送信中...';
-                    submitButton.disabled = true;
-
-                    const form = e.target;
-                    const data = new FormData(form);
-                    
-                    const messageContainer = document.getElementById('contact-inner-container');
-                    const existingError = messageContainer.querySelector('.text-red-600');
-                    if (existingError) existingError.remove();
-
-                    try {
-                        const response = await fetch(form.action, {
-                            method: form.method,
-                            body: data,
-                            headers: {
-                                'Accept': 'application/json' 
-                            }
-                        });
-
-                        if (response.ok) {
-                            // 送信成功時、フォームを非表示にして完了メッセージを表示
-                            contactForm.classList.add('hidden');
-                            thankYouMessage.classList.remove('hidden');
-                        } else {
-                            // 失敗時の処理
-                            const errorText = await response.text();
-                            console.error('Form submission failed:', errorText);
-                            
-                            const errorMessage = document.createElement('div');
-                            errorMessage.className = 'text-center text-red-600 p-4 border border-red-300 rounded-lg my-4';
-                            errorMessage.textContent = 'フォームの送信に失敗しました。お手数ですが、もう一度お試しください。';
-                            messageContainer.prepend(errorMessage);
-                            
-                            submitButton.textContent = '送信する';
-                            submitButton.disabled = false;
-                        }
-                    } catch (error) {
-                        console.error('Network error:', error);
-                        
-                        const errorMessage = document.createElement('div');
-                        errorMessage.className = 'text-center text-red-600 p-4 border border-red-300 rounded-lg my-4';
-                        errorMessage.textContent = 'ネットワークエラーにより送信できませんでした。接続を確認してください。';
-                        messageContainer.prepend(errorMessage);
-                        
-                        submitButton.textContent = '送信する';
-                        submitButton.disabled = false;
-                    }
-                });
-            }
         });
     </script>
 </body>
