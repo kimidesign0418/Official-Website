@@ -117,8 +117,10 @@
             あなたの言葉の奥にある、<br>まだ形になっていない想いを受けとめたい。
         </h1>
         <!-- Pタグにアニメーションと遅延を追加 --><p class="text-xl md:text-2xl text-gray-600 mb-12 main-copy animated-section is-visible" style="transition-delay: 0.4s;">
-            涙でも、ため息でも、それはすべて“あなたらしさ”のかけらです。<br>
-            Kimi Designは、**子育て世代の女性の「私」を整える、完全メール制の心の相談アトリエ**です。
+            涙でも、ため息でも、<br>
+            それはすべて“あなたらしさ”のかけらです。<br>
+            Kimi Designは、子育て世代の女性の「私」を整える、<br>
+            完全メール制の心の相談アトリエです。
         </p>
         <!-- ボタンにアニメーションと遅延を追加 --><a href="contact.html" class="primary-button inline-block text-lg w-full sm:w-auto animated-section is-visible" style="transition-delay: 0.6s;">
             まずは初回お試しから始める
@@ -190,8 +192,11 @@
             <h3 class="text-2xl font-bold text-[#5c5c5c] mb-6 mt-16 animated-section" data-delay="1.0">料金プラン (Price)</h3>
             <p class="text-lg text-gray-700 mb-8 animated-section" data-delay="1.2">まずは初回お試しプランで、Kimi Designの相談体験をお試しください。</p>
             
-            <!-- 料金プラン (モバイルで縦積みに) --><div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                <!-- 初回お試しプラン: 色味を少し抑えてメインのグリーンを引き立たせる --><div class="p-8 border-2 border-pink-300 rounded-xl bg-card shadow-lg transform scale-105 animated-section" data-delay="1.4">
+            <!-- 料金プラン (モバイルで縦積みに) -->
+            <!-- 初回お試しプランのみを表示し、中央寄せのレイアウトに変更 -->
+            <div class="grid md:grid-cols-1 gap-6 max-w-md mx-auto">
+                <!-- 初回お試しプラン: 中央に配置するため、グリッドを1列にし、幅を固定 -->
+                <div class="p-8 border-2 border-pink-300 rounded-xl bg-card shadow-lg transform scale-105 animated-section" data-delay="1.4">
                     <h4 class="text-2xl font-bold mb-2 text-pink-500">初回お試し</h4>
                     <p class="text-4xl font-extrabold text-pink-500 mb-4">¥1,100</p>
                     <p class="text-sm text-gray-600 mb-4">（メール往復1通セット）</p>
@@ -202,27 +207,7 @@
                     </ul>
                 </div>
 
-                <!-- ベーシックプラン --><div class="p-8 border-2 border-accent rounded-xl bg-card shadow-lg animated-section" data-delay="1.6">
-                    <h4 class="text-2xl font-bold mb-2">ベーシックプラン</h4>
-                    <p class="text-4xl font-extrabold accent-color mb-4">¥5,000</p>
-                    <p class="text-sm text-gray-600 mb-4">（メール往復3通セット）</p>
-                    <ul class="text-left space-y-2 text-gray-600 text-sm">
-                        <li>✅ お気軽にご相談したい方向け</li>
-                        <li>✅ 1往復あたり最大1,500文字</li>
-                        <li>✅ 3営業日以内の返信</li>
-                    </ul>
-                </div>
-
-                <!-- じっくりプラン --><div class="p-8 border-2 border-accent rounded-xl bg-card shadow-lg animated-section" data-delay="1.8">
-                    <h4 class="text-2xl font-bold mb-2">じっくりプラン</h4>
-                    <p class="text-4xl font-extrabold accent-color mb-4">¥9,000</p>
-                    <p class="text-sm text-gray-600 mb-4">（メール往復5通セット）</p>
-                    <ul class="text-left space-y-2 text-gray-600 text-sm">
-                        <li>✅ 深く悩みを整理したい方向け</li>
-                        <li>✅ 1往復あたり最大1,500文字</li>
-                        <li>✅ 2営業日以内の優先返信</li>
-                    </ul>
-                </div>
+                <!-- ベーシックプランとじっくりプランは非表示 -->
             </div>
         </div>
     </section>
