@@ -4,30 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kimi Design | 子育て世代の女性のためのメール相談</title>
+    <!-- Tailwind CSSをロード -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 丸くておしゃれなフォント 'Zen Maru Gothic' を使用 --><link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Zen+Maru+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+    <!-- 丸くておしゃれなフォント 'Zen Maru Gothic' と 'Inter' を使用 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Zen+Maru+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         /* フォント設定: Zen Maru Gothicを日本語、Interをその他の文字に使用 */
         body {
             font-family: 'Zen Maru Gothic', 'Inter', sans-serif; /* 丸めのフォントに設定 */
-            background-color: #fcf8f0; /* ソフトベージュ (ロゴの背景色に寄せる) */
+            background-color: #fcf8f0; /* ソフトベージュ (優しく落ち着いた背景) */
             color: #4a4a4a;
         }
         .header-bg {
             background-color: #ffffff;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08); /* より優しめのシャドウ */
         }
         /* メインコピーのスタイル */
         .main-copy {
             font-family: 'Zen Maru Gothic', sans-serif;
-            line-height: 1.5;
+            line-height: 1.6;
         }
         .nav-link:hover {
             color: #a3a3a3;
             transition: color 0.3s;
         }
 
-        /* --- 新しいアクセントカラー (東洋占術に基づくモスグリーン: #6d976d) --- */
+        /* --- メインアクセントカラー (モスグリーン: #6d976d) --- */
         
         /* ボタンのスタイル: 落ち着いたモスグリーンに変更 (#6d976d) */
         .primary-button {
@@ -36,13 +38,14 @@
             padding: 1rem 3rem;
             border-radius: 9999px;
             font-weight: 700;
-            transition: background-color 0.3s, transform 0.1s;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* transformもスムーズに */
             letter-spacing: 0.1em;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 10px rgba(109, 151, 109, 0.4); /* グリーン系のやわらかいシャドウ */
         }
         .primary-button:hover {
             background-color: #5c825c; /* ホバー時の色 (深く安定した緑) */
-            transform: translateY(-1px);
+            transform: translateY(-2px) scale(1.01); /* 少し浮き上がって、わずかに拡大 */
+            box-shadow: 0 6px 15px rgba(109, 151, 109, 0.5); 
         }
         /* アクセントカラーをモスグリーンに変更 */
         .accent-color {
@@ -57,176 +60,202 @@
         }
         /* セクション内カードの背景色を調整 */
         .bg-card {
-            background-color: #fcf8f0;
+            background-color: #ffffff; /* カードは白で清潔感を出す */
         }
-
 
         /* --- アニメーションの定義 (変更なし) --- */
-        /* ページロード時に下からフェードインするアニメーション */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* アニメーションを適用するためのクラス */
-        /* opacity-0とtranslate-y-4は初期状態をTailwindで設定 */
+        /* Intersection Observerで制御するためのスタイル */
         .animated-section {
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            /* delayはJavaScriptでsetTimeoutで制御するため、CSSではtransitionのみ設定 */
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         /* 表示されたときに適用するクラス */
         .animated-section.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
-        /* 遅延アニメーションのためのクラス */
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-400 { animation-delay: 0.4s; }
-        .delay-600 { animation-delay: 0.6s; }
-        .delay-800 { animation-delay: 0.8s; }
-        .delay-1000 { animation-delay: 1.0s; }
-        .delay-1200 { animation-delay: 1.2s; }
 
     </style>
 </head>
 <body>
 
-    <!-- ヘッダー (ナビゲーション) --><header class="header-bg sticky top-0 z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <!-- ロゴ (rogo.jpegを参照): リンク先を #main に変更し、IDを付与 --><a href="#main" class="text-2xl font-bold tracking-widest accent-color" id="logo-link">
-                <!-- ロゴ画像が見つからない場合のフォールバックを維持 --><img src="rogo.jpeg" alt="Kimi Design ロゴ" class="h-8 md:h-10" onerror="this.onerror=null; this.src='https://placehold.co/150x40/6d976d/ffffff?text=Kimi+Design';" />
+    <!-- ヘッダー (ナビゲーション) -->
+    <header class="header-bg sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            <!-- ロゴ -->
+            <a href="#main" class="text-2xl font-bold tracking-widest accent-color" id="logo-link">
+                <!-- ロゴ画像 (rogo.jpeg) のフォールバックを、サイトのトーンに合わせたプレースホルダーで維持 -->
+                <img src="rogo.jpeg" alt="Kimi Design ロゴ" class="h-9 md:h-11" 
+                    onerror="this.onerror=null; this.src='https://placehold.co/180x44/6d976d/ffffff?text=Kimi+Design';" />
             </a>
-            <!-- ナビゲーション: モバイルで文字サイズとスペースを調整し、見やすくしています --><nav class="space-x-2 sm:space-x-6 flex items-center">
-                <a href="#about" class="nav-link text-xs sm:text-sm font-medium">私たちについて</a>
-                <a href="#donation" class="nav-link text-xs sm:text-sm font-medium">寄付活動</a>
-                <a href="#service" class="nav-link text-xs sm:text-sm font-medium">サービス・料金</a> 
-                <!-- contact.htmlへリンク変更: モバイルでパディングを小さくして収まりやすくしています --><a href="contact.html" class="nav-link text-sm font-medium primary-button px-3 py-1.5 sm:px-4 sm:py-2 rounded-full">お申し込み</a>
+            <!-- ナビゲーション: モバイル対応 -->
+            <nav class="space-x-3 sm:space-x-6 flex items-center">
+                <a href="#about" class="nav-link text-xs sm:text-sm font-medium hover:accent-color">私たちについて</a>
+                <a href="#donation" class="nav-link text-xs sm:text-sm font-medium hover:accent-color">寄付活動</a>
+                <a href="#service" class="nav-link text-xs sm:text-sm font-medium hover:accent-color">サービス・料金</a> 
+                <!-- お申し込みボタン: モバイルでパディングを調整 -->
+                <a href="contact.html" class="nav-link text-sm font-medium primary-button px-4 py-1.5 sm:px-6 sm:py-2">お申し込み</a>
             </nav>
         </div>
     </header>
 
-    <!-- ヒーローセクション (メインメッセージ): IDを付与 --><main id="main" class="text-center pt-24 pb-32 max-w-4xl mx-auto px-4">
-        <!-- H1にアニメーションと遅延を追加 --><h1 class="main-copy text-4xl md:text-5xl font-bold text-[#5c5c5c] mb-8 animated-section is-visible" style="transition-delay: 0.2s;">
+    <!-- ヒーローセクション (メインメッセージ) -->
+    <main id="main" class="text-center pt-24 pb-32 max-w-4xl mx-auto px-4">
+        <!-- H1にアニメーションと遅延を追加 (初回ロード時に表示) -->
+        <h1 class="main-copy text-4xl sm:text-5xl md:text-6xl font-extrabold text-[#5c5c5c] mb-8 animated-section is-visible" style="transition-delay: 0.2s;">
             あなたの言葉の奥にある、<br>まだ形になっていない想いを受けとめたい。
         </h1>
-        <!-- Pタグにアニメーションと遅延を追加 --><p class="text-xl md:text-2xl text-gray-600 mb-12 main-copy animated-section is-visible" style="transition-delay: 0.4s;">
+        <!-- Pタグにアニメーションと遅延を追加 (初回ロード時に表示) -->
+        <p class="text-xl md:text-2xl text-gray-700 mb-12 main-copy animated-section is-visible" style="transition-delay: 0.4s;">
             涙でも、ため息でも、<br>
             それはすべて“あなたらしさ”のかけらです。<br>
             Kimi Designは、子育て世代の女性の「私」を整える、<br>
             完全メール制の心の相談アトリエです。
         </p>
-        <!-- ボタンにアニメーションと遅延を追加 --><a href="contact.html" class="primary-button inline-block text-lg w-full sm:w-auto animated-section is-visible" style="transition-delay: 0.6s;">
+        <!-- ボタンにアニメーションと遅延を追加 (初回ロード時に表示) -->
+        <a href="contact.html" class="primary-button inline-block text-lg w-full sm:w-auto animated-section is-visible" style="transition-delay: 0.6s;">
             まずは初回お試しから始める
         </a>
     </main>
 
-    <!-- 私たちについて/サービス概要 (About) --><section id="about" class="py-24 bg-white">
-        <div class="max-w-5xl mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold mb-12 border-b-2 border-accent pb-2 inline-block animated-section">子育てを頑張るあなたへ、静かに心を整える時間</h2>
-            <div class="grid md:grid-cols-3 gap-10 text-left">
-                <!-- 特徴 1: アニメーションと遅延を追加 --><div class="p-6 bg-card rounded-xl shadow-lg animated-section" data-delay="0.2">
-                    <div class="text-3xl accent-color mb-4">📝</div>
-                    <h3 class="text-xl font-bold mb-3">忙しい中でも「書く」ことで整理</h3>
-                    <p class="text-gray-600 text-sm">家事や育児の合間など、あなたのペースでご相談ください。時間を気にせず、じっくりとご自身の気持ちと向き合い、言葉にすることで心の整理を促します。</p>
+    <!-- 私たちについて/サービス概要 (About) -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <h2 class="text-3xl sm:text-4xl font-extrabold mb-12 border-b-4 border-accent pb-2 inline-block animated-section">
+                子育てを頑張るあなたへ、静かに心を整える時間
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8 text-left">
+                <!-- 特徴 1: アニメーションと遅延を追加 -->
+                <div class="p-8 bg-card rounded-2xl shadow-xl transition hover:shadow-2xl duration-300 animated-section" data-delay="0.2">
+                    <div class="text-4xl accent-color mb-4">📝</div>
+                    <h3 class="text-xl font-bold mb-3 text-[#5c5c5c]">忙しい中でも「書く」ことで整理</h3>
+                    <p class="text-gray-600">家事や育児の合間など、あなたのペースでご相談ください。時間を気にせず、じっくりとご自身の気持ちと向き合い、言葉にすることで心の整理を促します。</p>
                 </div>
-                <!-- 特徴 2: アニメーションと遅延を追加 --><div class="p-6 bg-card rounded-xl shadow-lg animated-section" data-delay="0.4">
-                    <div class="text-3xl accent-color mb-4">🫂</div>
-                    <h3 class="text-xl font-bold mb-3">経験を活かした寄り添い</h3>
-                    <p class="text-gray-600 text-sm">子育て世代特有の悩みや葛藤など、その胸の内のすべてをまずは安心してお話しください。経験者の視点から、共感をもってあなたのお気持ちを丁寧に受け止めます。</p>
+                <!-- 特徴 2: アニメーションと遅延を追加 -->
+                <div class="p-8 bg-card rounded-2xl shadow-xl transition hover:shadow-2xl duration-300 animated-section" data-delay="0.4">
+                    <div class="text-4xl accent-color mb-4">🫂</div>
+                    <h3 class="text-xl font-bold mb-3 text-[#5c5c5c]">経験を活かした寄り添い</h3>
+                    <p class="text-gray-600">子育て世代特有の悩みや葛藤など、その胸の内のすべてをまずは安心してお話しください。経験者の視点から、共感をもってあなたのお気持ちを丁寧に受け止めます。</p>
                 </div>
-                <!-- 特徴 3: アニメーションと遅延を追加 --><div class="p-6 bg-card rounded-xl shadow-lg animated-section" data-delay="0.6">
-                    <div class="text-3xl accent-color mb-4">🌸</div>
-                    <h3 class="text-xl font-bold mb-3">「母親」ではない私を取り戻す</h3>
-                    <p class="text-gray-600 text-sm">誰にも言えない葛藤や罪悪感を安心して話せる、女性専門の空間です。<br>
-                        心を軽くして、「母親」ではない一人のあなた自身を取り戻すための時間を提供します。</p>
+                <!-- 特徴 3: アニメーションと遅延を追加 -->
+                <div class="p-8 bg-card rounded-2xl shadow-xl transition hover:shadow-2xl duration-300 animated-section" data-delay="0.6">
+                    <div class="text-4xl accent-color mb-4">🌸</div>
+                    <h3 class="text-xl font-bold mb-3 text-[#5c5c5c]">「母親」ではない私を取り戻す</h3>
+                    <p class="text-gray-600">誰にも言えない葛藤や罪悪感を安心して話せる、女性専門の空間です。心を軽くして、「母親」ではない一人のあなた自身を取り戻すための時間を提供します。</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 寄付活動 (Donation) --><section id="donation" class="py-24 bg-subtle">
+    <!-- 寄付活動 (Donation) -->
+    <section id="donation" class="py-24 bg-subtle">
         <div class="max-w-5xl mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold mb-12 border-b-2 border-accent pb-2 inline-block animated-section">すべての優しさが、誰かの未来へ</h2>
-            <!-- Pタグにアニメーションと遅延を追加 --><p class="text-xl text-gray-700 mb-8 animated-section" data-delay="0.2">
+            <h2 class="text-3xl sm:text-4xl font-extrabold mb-12 border-b-4 border-accent pb-2 inline-block animated-section">
+                すべての優しさが、誰かの未来へ
+            </h2>
+            <!-- Pタグにアニメーションと遅延を追加 -->
+            <p class="text-lg text-gray-700 mb-8 animated-section" data-delay="0.2">
                 Kimi Designのご利用料金の一部は、親御さんがいない子どもたちの支援を行う団体へ寄付されます。
             </p>
-            <!-- カード全体にアニメーションと遅延を追加 --><div class="max-w-3xl mx-auto p-8 bg-white rounded-xl shadow-xl animated-section" data-delay="0.4">
+            <!-- カード全体にアニメーションと遅延を追加 -->
+            <div class="max-w-3xl mx-auto p-10 bg-white rounded-2xl shadow-2xl animated-section" data-delay="0.4">
                 <h3 class="text-2xl font-bold accent-color mb-4">売上の一部を子どもたちへ</h3>
-                <p class="text-gray-600 mb-6">
+                <p class="text-gray-600 mb-6 leading-relaxed">
                     あなたが心を整える時間が、次世代の希望を育む力に変わります。<br>
                     私たちの活動は、ご利用いただいたすべての皆様と共に、社会に優しさの輪を広げることを目指しています。
                 </p>
-                <!-- 寄付の進捗や詳細を今後追記する想定のプレースホルダー --><p class="text-sm text-gray-500 italic">※寄付の実績や詳細は、別途専用ページにて定期的にご報告いたします。</p>
+                <!-- 寄付の進捗や詳細を今後追記する想定のプレースホルダー -->
+                <p class="text-sm text-gray-500 italic">※寄付の実績や詳細は、別途専用ページにて定期的にご報告いたします。</p>
             </div>
         </div>
     </section>
 
-    <!-- 料金とご利用の流れ (Service) --><section id="service" class="py-24">
+    <!-- 料金とご利用の流れ (Service) -->
+    <section id="service" class="py-24">
         <div class="max-w-5xl mx-auto px-4 text-center">
-            <h2 class="text-4xl font-bold mb-12 border-b-2 border-accent pb-2 inline-block animated-section">ご利用の流れと料金プラン</h2>
+            <h2 class="text-3xl sm:text-4xl font-extrabold mb-12 border-b-4 border-accent pb-2 inline-block animated-section">
+                ご利用の流れと料金プラン
+            </h2>
 
-            <h3 class="text-2xl font-bold text-[#5c5c5c] mb-6 mt-16 animated-section" data-delay="0.2">ご利用の流れ (Flow)</h3>
-            <div class="flex flex-wrap justify-center gap-6">
-                <!-- モバイルで縦積みに --><div class="w-full sm:w-1/3 p-4 bg-white shadow-md rounded-lg animated-section" data-delay="0.4">
-                    <p class="text-4xl font-serif accent-color mb-2">1</p>
-                    <p class="font-bold">プランの選択とお申し込み</p>
-                    <p class="text-sm text-gray-600 mt-1">お問い合わせページからご希望のプランを選択し、ご相談内容を簡単にご記入ください。</p>
+            <!-- ご利用の流れ (Flow) -->
+            <h3 class="text-2xl font-bold text-[#5c5c5c] mb-8 mt-16 animated-section" data-delay="0.2">ご利用の流れ (Flow)</h3>
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <!-- ステップ 1 -->
+                <div class="flex-1 p-6 bg-white shadow-xl rounded-xl animated-section" data-delay="0.4">
+                    <p class="text-4xl font-extrabold text-[#7e8e7e] mb-2">1</p>
+                    <p class="font-bold text-lg text-[#5c5c5c]">プランの選択とお申し込み</p>
+                    <p class="text-sm text-gray-600 mt-2">お問い合わせページからご希望のプランを選択し、ご相談内容を簡単にご記入ください。</p>
                 </div>
-                <div class="w-full sm:w-1/3 p-4 bg-white shadow-md rounded-lg animated-section" data-delay="0.6">
-                    <p class="text-4xl font-serif accent-color mb-2">2</p>
-                    <p class="font-bold">料金のお支払い</p>
-                    <p class="text-sm text-gray-600 mt-1">折り返しのメールにてお支払い方法（クレジットカード等）をご案内します。</p>
+                <!-- ステップ 2 -->
+                <div class="flex-1 p-6 bg-white shadow-xl rounded-xl animated-section" data-delay="0.6">
+                    <p class="text-4xl font-extrabold text-[#7e8e7e] mb-2">2</p>
+                    <p class="font-bold text-lg text-[#5c5c5c]">料金のお支払い</p>
+                    <p class="text-sm text-gray-600 mt-2">折り返しのメールにてお支払い方法（クレジットカード等）をご案内します。</p>
                 </div>
-                <div class="w-full sm:w-1/3 p-4 bg-white shadow-md rounded-lg animated-section" data-delay="0.8">
-                    <p class="text-4xl font-serif accent-color mb-2">3</p>
-                    <p class="font-bold">メールでのやり取り開始</p>
-                    <p class="text-sm text-gray-600 mt-1">ご入金確認後、専用メールアドレスをご案内し、サポートを開始します。</p>
+                <!-- ステップ 3 -->
+                <div class="flex-1 p-6 bg-white shadow-xl rounded-xl animated-section" data-delay="0.8">
+                    <p class="text-4xl font-extrabold text-[#7e8e7e] mb-2">3</p>
+                    <p class="font-bold text-lg text-[#5c5c5c]">メールでのやり取り開始</p>
+                    <p class="text-sm text-gray-600 mt-2">ご入金確認後、専用メールアドレスをご案内し、サポートを開始します。</p>
                 </div>
             </div>
             
-            <h3 class="text-2xl font-bold text-[#5c5c5c] mb-6 mt-16 animated-section" data-delay="1.0">料金プラン (Price)</h3>
-            <p class="text-lg text-gray-700 mb-8 animated-section" data-delay="1.2">まずは初回お試しプランで、Kimi Designの相談体験をお試しください。</p>
+            <!-- 料金プラン (Price) -->
+            <h3 class="text-2xl font-bold text-[#5c5c5c] mb-6 mt-20 animated-section" data-delay="1.0">料金プラン (Price)</h3>
+            <p class="text-lg text-gray-700 mb-10 animated-section" data-delay="1.2">まずは初回お試しプランで、Kimi Designの相談体験をお試しください。</p>
             
-            <!-- 料金プラン (モバイルで縦積みに) -->
-            <!-- 初回お試しプランのみを表示し、中央寄せのレイアウトに変更 -->
+            <!-- 初回お試しプラン: モスグリーンで強調したデザインに統一 -->
             <div class="grid md:grid-cols-1 gap-6 max-w-md mx-auto">
-                <!-- 初回お試しプラン: 中央に配置するため、グリッドを1列にし、幅を固定 -->
-                <div class="p-8 border-2 border-pink-300 rounded-xl bg-card shadow-lg transform scale-105 animated-section" data-delay="1.4">
-                    <h4 class="text-2xl font-bold mb-2 text-pink-500">初回お試し</h4>
-                    <p class="text-4xl font-extrabold text-pink-500 mb-4">¥1,100</p>
-                    <p class="text-sm text-gray-600 mb-4">（メール往復1通セット）</p>
-                    <ul class="text-left space-y-2 text-gray-600 text-sm">
-                        <li>✅ サービス体験をしたい方向け</li>
-                        <li>✅ 1往復あたり最大400文字</li>
-                        <li>✅ 3営業日以内の返信</li>
+                <div class="p-8 border-4 border-accent rounded-2xl bg-white shadow-2xl transform hover:scale-[1.03] transition duration-300 animated-section" data-delay="1.4">
+                    <!-- 強調タグ -->
+                    <div class="bg-[#d4e1d4] text-[#4a724a] px-4 py-1.5 rounded-full inline-block mb-4 font-extrabold text-sm tracking-wider">
+                        ✨ まずは体験
+                    </div>
+                    <h4 class="text-3xl font-extrabold mb-2 accent-color">初回お試しプラン</h4>
+                    <p class="text-5xl font-extrabold accent-color mb-4">
+                        ¥1,100<span class="text-xl font-normal ml-2">（税込）</span>
+                    </p>
+                    <p class="text-base text-gray-600 mb-6">（メール往復1通セット）</p>
+                    <ul class="text-left space-y-3 text-gray-700 text-base">
+                        <li class="flex items-start">
+                            <span class="accent-color mr-2 mt-0.5 text-xl leading-none">✓</span>
+                            <span>サービス体験をしたい方、迷いを言葉にしてみたい方向け</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="accent-color mr-2 mt-0.5 text-xl leading-none">✓</span>
+                            <span>1往復あたり最大400文字までご相談可能</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="accent-color mr-2 mt-0.5 text-xl leading-none">✓</span>
+                            <span>3営業日以内のご丁寧な返信をお約束</span>
+                        </li>
                     </ul>
+                    <a href="contact.html" class="primary-button inline-block text-base mt-8 w-full">このプランでお申し込み</a>
                 </div>
-
-                <!-- ベーシックプランとじっくりプランは非表示 -->
             </div>
         </div>
     </section>
 
-    <!-- contact.htmlへの誘導セクション --><section class="py-24 bg-subtle text-center">
-        <h2 class="text-3xl font-bold mb-6 animated-section">あなたの心の声を、私たちに聞かせてください。</h2>
+    <!-- contact.htmlへの誘導セクション -->
+    <section class="py-24 bg-subtle text-center">
+        <h2 class="text-3xl font-extrabold mb-8 animated-section">
+            あなたの心の声を、私たちに聞かせてください。
+        </h2>
         <a href="contact.html" class="primary-button inline-block text-lg w-full sm:w-auto animated-section" data-delay="0.2">
             初回お試しプランで相談を始める
         </a>
     </section>
 
-    <!-- フッター --><footer class="py-8 bg-[#f5f5f5] text-center text-sm text-gray-500">
+    <!-- フッター -->
+    <footer class="py-8 bg-[#f0f0e8] text-center text-sm text-gray-500">
         <div class="max-w-7xl mx-auto px-4">
             <nav class="mb-4 space-x-6">
-                <!-- hover色も調整 --><a href="#" class="hover:text-[#6d976d]">プライバシーポリシー</a>
-                <a href="#" class="hover:text-[#6d976d]">利用規約</a>
-                <a href="#" class="hover:text-[#6d976d]">特定商取引法に基づく表記</a>
+                <!-- hover色も調整 -->
+                <a href="#" class="hover:accent-color">プライバシーポリシー</a>
+                <a href="#" class="hover:accent-color">利用規約</a>
+                <a href="#" class="hover:accent-color">特定商取引法に基づく表記</a>
             </nav>
             <p>&copy; 2025 Kimi Design. All rights reserved.</p>
         </div>
@@ -241,24 +270,25 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         const delay = entry.target.dataset.delay ? parseFloat(entry.target.dataset.delay) * 1000 : 0;
+                        
+                        // 遅延をかけてアニメーションを発火 (通常スクロールイン時の動作)
                         setTimeout(() => {
                             entry.target.classList.add('is-visible');
                         }, delay);
+                        
                         observer.unobserve(entry.target); // 一度アニメーションしたら監視を停止
                     }
                 });
-            }, { threshold: 0.2 }); // 20%以上表示されたらアニメーション
+            }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' }); // 20%以上表示、少し下側のマージンを追加
 
             animatedElements.forEach(element => {
-                // ヒーローセクションの要素はページロード時にアニメーションするため、is-visibleを既に持つ
-                // その他のセクションは監視対象とする
+                // ヒーローセクション以外の要素を監視対象とする
                 if (!element.classList.contains('is-visible')) {
                     observer.observe(element);
                 }
             });
 
-            // ヘッダーナビゲーションのページ内リンクとロゴをクリックした際のアニメーションを強制発火
-            // nav a[href^="#"] (ナビゲーションのページ内リンク) と a#logo-link (ロゴリンク) を対象とする
+            // ヘッダーナビゲーションのページ内リンクとロゴをクリックした際のスクロールとアニメーション再発火を制御
             document.querySelectorAll('nav a[href^="#"], a#logo-link').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault(); // デフォルトのスクロール動作をキャンセル
@@ -267,27 +297,25 @@
                     const targetElement = document.getElementById(targetId);
 
                     if (targetElement) {
-                        // まずはスクロール
+                        // 1. スムーズスクロールを実行
                         targetElement.scrollIntoView({
                             behavior: 'smooth'
                         });
 
-                        // ターゲットセクション内のアニメーション要素を再発火させる
-                        // スクロール完了を待つために少し時間をおいてから実行
+                        // 2. スクロール完了を待ってからアニメーションを即座に完了 (リセットは行わない)
                         setTimeout(() => {
                             const childrenToAnimate = targetElement.querySelectorAll('.animated-section');
                             childrenToAnimate.forEach(child => {
-                                // アニメーションをリセット
-                                child.classList.remove('is-visible'); 
-                                // 強制的にリフローさせてから再表示
-                                // これによりCSSアニメーションがリセットされ、再度実行される
-                                void child.offsetWidth; 
-                                const childDelay = child.dataset.delay ? parseFloat(child.dataset.delay) * 1000 : 0;
-                                setTimeout(() => {
-                                    child.classList.add('is-visible');
-                                }, childDelay);
+                                // アニメーションのリセット処理（.classList.remove('is-visible')）を削除
+                                // is-visibleを即座に付与することで、アニメーションが即完了し「お辞儀」を防ぐ
+                                child.classList.add('is-visible');
                             });
-                        }, 500); // スクロール完了を待つための時間
+                            
+                            // スクロール先のセクションが画面上部に見えるようになったので、
+                            // そのセクション内の要素はIntersection Observerの監視対象から外す必要はないが、
+                            // 再度アニメーションさせる必要もないため、即時完了が最善。
+                            
+                        }, 500); // スクロール完了を待つための時間 (500ms)
                     }
                 });
             });
