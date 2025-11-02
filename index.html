@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kimi Design | 子育て世代の女性のためのメール相談</title>
     
-    <!-- Tailwind CSSをロード --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSSの読み込み -->
+<script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- フォント設定: Zen Maru Gothic (本文/丸文字) と Shippori Mincho B1 (見出し/エレガント明朝) --><link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Zen+Maru+Gothic:wght@400;700;800&family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet">
+    <!-- フォント設定: Zen Maru Gothic (本文), Shippori Mincho B1 (見出し) -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Zen+Maru+Gothic:wght@400;700;800&family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* 1. カラーパレットとフォントの定義 */
         :root {
-            --color-primary: #6d976d;    /* モスグリーン */
+            --color-primary: #6d976d;    /* リーフグリーン (木の気、成長・再生) */
             --color-secondary: #f7fcf8;  /* 非常に薄い緑がかった背景 */
-            --color-background: #fcf8f0; /* ソフトベージュ */
+            --color-background: #fcf8f0; /* 生成りベージュ (大地の安定・土の気) */
             --color-text-dark: #3a3a3a;  /* 深いチャコールグレー */
             --color-heading: #5c5c5c;    /* 中間グレー */
         }
@@ -141,6 +143,18 @@
             stroke-width: 2.5;
         }
 
+        /* --- サービスセクション内の小さなアイコンボックス --- */
+        .icon-box-small {
+            width: 32px; /* 8 (w-8) */
+            height: 32px; /* 8 (h-8) */
+            margin-bottom: 0; /* マージンをリセット */
+            flex-shrink: 0;
+        }
+        .icon-box-small svg {
+            width: 16px; /* 4 */
+            height: 16px; /* 4 */
+        }
+
 
         /* --- アニメーションの定義 (変更なし) --- */
         .animated-section {
@@ -152,80 +166,184 @@
             opacity: 1;
             transform: translateY(0);
         }
-
+        
+        /* --- モバイルメニュー用CSS (追加) --- */
+        .mobile-menu-overlay {
+            background-color: rgba(252, 248, 240, 0.95); /* ソフトベージュの半透明 */
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+            visibility: hidden;
+            opacity: 0;
+        }
+        .mobile-menu-overlay.open {
+            visibility: visible;
+            opacity: 1;
+        }
+        .hamburger-icon {
+            transition: transform 0.3s ease;
+        }
+        .hamburger-icon.open .line-top {
+            transform: translateY(8px) rotate(45deg);
+        }
+        .hamburger-icon.open .line-middle {
+            opacity: 0;
+        }
+        .hamburger-icon.open .line-bottom {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+        .menu-link-item {
+             opacity: 0;
+             transform: translateY(10px);
+             transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .mobile-menu-overlay.open .menu-link-item {
+             opacity: 1;
+             transform: translateY(0);
+        }
+        /* モバイルでCTAボタンを非表示にするための修正 */
+        @media (max-width: 639px) { /* smブレークポイント未満 */
+            .mobile-cta-in-header {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- ヘッダー (ナビゲーション) --><header class="header-bg sticky top-0 z-20">
+    <!-- ヘッダー (粘着・モバイル対応) -->
+    <header class="header-bg sticky top-0 z-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-            <!-- ロゴ --><a href="#main" class="text-2xl font-bold tracking-widest accent-color" id="logo-link">
+            
+            <!-- ロゴ -->
+            <a href="#main" class="text-2xl font-bold tracking-widest accent-color" id="logo-link">
                 <img src="rogo.jpeg" alt="Kimi Design ロゴ" class="h-9 md:h-11" 
                     onerror="this.onerror=null; this.src='https://placehold.co/180x44/6d976d/ffffff?text=Kimi+Design';" />
             </a>
-            <!-- ナビゲーション --><nav class="space-x-3 sm:space-x-8 flex items-center">
-                <a href="#about" class="nav-link text-sm font-medium hover:accent-color hidden sm:inline-block">私たちについて</a>
-                <a href="#donation" class="nav-link text-sm font-medium hover:accent-color hidden sm:inline-block">社会貢献</a>
-                <a href="#service" class="nav-link text-sm font-medium hover:accent-color hidden sm:inline-block">料金プラン</a> 
-                <!-- お申し込みボタン: パディングを調整してさらに目立たせる --><a href="contact.html" class="primary-button inline-block text-sm font-medium px-6 py-2">お申し込み</a>
+            
+            <!-- デスクトップ用ナビゲーション (sm以上で表示) -->
+            <nav class="space-x-3 sm:space-x-8 hidden sm:flex items-center">
+                <a href="#about" class="nav-link text-sm font-medium hover:accent-color">私たちについて</a>
+                <a href="#donation" class="nav-link text-sm font-medium hover:accent-color">社会貢献</a>
+                <!-- ナビゲーションを「サービス」に変更 -->
+                <a href="#service" class="nav-link text-sm font-medium hover:accent-color">サービス</a>
+                
+                <!-- CTAボタン (PC版) -->
+                <a href="contact.html" class="primary-button inline-block text-sm font-medium px-6 py-2">お申し込み</a>
             </nav>
+
+            <!-- モバイル用ナビゲーション (sm未満で表示) -->
+            <div class="flex sm:hidden items-center space-x-4">
+                
+                <!-- ハンバーガーボタン -->
+                <button id="hamburger-button" aria-label="メニューを開く" class="p-2 focus:outline-none">
+                    <div class="hamburger-icon w-6 h-5 flex flex-col justify-between">
+                        <span class="line-top block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
+                        <span class="line-middle block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
+                        <span class="line-bottom block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
+                    </div>
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- ヒーローセクション (モダンな非対称レイアウトに刷新) --><main id="main" class="pt-24 pb-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- モバイルメニュー オーバーレイ -->
+    <div id="mobile-menu" class="mobile-menu-overlay fixed inset-0 z-30 flex flex-col items-center justify-center p-8">
+        <!-- 閉じるボタン -->
+        <button id="close-menu-button" aria-label="メニューを閉じる" class="absolute top-6 right-6 p-3">
+            <!-- 閉じるアイコン (Xマーク) -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        
+        <!-- ナビゲーションリンク -->
+        <nav class="flex flex-col space-y-8 text-center mt-16">
+            <a href="#about" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.1s;">私たちについて</a>
+            <a href="#donation" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.2s;">社会貢献</a>
+            <!-- ナビゲーションを「サービス」に変更 -->
+            <a href="#service" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.3s;">サービス</a>
+            
+            <!-- モバイルCTAボタン (メニュー内に追加し、ナビ項目として扱う) -->
+            <a href="contact.html" class="primary-button text-xl mt-8 px-10 py-4 menu-link-item" style="transition-delay: 0.4s;">
+                お申し込み
+            </a>
+        </nav>
+    </div>
+
+    <!-- メインコンテンツ -->
+    <main id="main" class="pt-16 pb-24 sm:pt-24 sm:pb-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-2 items-center gap-12 md:gap-8 animated-section is-visible" style="transition-delay: 0.2s;">
-            <!-- 左側: メッセージとCTA --><div class="md:text-left text-center">
+            
+            <!-- コピーライトエリア -->
+            <div class="md:text-left text-center">
                 <p class="text-lg accent-color mb-4 font-bold tracking-widest">Kimi Design</p>
                 <h1 class="main-copy heading-font text-5xl sm:text-6xl md:text-7xl font-extrabold text-gray-800 mb-8">
                     あなたの言葉の奥にある、<br><span class="accent-color">まだ形になっていない想い</span>を受けとめたい。
                 </h1>
                 <p class="text-xl md:text-2xl text-gray-600 mb-10 main-copy">
                     涙でも、ため息でも、それはすべて“あなたらしさ”のかけらです。<br>
-                    子育て世代の女性の「私」を整える、完全メール制の心の相談アトリエ。
+                    <!-- メインコピーを修正: メールとLINEを活用した非同期の心の相談アトリエ -->
+                    子育て世代の女性の「私」を整える、メールとLINEを活用した非同期の心の相談アトリエ。
                 </p>
-                <!-- CTAボタンを大きく、目立たせる --><a href="contact.html" class="primary-button inline-block text-lg w-full sm:w-auto">
+                
+                <!-- CTAボタン -->
+                <a href="contact.html" class="primary-button inline-block text-lg w-full sm:w-auto">
                     まずは初回お試しから始める
                 </a>
             </div>
-            <!-- 右側: ビジュアルスペース (静かな水彩風の画像を使用) --><div class="flex justify-center md:justify-end">
-                <!-- ヒーローセクションの最終決定版ビジュアルを挿入 --><img src="Gemini_Generated_Image_wpfsu2wpfsu2wpfs.png" 
+            
+            <!-- メインビジュアル -->
+            <div class="flex justify-center md:justify-end">
+                
+                <img src="Gemini_Generated_Image_wpfsu2wpfsu2wpfs.png" 
                      alt="窓辺で静かに自分を見つめる女性の抽象画" class="w-full max-w-sm rounded-3xl shadow-2xl" 
                      onerror="this.onerror=null; this.src='https://placehold.co/400x400/e8f0e8/6d976d?text=Quiet+Reflection';" />
             </div>
         </div>
     </main>
 
-    <!-- サービスの特徴 (About) --><section id="about" class="py-24 bg-white">
+    <!-- 私たちについてセクション -->
+    <section id="about" class="py-24 bg-white">
         <div class="max-w-6xl mx-auto px-4 text-center">
-            <!-- H2のスタイルを変更 (明朝体) --><h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
+            
+            <h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
                 子育てを頑張るあなたへ、静かに心を整える時間
             </h2>
             <div class="grid md:grid-cols-3 gap-10 text-left">
-                <!-- 特徴 1: 書くことで整理 --><div class="card-base text-center animated-section" data-delay="0.2">
+                
+                <!-- サービス特徴 1: メールを窓口とした非同期サポートに修正 -->
+                <div class="card-base text-center animated-section" data-delay="0.2">
                     <div class="icon-box mx-auto">
-                        <!-- Book Open Text Icon --><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                        <!-- Feather Icon (for 'writing' support) -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 20V10"/>
+                            <path d="M18.4 7a2.12 2.12 0 0 0-3-.4l-1.9 2.5a2.12 2.12 0 0 0 3 .4l1.9-2.5Z"/>
+                            <path d="M15.5 11.5l5.5-5.5a2.12 2.12 0 0 0-3-3L12 8.5"/>
                         </svg>
                     </div>
-                    <h3 class="text-xl heading-font mb-3 text-gray-700">メールで「書く」非同期サポート</h3>
-                    <p class="text-gray-600">家事や育児の合間など、あなたのペースでご相談ください。時間を気にせず、じっくりとご自身の気持ちと向き合い、言葉にすることで心の整理を促します。</p>
+                    <h3 class="text-xl heading-font mb-3 text-gray-700">メールを窓口とした非同期サポート</h3>
+                    <p class="text-gray-600">家事や育児の合間など、あなたのペースでご相談ください。メールとLINEを活用し、時間を気にせず、じっくりとご自身の気持ちと向き合い、言葉にすることで心の整理を促します。</p>
                 </div>
-                <!-- 特徴 2: 経験を活かした寄り添い --><div class="card-base text-center animated-section" data-delay="0.4">
+                
+                <!-- サービス特徴 2 (変更なし) -->
+                <div class="card-base text-center animated-section" data-delay="0.4">
                     <div class="icon-box mx-auto">
-                        <!-- Heart Hand Icon --><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M11 19C11 19 3 14 3 8C3 4.5 5.5 2 8 2C10.5 2 12 3.5 12 5C12 3.5 13.5 2 16 2C18.5 2 21 4.5 21 8C21 14 13 19 13 19"/>
-                            <path d="M12 22V19"/>
+                        <!-- Heart Icon (for deep empathy/connection) -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 1.05-4.5 3C10.5 4.05 9.24 3 7.5 3A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
                         </svg>
                     </div>
                     <h3 class="text-xl heading-font mb-3 text-gray-700">経験を活かした、深い共感</h3>
                     <p class="text-gray-600">子育て世代特有の悩みや葛藤など、その胸の内のすべてをまずは安心してお話しください。経験者の視点から、共感をもってあなたのお気持ちを丁寧に受け止めます。</p>
                 </div>
-                <!-- 特徴 3: 「母親」ではない私を取り戻す --><div class="card-base text-center animated-section" data-delay="0.6">
+                
+                <!-- サービス特徴 3 (変更なし) -->
+                <div class="card-base text-center animated-section" data-delay="0.6">
                     <div class="icon-box mx-auto">
-                        <!-- Feather Icon --><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20.2 12.8 13.5 20l-6-6 6-6Z"/>
-                            <path d="M19 11a1 1 0 0 0 0-2H5a1 1 0 0 0 0 2h14Z"/>
+                        <!-- UserCheck Icon (for self-affirmation/individual) -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="m17 17 2 2 4-4"/>
                         </svg>
                     </div>
                     <h3 class="text-xl heading-font mb-3 text-gray-700">「個人」としての自己肯定</h3>
@@ -235,16 +353,21 @@
         </div>
     </section>
 
-    <!-- 寄付活動 (Donation) - イラストを中心に配置し、情緒的に表現 --><section id="donation" class="py-24 bg-subtle">
+    <!-- 寄付セクション (変更なし) -->
+    <section id="donation" class="py-24 bg-subtle">
         <div class="max-w-5xl mx-auto px-4 text-center">
-            <!-- H2のスタイルを変更 (明朝体) --><h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
+            
+            <h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
                 あなたと誰かの未来を繋ぐ、社会貢献
             </h2>
             
             <div class="flex flex-col lg:flex-row items-center lg:space-x-12">
-                <!-- 左側: イラストと情緒的な背景 --><div class="w-full lg:w-1/2 mb-10 lg:mb-0 animated-section" data-delay="0.2">
+                
+                <!-- イラストコンテナ -->
+                <div class="w-full lg:w-1/2 mb-10 lg:mb-0 animated-section" data-delay="0.2">
                     <div class="donation-visual-container">
-                        <!-- 寄付セクションの最終決定版ビジュアルを挿入 --><img src="Gemini_Generated_Image_i7cxcli7cxcli7cx.png" 
+                        
+                        <img src="Gemini_Generated_Image_i7cxcli7cxcli7cx.png" 
                              alt="手を繋いで未来へ向かう親子、温かい希望のイラスト" 
                              class="w-full h-auto object-contain" />
                     </div>
@@ -253,7 +376,8 @@
                     </p>
                 </div>
                 
-                <!-- 右側: 詳細説明 --><div class="w-full lg:w-1/2 lg:text-left animated-section" data-delay="0.4">
+                <!-- テキストエリア -->
+                <div class="w-full lg:w-1/2 lg:text-left animated-section" data-delay="0.4">
                     <h3 class="text-3xl heading-font text-gray-700 mb-4">
                         すべての優しさが、誰かの未来へ。
                     </h3>
@@ -274,94 +398,74 @@
         </div>
     </section>
 
-    <!-- 料金とご利用の流れ (Service) --><section id="service" class="py-24">
-        <div class="max-w-5xl mx-auto px-4 text-center">
-            <!-- H2のスタイルを変更 (明朝体) --><h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
-                ご利用の流れと料金プラン
+    <!-- サービスセクション: 相談の流れ (大幅修正) -->
+    <section id="service" class="py-24">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            
+            <h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
+                メールから始める、心の相談の流れ
             </h2>
 
-            <!-- ご利用の流れ (Flow) の新デザイン --><h3 class="text-2xl heading-font text-gray-700 mb-8 mt-16 animated-section" data-delay="0.2">ご利用の流れ (Flow)</h3>
-            <div class="max-w-4xl mx-auto relative">
-                <!-- 接続線 (デスクトップのみ) --><div class="hidden sm:block absolute top-[68px] left-0 right-0 h-1 bg-[#d4e1d4] z-0"></div>
+            <!-- STEP 1: 初回メール相談 -->
+            <div class="card-base text-left mb-10 animated-section" data-delay="0.2">
+                <p class="text-xs font-bold accent-color mb-2 tracking-wider">STEP 1</p>
+                <h3 class="text-2xl heading-font text-gray-800 mb-4 flex items-center">
+                    <span class="icon-box icon-box-small w-8 h-8 mr-3">
+                        <!-- Mail Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="16" x="2" y="4" rx="2"/>
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                        </svg>
+                    </span>
+                    まずはじっくり、初回メールお試し相談
+                </h3>
+                <p class="text-lg text-gray-600 mb-4">
+                    誰にも話せない悩みや、まだ形になっていない想いを、時間を気にせずじっくりと文章にしてください。この「書く」行為自体が、心の整理を促す第一歩となります。
+                </p>
+                <div class="border-l-4 border-gray-200 pl-4 py-2 bg-gray-50 rounded-lg">
+                     <p class="text-xl font-bold accent-color">【特典】初回1往復は無料です</p>
+                     <p class="text-sm text-gray-500 mt-1">
+                        まずはサービスとの相性をお確かめください。お返事もじっくりと丁寧にお返しします。
+                     </p>
+                </div>
+            </div>
 
-                <!-- ステップコンテナ --><div class="flex flex-col sm:flex-row justify-between w-full relative z-10">
-                    
-                    <!-- ステップ 1 --><div class="flow-step-wrapper w-full sm:w-1/3 p-4 relative text-center animated-section" data-delay="0.4">
-                        <div class="sm:absolute sm:top-0 sm:left-1/2 sm:transform sm:-translate-x-1/2">
-                            <div class="flow-marker mx-auto">1</div>
-                        </div>
-                        <div class="card-base mt-4 sm:mt-0">
-                            <p class="font-bold text-lg heading-font mb-2 text-gray-700">プランの選択とお申し込み</p>
-                            <p class="text-sm text-gray-600 mt-2">ご希望のプランを選択し、ご相談内容を簡単にご記入ください。</p>
-                        </div>
-                    </div>
-                    
-                    <!-- ステップ 2 --><div class="flow-step-wrapper w-full sm:w-1/3 p-4 relative text-center animated-section" data-delay="0.6">
-                        <div class="sm:absolute sm:top-0 sm:left-1/2 sm:transform sm:-translate-x-1/2">
-                            <div class="flow-marker mx-auto">2</div>
-                        </div>
-                        <div class="card-base mt-4 sm:mt-0">
-                            <p class="font-bold text-lg heading-font mb-2 text-gray-700">料金のお支払い</p>
-                            <p class="text-sm text-gray-600 mt-2">折り返しメールにてお支払い方法をご案内します。</p>
-                        </div>
-                    </div>
-                    
-                    <!-- ステップ 3 --><div class="flow-step-wrapper w-full sm:w-1/3 p-4 relative text-center animated-section" data-delay="0.8">
-                        <div class="sm:absolute sm:top-0 sm:left-1/2 sm:transform sm:-translate-x-1/2">
-                            <div class="flow-marker mx-auto">3</div>
-                        </div>
-                        <div class="card-base mt-4 sm:mt-0">
-                            <p class="font-bold text-lg heading-font mb-2 text-gray-700">メールでのやり取り開始</p>
-                            <p class="text-sm text-gray-600 mt-2">ご入金確認後、専用メールアドレスをご案内し、サポートを開始します。</p>
-                        </div>
-                    </div>
-                </div>
+            <!-- STEP 2: LINE継続サポート -->
+            <div class="card-base text-left animated-section" data-delay="0.4">
+                <p class="text-xs font-bold accent-color mb-2 tracking-wider">STEP 2</p>
+                <h3 class="text-2xl heading-font text-gray-800 mb-4 flex items-center">
+                    <span class="icon-box icon-box-small w-8 h-8 mr-3">
+                        <!-- MessageCircle Icon for LINE chat -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>
+                        </svg>
+                    </span>
+                    継続的な心のサポートをLINEで
+                </h3>
+                <p class="text-lg text-gray-600 mb-4">
+                    初回相談後、より身近で継続的なサポートをご希望の場合、LINEでの専用有料プランへご案内します。LINEなら、日常の小さな変化や気づきを、よりスピーディにご報告いただけます。
+                </p>
+                <ul class="text-left space-y-2 text-gray-700 text-sm pl-4">
+                    <li class="flex items-start">
+                        <span class="accent-color mr-2 mt-0.5 text-xl leading-none">✓</span>
+                        <span>**デザインや東洋占術の知見**に基づいた、心の整えサポートを提供します。</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="accent-color mr-2 mt-0.5 text-xl leading-none">✓</span>
+                        <span>子育て中でも**非同期**でじっくり相談できるため、あなたのペースを守れます。</span>
+                    </li>
+                </ul>
             </div>
             
-            <!-- 料金プラン (Price) --><h3 class="text-2xl heading-font text-gray-700 mb-6 mt-20 animated-section" data-delay="1.0">料金プラン (Price)</h3>
-            <p class="text-lg text-gray-600 mb-10 animated-section" data-delay="1.2">まずは初回お試しプランで、Kimi Designの相談体験をお試しください。</p>
-            
-            <!-- プランカード --><div class="grid md:grid-cols-1 gap-6 max-w-md mx-auto">
-                <!-- 初回お試しプラン: よりプレミアムなデザインに --><div class="card-base p-10 border-4 border-accent rounded-2xl shadow-xl transform hover:scale-[1.03] transition duration-300 animated-section" data-delay="1.4">
-                    
-                    <div class="bg-[#e5f0e5] text-[#4a724a] px-4 py-1.5 rounded-full inline-block mb-4 font-extrabold text-sm tracking-wider heading-font">
-                        ✨ まずは体験
-                    </div>
-                    <h4 class="text-3xl heading-font mb-2 accent-color">初回お試しプラン</h4>
-                    <p class="text-5xl font-extrabold accent-color mb-4">
-                        ¥1,100<span class="text-xl font-normal ml-2">（税込）</span>
-                    </p>
-                    <p class="text-base text-gray-600 mb-6">（メール往復1通セット）</p>
-                    <ul class="text-left space-y-3 text-gray-700 text-base">
-                        <li class="flex items-start">
-                            <span class="accent-color mr-2 mt-0.5 text-xl leading-none">✓</span>
-                            <span>サービス体験をしたい方、迷いを言葉にしてみたい方向け</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="accent-color mr-2 mt-0.5 text-xl leading-none">✓</span>
-                            <span>1往復あたり最大400文字までご相談可能</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="accent-color mr-2 mt-0.5 text-xl leading-none">✓</span>
-                            <span>3営業日以内のご丁寧な返信をお約束</span>
-                        </li>
-                    </ul>
-                    <a href="contact.html" class="primary-button inline-block text-base mt-8 w-full">このプランでお申し込み</a>
-                </div>
-            </div>
+            <a href="contact.html" class="primary-button inline-block text-lg w-full sm:w-auto mt-16 animated-section" data-delay="0.6">
+                初回お試し相談のお申し込みはこちら
+            </a>
         </div>
     </section>
 
-    <!-- Final CTA セクション --><section class="py-24 bg-white text-center">
-        <h2 class="text-3xl heading-font text-gray-700 font-extrabold mb-8 animated-section">
-            心の声を、私たちに聞かせてください。
-        </h2>
-        <a href="contact.html" class="primary-button inline-block text-lg w-full sm:w-auto animated-section" data-delay="0.2">
-            初回お試しプランで相談を始める
-        </a>
-    </section>
-
-    <!-- フッター --><footer class="py-12 bg-[#f0f0e8] text-center text-sm text-gray-500">
+    
+    <!-- フッター (変更なし) -->
+    <footer class="py-12 bg-[#f0f0e8] text-center text-sm text-gray-500">
         <div class="max-w-7xl mx-auto px-4">
             <nav class="mb-4 space-x-6">
                 <a href="#" class="hover:accent-color">プライバシーポリシー</a>
@@ -373,7 +477,33 @@
     </footer>
 
     <script>
-        // Intersection Observer for scroll animation
+        // --- モバイルメニュー操作 (変更なし) ---
+        const hamburgerButton = document.getElementById('hamburger-button');
+        const closeMenuButton = document.getElementById('close-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = mobileMenu.querySelectorAll('a');
+
+        function toggleMenu() {
+            const isOpen = mobileMenu.classList.toggle('open');
+            hamburgerButton.classList.toggle('open', isOpen);
+            // メニューが開いているときはスクロールを禁止
+            document.body.style.overflow = isOpen ? 'hidden' : ''; 
+        }
+
+        hamburgerButton.addEventListener('click', toggleMenu);
+        closeMenuButton.addEventListener('click', toggleMenu);
+
+        // リンクをクリックしたらメニューを閉じる
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('open')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+
+        // --- Intersection Observer for scroll animation (変更なし) ---
         document.addEventListener('DOMContentLoaded', () => {
             const animatedElements = document.querySelectorAll('.animated-section');
 
@@ -398,7 +528,7 @@
                 }
             });
 
-            // Smooth scroll for anchor links
+            // Smooth scroll for anchor links (変更なし)
             document.querySelectorAll('nav a[href^="#"], a#logo-link').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     const href = this.getAttribute('href');
