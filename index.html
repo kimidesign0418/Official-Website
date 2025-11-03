@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kimi Design | 子育てママのスキマ時間に寄り添うメール＆LINE相談</title>
+    <title>Kimi Design | 子育て世代の女性のためのメール相談</title>
     
     <!-- Tailwind CSSの読み込み -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -465,13 +465,16 @@
     </section>
 
     
-    <!-- フッター (変更なし) -->
+    <!-- フッター (PDFファイルへのリンクを修正) -->
     <footer class="py-12 bg-[#f0f0e8] text-center text-sm text-gray-500">
         <div class="max-w-7xl mx-auto px-4">
             <nav class="mb-4 space-x-6">
-                <a href="#" class="hover:accent-color">プライバシーポリシー</a>
-                <a href="#" class="hover:accent-color">利用規約</a>
-                <a href="#" class="hover:accent-color">特定商取引法に基づく表記</a>
+                <!-- プライバシーポリシーのリンクをPDFファイルに修正 -->
+                <a href="プライバシーポリシー.pdf" target="_blank" class="hover:accent-color">プライバシーポリシー</a>
+                <!-- 利用規約のリンクをPDFファイルに修正 -->
+                <a href="利用規約.pdf" target="_blank" class="hover:accent-color">利用規約</a>
+                <!-- 特定商取引法に基づく表記のリンクをPDFファイルに修正 -->
+                <a href="特定商取引法に基づく表記.pdf" target="_blank" class="hover:accent-color">特定商取引法に基づく表記</a>
             </nav>
             <p>&copy; 2025 Kimi Design. All rights reserved.</p>
         </div>
@@ -497,7 +500,8 @@
         // リンクをクリックしたらメニューを閉じる
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                if (mobileMenu.classList.contains('open')) {
+                // PDFリンクは新しいタブで開くため、メニューを閉じないようにする
+                if (!link.getAttribute('target') === '_blank' && mobileMenu.classList.contains('open')) {
                     toggleMenu();
                 }
             });
