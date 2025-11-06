@@ -281,7 +281,6 @@
                 </h1>
                 <p class="text-xl md:text-2xl text-gray-600 mb-10 main-copy">
                     涙でも、ため息でも、それはすべて“あなたらしさ”のかけらです。<br>
-                    <!-- メインコピーを修正: メールとLINEを活用したスキマ時間の心の相談アトリエ -->
                     子育て世代の女性の「私」を整える、メールとLINEを活用した**スキマ時間**の心の相談アトリエ。
                 </p>
                 
@@ -295,8 +294,8 @@
             <div class="flex justify-center md:justify-end">
                 
                 <img src="Gemini_Generated_Image_wpfsu2wpfsu2wpfs.png" 
-                     alt="窓辺で静かに自分を見つめる女性の抽象画" class="w-full max-w-sm rounded-3xl shadow-2xl" 
-                     onerror="this.onerror=null; this.src='https://placehold.co/400x400/e8f0e8/6d976d?text=Quiet+Reflection';" />
+                    alt="窓辺で静かに自分を見つめる女性の抽象画" class="w-full max-w-sm rounded-3xl shadow-2xl" 
+                    onerror="this.onerror=null; this.src='https://placehold.co/400x400/e8f0e8/6d976d?text=Quiet+Reflection';" />
             </div>
         </div>
     </main>
@@ -368,8 +367,8 @@
                     <div class="donation-visual-container">
                         
                         <img src="Gemini_Generated_Image_i7cxcli7cxcli7cx.png" 
-                             alt="手を繋いで未来へ向かう親子、温かい希望のイラスト" 
-                             class="w-full h-auto object-contain" />
+                            alt="手を繋いで未来へ向かう親子、温かい希望のイラスト" 
+                            class="w-full h-auto object-contain" />
                     </div>
                     <p class="text-base font-bold accent-color mt-6 heading-font">
                         - Every act of kindness -
@@ -423,10 +422,10 @@
                     誰にも話せない悩みや、まだ形になっていない想いを、時間を気にせずじっくりと文章にしてください。この「書く」行為自体が、心の整理を促す第一歩となります。
                 </p>
                 <div class="border-l-4 border-gray-200 pl-4 py-2 bg-gray-50 rounded-lg">
-                     <p class="text-xl font-bold accent-color">【特典】初回1往復は無料です</p>
-                     <p class="text-sm text-gray-500 mt-1">
+                    <p class="text-xl font-bold accent-color">【特典】初回1往復は無料です</p>
+                    <p class="text-sm text-gray-500 mt-1">
                         まずはサービスとの相性をお確かめください。お返事もじっくりと丁寧にお返しします。
-                     </p>
+                    </p>
                 </div>
             </div>
 
@@ -471,21 +470,21 @@
             <nav class="mb-4 space-x-6">
                 <!-- プライバシーポリシーのリンクを英字ファイル名に修正 -->
                 <a href="privacy-policy.pdf" 
-                   target="_blank" class="hover:accent-color">プライバシーポリシー</a>
+                    target="_blank" class="hover:accent-color">プライバシーポリシー</a>
                 
                 <!-- 利用規約のリンクを英字ファイル名に修正 -->
                 <a href="terms-of-service.pdf" target="_blank" class="hover:accent-color">利用規約</a>
                 
                 <!-- 特定商取引法に基づく表記のリンクを英字ファイル名に修正 -->
                 <a href="commerce-act.pdf" 
-                   target="_blank" class="hover:accent-color">特定商取引法に基づく表記</a>
+                    target="_blank" class="hover:accent-color">特定商取引法に基づく表記</a>
             </nav>
             <p>&copy; 2025 Kimi Design. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // --- モバイルメニュー操作 (変更なし) ---
+        // --- モバイルメニュー操作 ---
         const hamburgerButton = document.getElementById('hamburger-button');
         const closeMenuButton = document.getElementById('close-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -504,8 +503,11 @@
         // リンクをクリックしたらメニューを閉じる
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                // PDFリンクは新しいタブで開くため、メニューを閉じないようにする
-                if (!link.getAttribute('target') === '_blank' && mobileMenu.classList.contains('open')) {
+                // BUG FIX: アンカーリンクやサイト内リンクがクリックされた際にメニューを閉じるように修正
+                // PDFなどの target="_blank" が設定されたリンク以外で、メニューが開いていたら閉じる
+                const isTargetBlank = link.getAttribute('target') === '_blank';
+                
+                if (!isTargetBlank && mobileMenu.classList.contains('open')) {
                     toggleMenu();
                 }
             });
