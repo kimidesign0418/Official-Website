@@ -29,7 +29,7 @@
             transition: background-color 0.3s, transform 0.1s;
             letter-spacing: 0.1em;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
-            white-space: nowrap; /* ボタン内のテキストが改行されないように */
+            white-space: nowrap;
         }
         .primary-button:hover {
             background-color: #5c825c;
@@ -43,38 +43,74 @@
             width: 100%;
             padding: 0.75rem;
             border: 1px solid #d1d5db;
-            border-radius: 0.5rem; /* rounded-lg */
+            border-radius: 0.5rem;
             transition: border-color 0.3s, box-shadow 0.3s;
             background-color: white;
         }
         .form-input:focus {
             outline: none;
-            border-color: #6d976d; /* フォーカス時にアクセントカラー */
+            border-color: #6d976d;
             box-shadow: 0 0 0 3px rgba(109, 151, 109, 0.3);
         }
         /* 必須マークのスタイル */
         .required-mark {
-            color: #ef4444; /* red-500 */
-            font-size: 0.75rem; /* text-xs */
+            color: #ef4444;
+            font-size: 0.75rem;
             font-weight: 700;
             margin-left: 0.5rem;
         }
 
-        /* --- モバイルメニューのアニメーション (index.htmlと共通) --- */
+        /* --- モーダル/オーバーレイのスタイル --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-content {
+            background-color: white;
+            max-width: 90%;
+            max-height: 90%;
+            width: 800px;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch; /* iOSでのスクロールをスムーズに */
+        }
+        .modal-overlay.open .modal-content {
+            transform: scale(1);
+        }
+
+        /* --- モバイルメニューのアニメーション --- */
         .mobile-menu-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(252, 248, 240, 0.98); /* ほぼ不透明 */
+            background-color: rgba(252, 248, 240, 0.98);
             z-index: 50;
-            transform: translateX(100%); /* 初期状態: 画面外 */
+            transform: translateX(100%);
             transition: transform 0.4s ease-out;
-            padding-top: 5rem; /* ヘッダーの高さ分スペースを空ける */
+            padding-top: 5rem;
         }
         .mobile-menu-overlay.open {
-            transform: translateX(0); /* オープン時: 画面内にスライドイン */
+            transform: translateX(0);
         }
         .hamburger-icon {
             cursor: pointer;
@@ -93,11 +129,25 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* モーダル内のコンテンツ整形用 */
+        #documentContent p {
+            margin-bottom: 1em;
+            line-height: 1.7;
+        }
+        #documentContent h2 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #6d976d;
+            padding-bottom: 0.3rem;
+        }
     </style>
 </head>
 <body>
 
-    <!-- ヘッダー (ナビゲーション) - index.htmlとデザイン統一 -->
+    <!-- ヘッダー (ナビゲーション) -->
     <header class="header-bg sticky top-0 z-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <!-- ロゴ -->
@@ -110,7 +160,6 @@
                 <a href="index.html#about" class="nav-link text-sm font-medium hover:text-gray-500">私たちについて</a>
                 <a href="index.html#donation" class="nav-link text-sm font-medium hover:text-gray-500">寄付活動</a>
                 <a href="index.html#service" class="nav-link text-sm font-medium hover:text-gray-500">サービス・料金</a>
-                <!-- 現在のページなので、ボタンのスタイルは変えず、アクティブな印象にしない -->
                 <a href="contact.html" class="nav-link text-sm font-medium primary-button px-4 py-2 rounded-full shadow-lg">お申し込み</a>
             </nav>
 
@@ -179,6 +228,8 @@
                         <select id="plan" name="plan" required class="form-input appearance-none pr-10">
                             <option value="" disabled selected>選択してください</option>
                             <option value="お試しプラン">初回お試しプラン (¥1,100)</option>
+                            <option value="ベーシックプラン">ベーシックプラン (3往復)</option>
+                            <option value="じっくりプラン">じっくりプラン (5往復)</option>
                             <option value="その他">その他 (ご質問)</option>
                         </select>
                         <!-- カスタムのドロップダウン矢印 -->
@@ -200,7 +251,8 @@
                 <div class="flex items-center pt-4">
                     <input id="privacy" type="checkbox" required class="w-5 h-5 accent-color text-[#6d976d] border-gray-300 rounded focus:ring-[#6d976d]">
                     <label for="privacy" class="ml-3 text-sm text-gray-700">
-                        <a href="privacy_policy.md" target="_blank" class="accent-color underline hover:text-[#5c825c]">プライバシーポリシー</a>に同意する <span class="required-mark">必須</span>
+                        <!-- onclickでモーダル表示を呼び出すように修正 -->
+                        <a href="#" onclick="showDocument('プライバシーポリシー', privacyPolicyContent, event)" class="accent-color underline hover:text-[#5c825c]">プライバシーポリシー</a>に同意する <span class="required-mark">必須</span>
                     </label>
                 </div>
 
@@ -213,7 +265,7 @@
             </form>
 
             <!-- 成功メッセージ表示エリア -->
-            <div id="successMessage" class="hidden mt-10 p-6 border-2 border-[#6d976d] bg-subtle rounded-xl text-center animated-fade" role="alert">
+            <div id="successMessage" class="hidden mt-10 p-6 border-2 border-[#6d976d] bg-[#fcf8f0] rounded-xl text-center animated-fade" role="alert">
                 <h3 class="text-2xl font-bold accent-color mb-3">✨ お申し込みありがとうございます！ ✨</h3>
                 <p class="text-lg text-gray-700">
                     お客様のメッセージは、<span id="submittedName" class="font-bold"></span> 様へ、無事に受け付けられました。<br>
@@ -235,13 +287,33 @@
         </div>
     </main>
 
+    <!-- ドキュメント表示モーダル (index.htmlと同様の機能) -->
+    <div id="documentModal" class="modal-overlay hidden" onclick="closeDocumentModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-4 border-b pb-2">
+                <h2 id="documentTitle" class="text-2xl font-bold accent-color"></h2>
+                <button onclick="closeDocumentModal()" class="text-gray-500 hover:text-gray-700" aria-label="閉じる">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- コンテンツ挿入エリア -->
+            <div id="documentContent" class="text-sm text-gray-700">
+                <!-- ここにMarkdownがHTMLに変換されて挿入されます -->
+            </div>
+        </div>
+    </div>
+
+
     <!-- フッター -->
     <footer class="py-8 bg-[#f5f5f5] text-center text-sm text-gray-500">
         <div class="max-w-7xl mx-auto px-4">
             <nav class="mb-4 space-x-6">
-                <a href="privacy-policy.md" class="hover:text-[#6d976d]">プライバシーポリシー</a>
-                <a href="terms-of-service.md" class="hover:text-[#6d976d]">利用規約</a>
-                <a href="commerce-act.md" class="hover:text-[#6d976d]">特定商取引法に基づく表記</a>
+                <!-- onclickでモーダル表示を呼び出すように修正 -->
+                <a href="#" onclick="showDocument('プライバシーポリシー', privacyPolicyContent, event)" class="hover:text-[#6d976d]">プライバシーポリシー</a>
+                <a href="#" onclick="showDocument('利用規約', termsOfServiceContent, event)" class="hover:text-[#6d976d]">利用規約</a>
+                <a href="#" onclick="showDocument('特定商取引法に基づく表記', commerceActContent, event)" class="hover:text-[#6d976d]">特定商取引法に基づく表記</a>
             </nav>
             <p>&copy; 2025 Kimi Design. All rights reserved.</p>
         </div>
@@ -263,7 +335,6 @@
             }
 
             try {
-                // Firebaseモジュールの動的インポート
                 const { initializeApp } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js");
                 const { getAuth, signInAnonymously, signInWithCustomToken } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js");
                 const { getFirestore } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
@@ -272,48 +343,35 @@
                 db = getFirestore(app);
                 auth = getAuth(app);
 
-                // 認証処理
                 if (initialAuthToken) {
                     await signInWithCustomToken(auth, initialAuthToken);
-                    console.log("Firebase: Signed in with custom token.");
                 } else {
                     await signInAnonymously(auth);
-                    console.log("Firebase: Signed in anonymously.");
                 }
-
-                // 認証後のユーザーID
-                // const userId = auth.currentUser?.uid || crypto.randomUUID();
-                // console.log("Current User ID for data operations:", userId);
-
             } catch (error) {
                 console.error("Firebase initialization or authentication failed:", error);
             }
         }
 
-        // --- フォームバリデーションロジック ---
+        // --- フォームバリデーションロジック (変更なし) ---
         function validateForm() {
             const form = document.getElementById('contactForm');
             const requiredFields = form.querySelectorAll('[required]');
             let isValid = true;
             let errorMessages = [];
 
-            // 必須フィールドのチェック
             requiredFields.forEach(field => {
                 if (field.type === 'checkbox' && !field.checked) {
-                    // チェックボックス（プライバシーポリシー）のチェック
                     isValid = false;
                     errorMessages.push("プライバシーポリシーへの同意が必要です。");
                 } else if (field.value.trim() === '' && field.type !== 'checkbox') {
-                    // テキスト/セレクトボックスの空欄チェック
                     isValid = false;
-                    // 適切なラベルを取得
                     const labelElement = document.querySelector(`label[for="${field.id}"]`);
                     const label = labelElement ? labelElement.textContent.replace('必須', '').trim() : '一部のフィールド';
                     errorMessages.push(`${label} が入力されていません。`);
                 }
             });
 
-            // エラーメッセージの表示
             const uniqueErrors = [...new Set(errorMessages)];
             const errorDiv = document.getElementById('errorMessage');
             const errorText = document.getElementById('errorText');
@@ -321,7 +379,6 @@
             if (!isValid) {
                 errorText.innerHTML = uniqueErrors.join('<br>');
                 errorDiv.classList.remove('hidden');
-                // エラー表示までスクロール
                 errorDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
             } else {
                 errorDiv.classList.add('hidden');
@@ -330,9 +387,8 @@
             return isValid;
         }
 
-        // --- フォーム送信処理 ---
-        function handleSubmit(event) {
-            // イベントを受け取らないため、ここでは event.preventDefault() は不要 (type="button"のため)
+        // --- フォーム送信処理 (変更なし) ---
+        function handleSubmit() {
             if (!validateForm()) {
                 return;
             }
@@ -342,35 +398,192 @@
             const plan = document.getElementById('plan').value;
             const content = document.getElementById('content').value;
 
-            // フォームと成功メッセージの要素を取得
             const form = document.getElementById('contactForm');
             const successMessage = document.getElementById('successMessage');
 
-            // 成功メッセージに名前とメールアドレスを挿入
             document.getElementById('submittedName').textContent = name;
             document.getElementById('submittedEmail').textContent = email;
 
-            // フォームを非表示にし、成功メッセージを表示
             form.classList.add('hidden');
             successMessage.classList.remove('hidden');
             
-            // ページ上部までスクロール
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            // 実際の送信処理（シミュレーションと将来のFirestoreへの保存場所）
             console.log("--- フォーム送信シミュレーション ---");
             console.log(`データ: お名前=${name}, メール=${email}, プラン=${plan}, 内容の一部=${content.substring(0, 30)}...`);
-            // ここにFirestoreへの保存処理（addDocなど）を記述します。
-            // 例: if (db) { await addDoc(collection(db, `artifacts/${appId}/public/data/contacts`), { name, email, plan, content, submittedAt: new Date() }); }
             console.log("----------------------------------");
         }
 
+        // --- モーダル表示のためのコンテンツ定義 ---
+        const privacyPolicyContent = `
+# Kimi Design プライバシーポリシー
+
+## 1. 個人情報の定義
+本ポリシーにおいて「個人情報」とは、生存する個人に関する情報であって、氏名、生年月日、住所、電話番号、連絡先その他の記述等により特定の個人を識別できる情報を指します。
+
+## 2. 個人情報の収集
+当ウェブサイトでは、お客様がお問い合わせフォームを利用する際に、氏名、メールアドレス、ご相談内容などの個人情報を収集します。
+
+## 3. 個人情報の利用目的
+収集した個人情報は、以下の目的で利用します。
+
+* お問い合わせやお申し込みへの対応および確認のため
+* サービスの提供、維持、改善のため
+* 重要な通知など、必要に応じたご連絡のため
+
+## 4. 個人情報の第三者提供
+法令に基づく場合等、正当な理由によらない限り、事前に本人の同意を得ることなく、個人情報を第三者に開示・提供することはありません。
+
+## 5. 個人情報の開示・訂正・削除
+ご本人から個人情報の開示、訂正、削除の請求があった場合は、ご本人であることを確認の上、速やかに対応いたします。
+
+2025年1月1日制定
+Kimi Design 代表
+        `.trim();
+
+        const termsOfServiceContent = `
+# Kimi Design 利用規約
+
+## 第1条（適用）
+本規約は、Kimi Design（以下「当社」）が提供する各種カウンセリングサービス（以下「本サービス」）の利用に関わる一切の事項に適用されます。
+
+## 第2条（利用登録）
+本サービスの利用を希望する者は、本規約に同意の上、当社所定の方法により利用登録を申請し、当社がこれを承認することにより、利用登録が完了するものとします。
+
+## 第3条（料金と支払方法）
+利用者は、本サービス利用の対価として、当社が別途定める料金を、当社が指定する支払方法により支払うものとします。
+
+## 第4条（禁止事項）
+利用者は、本サービスの利用にあたり、以下の行為を行ってはならないものとします。
+1. 法令または公序良俗に違反する行為
+2. 犯罪行為に関連する行為
+3. 当社のサーバーまたはネットワークの機能を破壊したり、妨害したりする行為
+4. その他、当社が不適切と判断する行為
+
+## 第5条（サービスの停止等）
+当社は、以下のいずれかの事由があると判断した場合、事前に通知することなく本サービスの全部または一部の提供を停止または中断することができるものとします。
+1. 本サービスにかかるコンピュータシステムの保守点検または更新を行う場合
+2. 地震、落雷、火災、停電などの不可抗力により本サービスの提供が困難となった場合
+
+2025年1月1日制定
+        `.trim();
+
+        const commerceActContent = `
+# 特定商取引法に基づく表記
+
+## 1. 事業者の名称
+Kimi Design
+
+## 2. 所在地
+所在地は、ご請求があり次第遅滞なく開示いたします。
+
+## 3. 連絡先
+メールアドレス：contact@kimi-design.example (ダミー)
+電話番号：電話番号は、ご請求があり次第遅滞なく開示いたします。
+
+## 4. 販売価格
+各プランの詳細ページに記載しています。
+
+## 5. 代金の支払い時期と方法
+支払い時期：サービスお申し込み時または所定の期日までにお支払いください。
+支払い方法：クレジットカード決済、銀行振込
+
+## 6. 役務の提供時期
+お支払い確認後、ご指定のプランに基づきサービスを提供いたします。
+
+## 7. 返品・キャンセルに関する特約
+* サービスの性質上、契約後のキャンセル・返金は原則としてお受けできません。
+* ただし、当社側の責めに帰すべき事由による場合は、この限りではありません。
+
+2025年1月1日制定
+        `.trim();
+        
+        // --- モーダル操作関数 ---
+
+        // Markdown風テキストを簡易的にHTMLに変換する関数
+        // (段落と見出し2(##)のみ対応)
+        function convertMarkdownToHtml(markdown) {
+            let html = markdown
+                .split('\n')
+                .map(line => line.trim())
+                .filter(line => line.length > 0)
+                .map(line => {
+                    if (line.startsWith('# ')) {
+                        // 見出し1 (# Title) - モーダルタイトルと重複するのでpタグとして扱う
+                        return `<p class="text-xl font-bold mb-3">${line.substring(2)}</p>`;
+                    }
+                    if (line.startsWith('## ')) {
+                        // 見出し2 (## Section)
+                        return `<h2>${line.substring(3)}</h2>`;
+                    }
+                    if (line.startsWith('* ')) {
+                         // リスト項目
+                        return `<li>${line.substring(2)}</li>`;
+                    }
+                    // その他のテキストは段落として処理
+                    return `<p>${line}</p>`;
+                })
+                .join('');
+            
+            // リストタグで囲む (簡易的な処理)
+            if (html.includes('<li>')) {
+                html = html.replace(/<\/p><li>/g, '</li><p>').replace(/<li>/g, '</ul><li>').replace(/<\/li>/g, '</li><ul>');
+            }
+
+            return html.replace(/<ul>/g, '<ul class="list-disc pl-5 my-2">').replace(/<\/ul>/g, '</ul>');
+        }
+
+        /**
+         * ドキュメントモーダルを表示する
+         * @param {string} title - モーダルのタイトル
+         * @param {string} content - 表示するMarkdown形式のコンテンツ
+         * @param {Event} event - クリックイベント（aタグの場合、デフォルト動作を防止）
+         */
+        window.showDocument = function(title, content, event) {
+            if (event) {
+                event.preventDefault(); // aタグのデフォルトのページ遷移を防ぐ
+            }
+            
+            const modal = document.getElementById('documentModal');
+            document.getElementById('documentTitle').textContent = title;
+            document.getElementById('documentContent').innerHTML = convertMarkdownToHtml(content);
+            
+            modal.classList.remove('hidden');
+
+            // requestAnimationFrameを使って、hidden解除後の描画を待ち、openクラスを適用
+            requestAnimationFrame(() => {
+                modal.classList.add('open');
+                // モーダルコンテンツのスクロールを一番上にリセット
+                modal.querySelector('.modal-content').scrollTop = 0;
+            });
+        }
+
+        /**
+         * ドキュメントモーダルを閉じる
+         * @param {Event} event - クリックイベント（オーバーレイクリック用）
+         */
+        window.closeDocumentModal = function(event) {
+             // モーダルの中身をクリックした場合は閉じない
+            if (event && event.target.id !== 'documentModal') {
+                return;
+            }
+            
+            const modal = document.getElementById('documentModal');
+            if (modal.classList.contains('open')) {
+                modal.classList.remove('open');
+                // アニメーションが完了するのを待ってからhiddenを適用 (0.3s)
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300); 
+            }
+        }
+
+
         // --- DOMContentLoadedイベントリスナー ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Firebaseの初期化を開始
             initializeFirebase();
 
-            // --- アニメーションの監視 ---
+            // --- アニメーションの監視 (変更なし) ---
             const animatedElements = document.querySelectorAll('.animated-section');
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -385,37 +598,31 @@
                 observer.observe(element);
             });
             
-            // --- モバイルメニューの開閉ロジック (統一) ---
+            // --- モバイルメニューの開閉ロジック (変更なし) ---
             const mobileMenuButton = document.getElementById('mobileMenuButton');
             const closeMenuButton = document.getElementById('closeMenuButton');
             const mobileMenu = document.getElementById('mobileMenu');
             const mobileLinks = mobileMenu.querySelectorAll('.mobile-link');
 
-            // メニューを開く関数: hiddenを解除し、openでスライドインアニメーションを開始
             const openMenu = () => {
                 mobileMenu.classList.remove('hidden');
-                // requestAnimationFrameでhidden解除後の描画を待ち、openクラスを適用
                 requestAnimationFrame(() => {
                     mobileMenu.classList.add('open');
                 });
             };
 
-            // メニューを閉じる関数: openを解除し、トランジション完了後にhiddenを適用
             const closeMenu = () => {
                 if (mobileMenu.classList.contains('open')) {
                     mobileMenu.classList.remove('open');
-                    // CSSのtransition: 0.4sに合わせて400msを設定し、hiddenを適用
                     setTimeout(() => {
                         mobileMenu.classList.add('hidden');
                     }, 400); 
                 }
             };
 
-            // イベントリスナーの登録
             mobileMenuButton.addEventListener('click', openMenu);
             closeMenuButton.addEventListener('click', closeMenu);
 
-            // メニュー内のリンクをクリックしたらメニューを閉じる
             mobileLinks.forEach(link => {
                 link.addEventListener('click', closeMenu);
             });
