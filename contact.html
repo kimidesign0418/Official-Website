@@ -35,6 +35,10 @@
             background-color: #5c825c;
             transform: translateY(-1px);
         }
+        .primary-button:disabled {
+            background-color: #a0a0a0;
+            cursor: not-allowed;
+        }
         .accent-color {
             color: #6d976d;
         }
@@ -120,6 +124,7 @@
         /* その他アニメーション */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .animated-fade { animation: fadeIn 0.8s ease-out forwards; }
+        /* is-visibleクラスはJSで付与され、フォームを最初に表示するためにデフォルトで付与 */
         .animated-section {
             opacity: 0;
             transform: translateY(20px);
@@ -152,7 +157,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <!-- ロゴ -->
             <a href="index.html#main" class="text-2xl font-bold tracking-widest accent-color">
-                <img src="rogo.jpeg" alt="Kimi Design ロゴ" class="h-8 md:h-10" onerror="this.onerror=null; this.src='https://placehold.co/150x40/6d976d/ffffff?text=Kimi+Design';" />
+                <!-- ロゴの画像を汎用プレースホルダーに修正し、エラーハンドリングを削除 -->
+                <img src="https://placehold.co/150x40/6d976d/ffffff?text=Kimi+Design" alt="Kimi Design ロゴ" class="h-8 md:h-10" />
             </a>
             
             <!-- PC用ナビゲーション (sm以上で表示) -->
@@ -251,7 +257,6 @@
                 <div class="flex items-center pt-4">
                     <input id="privacy" type="checkbox" required class="w-5 h-5 accent-color text-[#6d976d] border-gray-300 rounded focus:ring-[#6d976d]">
                     <label for="privacy" class="ml-3 text-sm text-gray-700">
-                        <!-- onclickでモーダル表示を呼び出すように修正 -->
                         <a href="#" onclick="showDocument('プライバシーポリシー', privacyPolicyContent, event)" class="accent-color underline hover:text-[#5c825c]">プライバシーポリシー</a>に同意する <span class="required-mark">必須</span>
                     </label>
                 </div>
@@ -268,12 +273,12 @@
             <div id="successMessage" class="hidden mt-10 p-6 border-2 border-[#6d976d] bg-[#fcf8f0] rounded-xl text-center animated-fade" role="alert">
                 <h3 class="text-2xl font-bold accent-color mb-3">✨ お申し込みありがとうございます！ ✨</h3>
                 <p class="text-lg text-gray-700">
-                    お客様のメッセージは、<span id="submittedName" class="font-bold"></span> 様へ、無事に受け付けられました。<br>
+                    お客様のメッセージは、<span id="submittedName" class="font-bold"></span> 様のデータとして、無事に受け付けられました。<br>
                     担当者より、**3営業日以内**にメール（<span id="submittedEmail" class="font-bold"></span>）にてご連絡いたします。<br>
                     今しばらくお待ちください。
                 </p>
                 <p class="text-sm text-gray-500 mt-4">
-                    ※これはデモ環境のため、実際のデータ保存やメール送信は行われていません。
+                    データはFirestoreに保存されました。
                 </p>
                 <a href="index.html" class="mt-6 inline-block text-sm text-gray-500 hover:text-[#6d976d] underline">メインページに戻る</a>
             </div>
@@ -310,7 +315,6 @@
     <footer class="py-8 bg-[#f5f5f5] text-center text-sm text-gray-500">
         <div class="max-w-7xl mx-auto px-4">
             <nav class="mb-4 space-x-6">
-                <!-- onclickでモーダル表示を呼び出すように修正 -->
                 <a href="#" onclick="showDocument('プライバシーポリシー', privacyPolicyContent, event)" class="hover:text-[#6d976d]">プライバシーポリシー</a>
                 <a href="#" onclick="showDocument('利用規約', termsOfServiceContent, event)" class="hover:text-[#6d976d]">利用規約</a>
                 <a href="#" onclick="showDocument('特定商取引法に基づく表記', commerceActContent, event)" class="hover:text-[#6d976d]">特定商取引法に基づく表記</a>
@@ -325,9 +329,9 @@
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
-        let db, auth;
+        let db, auth, userId = null;
 
-        // --- Firebase初期化と認証 ---
+        // --- Firebaseインポートと初期化 ---
         async function initializeFirebase() {
             if (!firebaseConfig) {
                 console.warn("Firebase config is missing. Database features are disabled.");
@@ -335,30 +339,98 @@
             }
 
             try {
+                // 必要なFirebaseモジュールをインポート
                 const { initializeApp } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js");
-                const { getAuth, signInAnonymously, signInWithCustomToken } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js");
-                const { getFirestore } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
+                const { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js");
+                const { getFirestore, addDoc, collection, setLogLevel } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
                 
+                // Firestoreのデバッグログを有効化
+                setLogLevel('Debug');
+
                 const app = initializeApp(firebaseConfig);
                 db = getFirestore(app);
                 auth = getAuth(app);
 
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                } else {
-                    await signInAnonymously(auth);
-                }
+                // 認証状態の変化を監視し、userIdを設定
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        console.log(`Authenticated as user ID: ${userId}`);
+                    } else {
+                        // 匿名認証またはカスタム認証を実行
+                        (async () => {
+                            try {
+                                if (initialAuthToken) {
+                                    await signInWithCustomToken(auth, initialAuthToken);
+                                } else {
+                                    await signInAnonymously(auth);
+                                }
+                            } catch (e) {
+                                console.error("Authentication failed:", e);
+                                // 認証失敗時はランダムなIDを使用 (安全のため)
+                                userId = crypto.randomUUID(); 
+                            }
+                        })();
+                    }
+                });
+
             } catch (error) {
                 console.error("Firebase initialization or authentication failed:", error);
+                userId = crypto.randomUUID();
             }
         }
 
-        // --- フォームバリデーションロジック (変更なし) ---
+        /**
+         * フォームの入力値をFirestoreに保存する
+         * @param {object} formData - フォームデータ
+         */
+        async function saveToFirestore(formData) {
+            if (!db || !userId) {
+                console.error("Database not initialized or user not authenticated.");
+                showError("システムエラー：データベースに接続できませんでした。");
+                return false;
+            }
+
+            // データ保存先のパスを決定 (プライベートデータとして保存)
+            const collectionPath = `/artifacts/${appId}/users/${userId}/contact_submissions`;
+
+            try {
+                const { addDoc, collection } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
+                
+                await addDoc(collection(db, collectionPath), {
+                    ...formData,
+                    timestamp: new Date().toISOString(),
+                    status: 'Pending'
+                });
+                
+                console.log("Form data successfully saved to Firestore.");
+                return true;
+            } catch (error) {
+                console.error("Error writing document to Firestore: ", error);
+                showError("システムエラー：送信中に問題が発生しました。再度お試しください。");
+                return false;
+            }
+        }
+
+        // --- エラーメッセージ表示関数 (Alertの代わり) ---
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            // 既存のエラーをクリアしてから表示
+            errorText.innerHTML = message;
+            errorDiv.classList.remove('hidden');
+            errorDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // --- フォームバリデーションロジック ---
         function validateForm() {
             const form = document.getElementById('contactForm');
             const requiredFields = form.querySelectorAll('[required]');
             let isValid = true;
             let errorMessages = [];
+
+            // エラーメッセージをリセット
+            document.getElementById('errorMessage').classList.add('hidden');
 
             requiredFields.forEach(field => {
                 if (field.type === 'checkbox' && !field.checked) {
@@ -372,49 +444,64 @@
                 }
             });
 
+            // uniqueErrorsを取る
             const uniqueErrors = [...new Set(errorMessages)];
-            const errorDiv = document.getElementById('errorMessage');
-            const errorText = document.getElementById('errorText');
             
             if (!isValid) {
-                errorText.innerHTML = uniqueErrors.join('<br>');
-                errorDiv.classList.remove('hidden');
-                errorDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else {
-                errorDiv.classList.add('hidden');
+                showError(uniqueErrors.join('<br>'));
             }
 
             return isValid;
         }
 
-        // --- フォーム送信処理 (変更なし) ---
-        function handleSubmit() {
+        // --- フォーム送信処理 (Firestore保存ロジックを追加) ---
+        async function handleSubmit() {
             if (!validateForm()) {
                 return;
             }
+
+            const submitButton = document.getElementById('submitButton');
+            submitButton.disabled = true;
+            submitButton.textContent = "送信中...";
 
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const plan = document.getElementById('plan').value;
             const content = document.getElementById('content').value;
 
-            const form = document.getElementById('contactForm');
-            const successMessage = document.getElementById('successMessage');
+            const formData = { name, email, plan, content };
 
-            document.getElementById('submittedName').textContent = name;
-            document.getElementById('submittedEmail').textContent = email;
+            try {
+                // Firestoreにデータを保存
+                const success = await saveToFirestore(formData);
+                
+                if (success) {
+                    const form = document.getElementById('contactForm');
+                    const successMessage = document.getElementById('successMessage');
 
-            form.classList.add('hidden');
-            successMessage.classList.remove('hidden');
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+                    document.getElementById('submittedName').textContent = name;
+                    document.getElementById('submittedEmail').textContent = email;
 
-            console.log("--- フォーム送信シミュレーション ---");
-            console.log(`データ: お名前=${name}, メール=${email}, プラン=${plan}, 内容の一部=${content.substring(0, 30)}...`);
-            console.log("----------------------------------");
+                    // フォームを非表示にし、成功メッセージを表示
+                    form.classList.add('hidden');
+                    successMessage.classList.remove('hidden');
+                    
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    // saveToFirestore内でエラー表示済み
+                    submitButton.disabled = false;
+                    submitButton.textContent = "送信する";
+                }
+
+            } catch (error) {
+                console.error("Submission failed:", error);
+                showError("予期せぬエラーが発生しました。");
+                submitButton.disabled = false;
+                submitButton.textContent = "送信する";
+            }
         }
 
-        // --- モーダル表示のためのコンテンツ定義 ---
+        // --- モーダル表示のためのコンテンツ定義 (変更なし) ---
         const privacyPolicyContent = `
 # Kimi Design プライバシーポリシー
 
@@ -498,10 +585,9 @@ Kimi Design
 2025年1月1日制定
         `.trim();
         
-        // --- モーダル操作関数 ---
+        // --- モーダル操作関数 (変更なし) ---
 
         // Markdown風テキストを簡易的にHTMLに変換する関数
-        // (段落と見出し2(##)のみ対応)
         function convertMarkdownToHtml(markdown) {
             let html = markdown
                 .split('\n')
@@ -517,7 +603,7 @@ Kimi Design
                         return `<h2>${line.substring(3)}</h2>`;
                     }
                     if (line.startsWith('* ')) {
-                         // リスト項目
+                        // リスト項目
                         return `<li>${line.substring(2)}</li>`;
                     }
                     // その他のテキストは段落として処理
