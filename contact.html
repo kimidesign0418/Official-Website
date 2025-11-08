@@ -14,7 +14,6 @@
             background-color: #fcf8f0; /* ソフトベージュ */
             color: #4a4a4a;
         }
-        /* ヘッダーの背景と影 */
         .header-bg {
             background-color: #ffffff;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -23,108 +22,56 @@
         .primary-button {
             background-color: #6d976d;
             color: white;
-            padding: 0.75rem 2.5rem;
+            padding: 0.75rem 2.5rem; /* 通常より少し小さく */
             border-radius: 9999px;
             font-weight: 700;
             transition: background-color 0.3s, transform 0.1s;
             letter-spacing: 0.1em;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
-            white-space: nowrap;
         }
         .primary-button:hover {
             background-color: #5c825c;
             transform: translateY(-1px);
         }
-        .primary-button:disabled {
-            background-color: #a0a0a0;
-            cursor: not-allowed;
-        }
         .accent-color {
             color: #6d976d;
+        }
+        .border-accent {
+            border-color: #6d976d;
+        }
+        .bg-subtle {
+            background-color: #f5f0e9;
         }
         /* フォームの入力フィールドのスタイル */
         .form-input {
             width: 100%;
             padding: 0.75rem;
             border: 1px solid #d1d5db;
-            border-radius: 0.5rem;
+            border-radius: 0.5rem; /* rounded-lg */
             transition: border-color 0.3s, box-shadow 0.3s;
             background-color: white;
         }
         .form-input:focus {
             outline: none;
-            border-color: #6d976d;
+            border-color: #6d976d; /* フォーカス時にアクセントカラー */
             box-shadow: 0 0 0 3px rgba(109, 151, 109, 0.3);
         }
         /* 必須マークのスタイル */
         .required-mark {
-            color: #ef4444;
-            font-size: 0.75rem;
+            color: #ef4444; /* red-500 */
+            font-size: 0.75rem; /* text-xs */
             font-weight: 700;
             margin-left: 0.5rem;
         }
 
-        /* --- モーダル/オーバーレイのスタイル --- */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
+        /* アニメーションの定義 (Main Pageから流用) */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
-        .modal-overlay.open {
-            opacity: 1;
-            pointer-events: auto;
+        .animated-fade {
+            animation: fadeIn 0.8s ease-out forwards;
         }
-        .modal-content {
-            background-color: white;
-            max-width: 90%;
-            max-height: 90%;
-            width: 800px;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch; /* iOSでのスクロールをスムーズに */
-        }
-        .modal-overlay.open .modal-content {
-            transform: scale(1);
-        }
-
-        /* --- モバイルメニューのアニメーション --- */
-        .mobile-menu-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(252, 248, 240, 0.98);
-            z-index: 50;
-            transform: translateX(100%);
-            transition: transform 0.4s ease-out;
-            padding-top: 5rem;
-        }
-        .mobile-menu-overlay.open {
-            transform: translateX(0);
-        }
-        .hamburger-icon {
-            cursor: pointer;
-            z-index: 60;
-        }
-
-        /* その他アニメーション */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .animated-fade { animation: fadeIn 0.8s ease-out forwards; }
-        /* is-visibleクラスはJSで付与され、フォームを最初に表示するためにデフォルトで付与 */
         .animated-section {
             opacity: 0;
             transform: translateY(20px);
@@ -134,44 +81,51 @@
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* モーダル内のコンテンツ整形用 */
-        #documentContent p {
-            margin-bottom: 1em;
-            line-height: 1.7;
+        
+        /* ハンバーガーメニューのスタイル */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(252, 248, 240, 0.95); /* ソフトベージュの半透明 */
+            z-index: 50;
+            transform: translateX(100%);
+            transition: transform 0.4s ease-out;
+            padding: 2rem;
         }
-        #documentContent h2 {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #6d976d;
-            padding-bottom: 0.3rem;
+        .mobile-menu-overlay.open {
+            transform: translateX(0);
+        }
+        .hamburger-icon {
+            cursor: pointer;
+            z-index: 60;
         }
     </style>
 </head>
 <body>
 
     <!-- ヘッダー (ナビゲーション) -->
-    <header class="header-bg sticky top-0 z-20">
+    <header class="header-bg sticky top-0 z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <!-- ロゴ -->
             <a href="index.html#main" class="text-2xl font-bold tracking-widest accent-color">
-                <!-- ロゴの画像を汎用プレースホルダーに修正し、エラーハンドリングを削除 -->
-                <img src="https://placehold.co/150x40/6d976d/ffffff?text=Kimi+Design" alt="Kimi Design ロゴ" class="h-8 md:h-10" />
+                <!-- 存在しない画像ファイル名を使用しているため、placeholderに置き換え、元のonerrorを残します。 -->
+                <img src="rogo.jpeg" alt="Kimi Design ロゴ" class="h-8 md:h-10" onerror="this.onerror=null; this.src='https://placehold.co/150x40/6d976d/ffffff?text=Kimi+Design';" />
             </a>
             
             <!-- PC用ナビゲーション (sm以上で表示) -->
             <nav class="hidden sm:flex items-center space-x-6">
-                <a href="index.html#about" class="nav-link text-sm font-medium hover:text-gray-500">私たちについて</a>
-                <a href="index.html#donation" class="nav-link text-sm font-medium hover:text-gray-500">寄付活動</a>
-                <a href="index.html#service" class="nav-link text-sm font-medium hover:text-gray-500">サービス・料金</a>
-                <a href="contact.html" class="nav-link text-sm font-medium primary-button px-4 py-2 rounded-full shadow-lg">お申し込み</a>
+                <a href="index.html#about" class="nav-link text-sm font-medium hover:text-gray-400">私たちについて</a>
+                <a href="index.html#donation" class="nav-link text-sm font-medium hover:text-gray-400">寄付活動</a>
+                <a href="index.html#service" class="nav-link text-sm font-medium hover:text-gray-400">サービス・料金</a>
+                <a href="contact.html" class="nav-link text-sm font-medium primary-button px-4 py-2 rounded-full">お申し込み</a>
             </nav>
 
             <!-- モバイル用ハンバーガーボタン (sm未満で表示) -->
             <button id="mobileMenuButton" class="sm:hidden hamburger-icon p-2 focus:outline-none" aria-label="メニューを開く">
-                <svg id="hamburgerIcon" class="w-6 h-6 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-6 h-6 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
@@ -180,27 +134,25 @@
 
     <!-- モバイルメニューオーバーレイ -->
     <div id="mobileMenu" class="mobile-menu-overlay hidden">
-        <div class="px-4 sm:px-6 lg:px-8 flex flex-col items-end">
-            <!-- 閉じるボタン -->
-            <button id="closeMenuButton" class="p-2 focus:outline-none absolute top-4 right-4" aria-label="メニューを閉じる">
+        <div class="flex justify-end mb-8">
+            <button id="closeMenuButton" class="p-2 focus:outline-none" aria-label="メニューを閉じる">
                 <svg class="w-6 h-6 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
-            <nav class="flex flex-col space-y-8 text-center w-full mt-10">
-                <a href="index.html#about" class="mobile-link text-xl font-bold hover:text-[#6d976d] pb-2 border-b border-gray-200">私たちについて</a>
-                <a href="index.html#donation" class="mobile-link text-xl font-bold hover:text-[#6d976d] pb-2 border-b border-gray-200">寄付活動</a>
-                <a href="index.html#service" class="mobile-link text-xl font-bold hover:text-[#6d976d] pb-2 border-b border-gray-200">サービス・料金</a>
-                <div class="pt-8">
-                    <a href="contact.html" class="mobile-link primary-button text-lg px-8 py-3 w-full max-w-xs mx-auto">お申し込み</a>
-                </div>
-            </nav>
         </div>
+        <nav class="flex flex-col space-y-6 text-center text-xl font-bold">
+            <a href="index.html#about" class="hover:text-[#6d976d]">私たちについて</a>
+            <a href="index.html#donation" class="hover:text-[#6d976d]">寄付活動</a>
+            <a href="index.html#service" class="hover:text-[#6d976d]">サービス・料金</a>
+            <div class="pt-6">
+                <a href="contact.html" class="primary-button text-base px-6 py-3">お申し込み</a>
+            </div>
+        </nav>
     </div>
 
     <!-- メインコンテンツ (お問い合わせフォーム) -->
-    <main class="py-16 px-4">
-        <!-- 中央のフォームコンテナ -->
+    <main class="py-20 px-4">
         <div class="max-w-3xl mx-auto bg-white p-6 sm:p-10 rounded-2xl shadow-xl animated-section is-visible">
             <h1 class="text-3xl md:text-4xl font-bold text-center accent-color mb-4">お申し込み・お問い合わせ</h1>
             <p class="text-center text-gray-600 mb-10">下記フォームにご入力いただき、「送信する」ボタンを押してください。</p>
@@ -230,19 +182,13 @@
                     <label for="plan" class="block text-lg font-medium text-[#5c5c5c] mb-2">
                         ご希望のプラン <span class="required-mark">必須</span>
                     </label>
-                    <div class="relative">
-                        <select id="plan" name="plan" required class="form-input appearance-none pr-10">
-                            <option value="" disabled selected>選択してください</option>
-                            <option value="お試しプラン">初回お試しプラン (¥1,100)</option>
-                            <option value="ベーシックプラン">ベーシックプラン (3往復)</option>
-                            <option value="じっくりプラン">じっくりプラン (5往復)</option>
-                            <option value="その他">その他 (ご質問)</option>
-                        </select>
-                        <!-- カスタムのドロップダウン矢印 -->
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                        </div>
-                    </div>
+                    <select id="plan" name="plan" required class="form-input appearance-none">
+                        <option value="" disabled selected>選択してください</option>
+                        <option value="お試しプラン">初回お試しプラン (¥1,100)</option>
+                        <option value="ベーシックプラン">ベーシックプラン (3往復)</option>
+                        <option value="じっくりプラン">じっくりプラン (5往復)</option>
+                        <option value="その他">その他 (ご質問)</option>
+                    </select>
                 </div>
 
                 <!-- 4. ご相談内容 -->
@@ -255,30 +201,32 @@
 
                 <!-- 5. プライバシーポリシー同意 -->
                 <div class="flex items-center pt-4">
+                    <!-- リンク先を privacy_policy.md に修正 -->
                     <input id="privacy" type="checkbox" required class="w-5 h-5 accent-color text-[#6d976d] border-gray-300 rounded focus:ring-[#6d976d]">
                     <label for="privacy" class="ml-3 text-sm text-gray-700">
-                        <a href="#" onclick="showDocument('プライバシーポリシー', privacyPolicyContent, event)" class="accent-color underline hover:text-[#5c825c]">プライバシーポリシー</a>に同意する <span class="required-mark">必須</span>
+                        <a href="privacy_policy.md" target="_blank" class="accent-color underline hover:text-[#5c825c]">プライバシーポリシー</a>に同意する <span class="required-mark">必須</span>
                     </label>
                 </div>
 
                 <!-- 送信ボタン -->
                 <div class="pt-6 flex justify-center">
-                    <button type="button" id="submitButton" class="primary-button text-xl">
+                    <!-- ボタンのtypeを"submit"から"button"に変更し、JSで処理を制御します -->
+                    <button type="button" onclick="submitForm(event)" class="primary-button text-xl">
                         送信する
                     </button>
                 </div>
             </form>
 
             <!-- 成功メッセージ表示エリア -->
-            <div id="successMessage" class="hidden mt-10 p-6 border-2 border-[#6d976d] bg-[#fcf8f0] rounded-xl text-center animated-fade" role="alert">
+            <div id="successMessage" class="hidden mt-10 p-6 border-2 border-[#6d976d] bg-subtle rounded-xl text-center animated-fade" role="alert">
                 <h3 class="text-2xl font-bold accent-color mb-3">✨ お申し込みありがとうございます！ ✨</h3>
                 <p class="text-lg text-gray-700">
-                    お客様のメッセージは、<span id="submittedName" class="font-bold"></span> 様のデータとして、無事に受け付けられました。<br>
+                    お客様のメッセージは、<span id="submittedName" class="font-bold"></span> 様へ、無事に受け付けられました。<br>
                     担当者より、**3営業日以内**にメール（<span id="submittedEmail" class="font-bold"></span>）にてご連絡いたします。<br>
                     今しばらくお待ちください。
                 </p>
                 <p class="text-sm text-gray-500 mt-4">
-                    データはFirestoreに保存されました。
+                    ※これはデモ環境のため、実際のメールは送信されていません。
                 </p>
                 <a href="index.html" class="mt-6 inline-block text-sm text-gray-500 hover:text-[#6d976d] underline">メインページに戻る</a>
             </div>
@@ -286,390 +234,109 @@
             <!-- エラーメッセージ表示エリア (Alertの代わり) -->
             <div id="errorMessage" class="hidden mt-6 p-4 border border-red-400 bg-red-50 rounded-lg text-center text-red-700" role="alert">
                 <p class="font-bold">⚠️ 入力エラー</p>
-                <p id="errorText" class="text-sm mt-1"></p>
+                <p id="errorText" class="text-sm"></p>
             </div>
 
         </div>
     </main>
 
-    <!-- ドキュメント表示モーダル (index.htmlと同様の機能) -->
-    <div id="documentModal" class="modal-overlay hidden" onclick="closeDocumentModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <div class="flex justify-between items-center mb-4 border-b pb-2">
-                <h2 id="documentTitle" class="text-2xl font-bold accent-color"></h2>
-                <button onclick="closeDocumentModal()" class="text-gray-500 hover:text-gray-700" aria-label="閉じる">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
-            <!-- コンテンツ挿入エリア -->
-            <div id="documentContent" class="text-sm text-gray-700">
-                <!-- ここにMarkdownがHTMLに変換されて挿入されます -->
-            </div>
-        </div>
-    </div>
-
-
     <!-- フッター -->
     <footer class="py-8 bg-[#f5f5f5] text-center text-sm text-gray-500">
         <div class="max-w-7xl mx-auto px-4">
             <nav class="mb-4 space-x-6">
-                <a href="#" onclick="showDocument('プライバシーポリシー', privacyPolicyContent, event)" class="hover:text-[#6d976d]">プライバシーポリシー</a>
-                <a href="#" onclick="showDocument('利用規約', termsOfServiceContent, event)" class="hover:text-[#6d976d]">利用規約</a>
-                <a href="#" onclick="showDocument('特定商取引法に基づく表記', commerceActContent, event)" class="hover:text-[#6d976d]">特定商取引法に基づく表記</a>
+                <!-- リンク先を各Markdownファイルに変更済み -->
+                <a href="privacy-policy.pdf" class="hover:text-[#6d976d]">プライバシーポリシー</a>
+                <a href="terms-of-service.pdf" class="hover:text-[#6d976d]">利用規約</a>
+                <a href="commerce-act.pdf" class="hover:text-[#6d976d]">特定商取引法に基づく表記</a>
             </nav>
             <p>&copy; 2025 Kimi Design. All rights reserved.</p>
         </div>
     </footer>
 
-    <script type="module">
-        // Firebase関連のグローバル変数（Canvas環境から提供される）
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+    <script>
+        // Intersection Observerはここでは不要なため、フォーム送信ロジックのみを実装
 
-        let db, auth, userId = null;
-
-        // --- Firebaseインポートと初期化 ---
-        async function initializeFirebase() {
-            if (!firebaseConfig) {
-                console.warn("Firebase config is missing. Database features are disabled.");
-                return;
-            }
-
-            try {
-                // 必要なFirebaseモジュールをインポート
-                const { initializeApp } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js");
-                const { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js");
-                const { getFirestore, addDoc, collection, setLogLevel } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
-                
-                // Firestoreのデバッグログを有効化
-                setLogLevel('Debug');
-
-                const app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
-
-                // 認証状態の変化を監視し、userIdを設定
-                onAuthStateChanged(auth, (user) => {
-                    if (user) {
-                        userId = user.uid;
-                        console.log(`Authenticated as user ID: ${userId}`);
-                    } else {
-                        // 匿名認証またはカスタム認証を実行
-                        (async () => {
-                            try {
-                                if (initialAuthToken) {
-                                    await signInWithCustomToken(auth, initialAuthToken);
-                                } else {
-                                    await signInAnonymously(auth);
-                                }
-                            } catch (e) {
-                                console.error("Authentication failed:", e);
-                                // 認証失敗時はランダムなIDを使用 (安全のため)
-                                userId = crypto.randomUUID(); 
-                            }
-                        })();
-                    }
-                });
-
-            } catch (error) {
-                console.error("Firebase initialization or authentication failed:", error);
-                userId = crypto.randomUUID();
-            }
-        }
-
-        /**
-         * フォームの入力値をFirestoreに保存する
-         * @param {object} formData - フォームデータ
-         */
-        async function saveToFirestore(formData) {
-            if (!db || !userId) {
-                console.error("Database not initialized or user not authenticated.");
-                showError("システムエラー：データベースに接続できませんでした。");
-                return false;
-            }
-
-            // データ保存先のパスを決定 (プライベートデータとして保存)
-            const collectionPath = `/artifacts/${appId}/users/${userId}/contact_submissions`;
-
-            try {
-                const { addDoc, collection } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
-                
-                await addDoc(collection(db, collectionPath), {
-                    ...formData,
-                    timestamp: new Date().toISOString(),
-                    status: 'Pending'
-                });
-                
-                console.log("Form data successfully saved to Firestore.");
-                return true;
-            } catch (error) {
-                console.error("Error writing document to Firestore: ", error);
-                showError("システムエラー：送信中に問題が発生しました。再度お試しください。");
-                return false;
-            }
-        }
-
-        // --- エラーメッセージ表示関数 (Alertの代わり) ---
-        function showError(message) {
-            const errorDiv = document.getElementById('errorMessage');
-            const errorText = document.getElementById('errorText');
-            // 既存のエラーをクリアしてから表示
-            errorText.innerHTML = message;
-            errorDiv.classList.remove('hidden');
-            errorDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-        
-        // --- フォームバリデーションロジック ---
         function validateForm() {
             const form = document.getElementById('contactForm');
             const requiredFields = form.querySelectorAll('[required]');
             let isValid = true;
             let errorMessages = [];
 
-            // エラーメッセージをリセット
-            document.getElementById('errorMessage').classList.add('hidden');
-
+            // 必須フィールドのチェック
             requiredFields.forEach(field => {
                 if (field.type === 'checkbox' && !field.checked) {
                     isValid = false;
-                    errorMessages.push("プライバシーポリシーへの同意が必要です。");
-                } else if (field.value.trim() === '' && field.type !== 'checkbox') {
+                    // プライバシーポリシーのチェックボックスのカスタムメッセージ
+                    if (!errorMessages.includes("プライバシーポリシーへの同意が必要です。")) {
+                        errorMessages.push("プライバシーポリシーへの同意が必要です。");
+                    }
+                } else if (!field.value.trim() && field.type !== 'checkbox') {
                     isValid = false;
-                    const labelElement = document.querySelector(`label[for="${field.id}"]`);
-                    const label = labelElement ? labelElement.textContent.replace('必須', '').trim() : '一部のフィールド';
-                    errorMessages.push(`${label} が入力されていません。`);
+                    const label = field.previousElementSibling ? field.previousElementSibling.textContent.replace('必須', '').trim() : '一部のフィールド';
+                    // エラーメッセージの重複を防ぐ
+                    const errorMessage = `${label} が入力されていません。`;
+                    if (!errorMessages.includes(errorMessage)) {
+                        errorMessages.push(errorMessage);
+                    }
                 }
             });
 
-            // uniqueErrorsを取る
+            // エラーメッセージの重複を削除して表示
             const uniqueErrors = [...new Set(errorMessages)];
+            const errorDiv = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
             
             if (!isValid) {
-                showError(uniqueErrors.join('<br>'));
+                errorText.innerHTML = uniqueErrors.join('<br>');
+                errorDiv.classList.remove('hidden');
+                // エラー表示までスクロール
+                errorDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                errorDiv.classList.add('hidden');
             }
 
             return isValid;
         }
 
-        // --- フォーム送信処理 (Firestore保存ロジックを追加) ---
-        async function handleSubmit() {
+        function submitForm(event) {
+            // alert()は使えないため、カスタムエラー表示を使用
             if (!validateForm()) {
                 return;
             }
-
-            const submitButton = document.getElementById('submitButton');
-            submitButton.disabled = true;
-            submitButton.textContent = "送信中...";
 
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const plan = document.getElementById('plan').value;
             const content = document.getElementById('content').value;
 
-            const formData = { name, email, plan, content };
+            // フォームと成功メッセージの要素を取得
+            const form = document.getElementById('contactForm');
+            const successMessage = document.getElementById('successMessage');
 
-            try {
-                // Firestoreにデータを保存
-                const success = await saveToFirestore(formData);
-                
-                if (success) {
-                    const form = document.getElementById('contactForm');
-                    const successMessage = document.getElementById('successMessage');
+            // 成功メッセージに名前とメールアドレスを挿入
+            document.getElementById('submittedName').textContent = name;
+            document.getElementById('submittedEmail').textContent = email;
 
-                    document.getElementById('submittedName').textContent = name;
-                    document.getElementById('submittedEmail').textContent = email;
+            // フォームを非表示にし、成功メッセージを表示
+            form.classList.add('hidden');
+            successMessage.classList.remove('hidden');
+            
+            // ページ上部までスクロール
+            window.scrollTo({ top: 0, behavior: 'smooth' });
 
-                    // フォームを非表示にし、成功メッセージを表示
-                    form.classList.add('hidden');
-                    successMessage.classList.remove('hidden');
-                    
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                } else {
-                    // saveToFirestore内でエラー表示済み
-                    submitButton.disabled = false;
-                    submitButton.textContent = "送信する";
-                }
-
-            } catch (error) {
-                console.error("Submission failed:", error);
-                showError("予期せぬエラーが発生しました。");
-                submitButton.disabled = false;
-                submitButton.textContent = "送信する";
-            }
+            // 実際の送信処理（シミュレーション）
+            console.log("--- フォーム送信シミュレーション ---");
+            console.log(`お名前: ${name}`);
+            console.log(`メール: ${email}`);
+            console.log(`プラン: ${plan}`);
+            console.log(`内容: ${content.substring(0, 50)}...`);
+            console.log("----------------------------------");
+            
+            // 実際はここでサーバーサイドのエンドポイントにデータをPOSTします。
         }
 
-        // --- モーダル表示のためのコンテンツ定義 (変更なし) ---
-        const privacyPolicyContent = `
-# Kimi Design プライバシーポリシー
-
-## 1. 個人情報の定義
-本ポリシーにおいて「個人情報」とは、生存する個人に関する情報であって、氏名、生年月日、住所、電話番号、連絡先その他の記述等により特定の個人を識別できる情報を指します。
-
-## 2. 個人情報の収集
-当ウェブサイトでは、お客様がお問い合わせフォームを利用する際に、氏名、メールアドレス、ご相談内容などの個人情報を収集します。
-
-## 3. 個人情報の利用目的
-収集した個人情報は、以下の目的で利用します。
-
-* お問い合わせやお申し込みへの対応および確認のため
-* サービスの提供、維持、改善のため
-* 重要な通知など、必要に応じたご連絡のため
-
-## 4. 個人情報の第三者提供
-法令に基づく場合等、正当な理由によらない限り、事前に本人の同意を得ることなく、個人情報を第三者に開示・提供することはありません。
-
-## 5. 個人情報の開示・訂正・削除
-ご本人から個人情報の開示、訂正、削除の請求があった場合は、ご本人であることを確認の上、速やかに対応いたします。
-
-2025年1月1日制定
-Kimi Design 代表
-        `.trim();
-
-        const termsOfServiceContent = `
-# Kimi Design 利用規約
-
-## 第1条（適用）
-本規約は、Kimi Design（以下「当社」）が提供する各種カウンセリングサービス（以下「本サービス」）の利用に関わる一切の事項に適用されます。
-
-## 第2条（利用登録）
-本サービスの利用を希望する者は、本規約に同意の上、当社所定の方法により利用登録を申請し、当社がこれを承認することにより、利用登録が完了するものとします。
-
-## 第3条（料金と支払方法）
-利用者は、本サービス利用の対価として、当社が別途定める料金を、当社が指定する支払方法により支払うものとします。
-
-## 第4条（禁止事項）
-利用者は、本サービスの利用にあたり、以下の行為を行ってはならないものとします。
-1. 法令または公序良俗に違反する行為
-2. 犯罪行為に関連する行為
-3. 当社のサーバーまたはネットワークの機能を破壊したり、妨害したりする行為
-4. その他、当社が不適切と判断する行為
-
-## 第5条（サービスの停止等）
-当社は、以下のいずれかの事由があると判断した場合、事前に通知することなく本サービスの全部または一部の提供を停止または中断することができるものとします。
-1. 本サービスにかかるコンピュータシステムの保守点検または更新を行う場合
-2. 地震、落雷、火災、停電などの不可抗力により本サービスの提供が困難となった場合
-
-2025年1月1日制定
-        `.trim();
-
-        const commerceActContent = `
-# 特定商取引法に基づく表記
-
-## 1. 事業者の名称
-Kimi Design
-
-## 2. 所在地
-所在地は、ご請求があり次第遅滞なく開示いたします。
-
-## 3. 連絡先
-メールアドレス：contact@kimi-design.example (ダミー)
-電話番号：電話番号は、ご請求があり次第遅滞なく開示いたします。
-
-## 4. 販売価格
-各プランの詳細ページに記載しています。
-
-## 5. 代金の支払い時期と方法
-支払い時期：サービスお申し込み時または所定の期日までにお支払いください。
-支払い方法：クレジットカード決済、銀行振込
-
-## 6. 役務の提供時期
-お支払い確認後、ご指定のプランに基づきサービスを提供いたします。
-
-## 7. 返品・キャンセルに関する特約
-* サービスの性質上、契約後のキャンセル・返金は原則としてお受けできません。
-* ただし、当社側の責めに帰すべき事由による場合は、この限りではありません。
-
-2025年1月1日制定
-        `.trim();
-        
-        // --- モーダル操作関数 (変更なし) ---
-
-        // Markdown風テキストを簡易的にHTMLに変換する関数
-        function convertMarkdownToHtml(markdown) {
-            let html = markdown
-                .split('\n')
-                .map(line => line.trim())
-                .filter(line => line.length > 0)
-                .map(line => {
-                    if (line.startsWith('# ')) {
-                        // 見出し1 (# Title) - モーダルタイトルと重複するのでpタグとして扱う
-                        return `<p class="text-xl font-bold mb-3">${line.substring(2)}</p>`;
-                    }
-                    if (line.startsWith('## ')) {
-                        // 見出し2 (## Section)
-                        return `<h2>${line.substring(3)}</h2>`;
-                    }
-                    if (line.startsWith('* ')) {
-                        // リスト項目
-                        return `<li>${line.substring(2)}</li>`;
-                    }
-                    // その他のテキストは段落として処理
-                    return `<p>${line}</p>`;
-                })
-                .join('');
-            
-            // リストタグで囲む (簡易的な処理)
-            if (html.includes('<li>')) {
-                html = html.replace(/<\/p><li>/g, '</li><p>').replace(/<li>/g, '</ul><li>').replace(/<\/li>/g, '</li><ul>');
-            }
-
-            return html.replace(/<ul>/g, '<ul class="list-disc pl-5 my-2">').replace(/<\/ul>/g, '</ul>');
-        }
-
-        /**
-         * ドキュメントモーダルを表示する
-         * @param {string} title - モーダルのタイトル
-         * @param {string} content - 表示するMarkdown形式のコンテンツ
-         * @param {Event} event - クリックイベント（aタグの場合、デフォルト動作を防止）
-         */
-        window.showDocument = function(title, content, event) {
-            if (event) {
-                event.preventDefault(); // aタグのデフォルトのページ遷移を防ぐ
-            }
-            
-            const modal = document.getElementById('documentModal');
-            document.getElementById('documentTitle').textContent = title;
-            document.getElementById('documentContent').innerHTML = convertMarkdownToHtml(content);
-            
-            modal.classList.remove('hidden');
-
-            // requestAnimationFrameを使って、hidden解除後の描画を待ち、openクラスを適用
-            requestAnimationFrame(() => {
-                modal.classList.add('open');
-                // モーダルコンテンツのスクロールを一番上にリセット
-                modal.querySelector('.modal-content').scrollTop = 0;
-            });
-        }
-
-        /**
-         * ドキュメントモーダルを閉じる
-         * @param {Event} event - クリックイベント（オーバーレイクリック用）
-         */
-        window.closeDocumentModal = function(event) {
-             // モーダルの中身をクリックした場合は閉じない
-            if (event && event.target.id !== 'documentModal') {
-                return;
-            }
-            
-            const modal = document.getElementById('documentModal');
-            if (modal.classList.contains('open')) {
-                modal.classList.remove('open');
-                // アニメーションが完了するのを待ってからhiddenを適用 (0.3s)
-                setTimeout(() => {
-                    modal.classList.add('hidden');
-                }, 300); 
-            }
-        }
-
-
-        // --- DOMContentLoadedイベントリスナー ---
+        // ページ内アニメーションのロジック（メインページからの流用）
         document.addEventListener('DOMContentLoaded', () => {
-            initializeFirebase();
-
-            // --- アニメーションの監視 (変更なし) ---
             const animatedElements = document.querySelectorAll('.animated-section');
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -684,37 +351,41 @@ Kimi Design
                 observer.observe(element);
             });
             
-            // --- モバイルメニューの開閉ロジック (変更なし) ---
+            // モバイルメニューの開閉ロジック
             const mobileMenuButton = document.getElementById('mobileMenuButton');
             const closeMenuButton = document.getElementById('closeMenuButton');
             const mobileMenu = document.getElementById('mobileMenu');
-            const mobileLinks = mobileMenu.querySelectorAll('.mobile-link');
+            const mobileLinks = mobileMenu.querySelectorAll('a');
 
-            const openMenu = () => {
-                mobileMenu.classList.remove('hidden');
-                requestAnimationFrame(() => {
-                    mobileMenu.classList.add('open');
-                });
-            };
-
-            const closeMenu = () => {
-                if (mobileMenu.classList.contains('open')) {
-                    mobileMenu.classList.remove('open');
+            const toggleMenu = () => {
+                const isMenuOpen = mobileMenu.classList.toggle('open');
+                // hiddenクラスのトグルも制御して、トランジションが機能するようにする
+                if(isMenuOpen) {
+                    mobileMenu.classList.remove('hidden');
+                } else {
+                    // トランジション終了後にhiddenを追加
                     setTimeout(() => {
                         mobileMenu.classList.add('hidden');
-                    }, 400); 
+                    }, 400); // CSSのtransition時間(0.4s)に合わせる
                 }
             };
 
-            mobileMenuButton.addEventListener('click', openMenu);
-            closeMenuButton.addEventListener('click', closeMenu);
+            mobileMenuButton.addEventListener('click', toggleMenu);
+            closeMenuButton.addEventListener('click', toggleMenu);
 
+            // メニュー内のリンクをクリックしたらメニューを閉じる
             mobileLinks.forEach(link => {
-                link.addEventListener('click', closeMenu);
+                link.addEventListener('click', () => {
+                    if (mobileMenu.classList.contains('open')) {
+                        toggleMenu();
+                    }
+                });
             });
             
-            // 送信ボタンにイベントリスナーを紐付け
-            document.getElementById('submitButton').addEventListener('click', handleSubmit);
+            // 初期状態での表示制御（念のため）
+            if (!mobileMenu.classList.contains('open')) {
+                mobileMenu.classList.add('hidden');
+            }
         });
 
     </script>
