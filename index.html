@@ -167,9 +167,15 @@
     @media (max-width: 639px) {
       .mobile-cta-in-header { display: none; }
     }
-    .hero-title {
-  max-width: 15ch;
-}
+
+    /* ✅ HERO：左右バランスを整える（中央寄りの左配置） */
+    .hero-title { max-width: 22ch; }
+    .hero-wrap  { max-width: 56rem; } /* 文章ブロック全体の幅（左右均等感UP） */
+
+    /* ✅ 動きが苦手な人への配慮（プロ品質） */
+    @media (prefers-reduced-motion: reduce) {
+      .animated-section { transition: none !important; transform: none !important; }
+    }
   </style>
 </head>
 
@@ -232,44 +238,43 @@
     </nav>
   </div>
 
-  <!-- HERO（画像なし版） -->
-<!-- HERO（修正版） -->
-<main id="main" class="pt-14 pb-20 sm:pt-20 sm:pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <div class="animated-section is-visible" style="transition-delay: 0.2s;">
+  <!-- HERO（整えた版：中央寄りの左配置） -->
+  <main id="main" class="pt-14 pb-20 sm:pt-20 sm:pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="animated-section is-visible hero-wrap mx-auto" style="transition-delay: 0.2s;">
 
-    <p class="text-sm sm:text-base accent-color mb-4 font-bold tracking-widest">
-      KimiDesign
-    </p>
+      <p class="text-sm sm:text-base accent-color mb-4 font-bold tracking-widest">
+        KimiDesign
+      </p>
 
-    <h1 class="heading-font text-gray-800 font-extrabold
-               text-[44px] sm:text-[58px] lg:text-[72px]
-               leading-[1.08] sm:leading-[1.06] tracking-[-0.02em]
-               max-w-[18ch]">
-      <span class="block">訪問看護ステーションの</span>
-      <span class="block accent-color">採用につながる導線</span>
-      <span class="block">ホームページを整えます。</span>
-    </h1>
+      <h1 class="heading-font hero-title text-gray-800 font-extrabold
+                 text-[44px] sm:text-[58px] lg:text-[72px]
+                 leading-[1.08] sm:leading-[1.06] tracking-[-0.02em]">
+        <span class="block">訪問看護ステーションの</span>
+        <span class="block accent-color">採用につながる導線</span>
+        <span class="block">ホームページを整えます。</span>
+      </h1>
 
-    <p class="text-gray-600 mt-6 text-base sm:text-lg leading-relaxed max-w-[56ch]">
-      求職者が安心して応募できる情報設計。採用ページ・LINE/電話導線・SNS導線まで一式で整えます。<br class="hidden sm:block">
-      GitHub Pages運用で、軽く速いサイトを実現します。
-    </p>
+      <p class="text-gray-600 mt-6 text-base sm:text-lg leading-relaxed max-w-[56ch]">
+        求職者が安心して応募できる情報設計。採用ページ・LINE/電話導線・SNS導線まで一式で整えます。<br class="hidden sm:block">
+        GitHub Pages運用で、軽く速いサイトを実現します。
+      </p>
 
-    <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-4">
-      <a href="contact.html" class="primary-button inline-block text-base sm:text-lg w-full sm:w-auto text-center">
-        無料相談はこちら
-      </a>
-      <a href="#works" class="inline-block text-base sm:text-lg font-bold accent-color underline underline-offset-4 text-center sm:text-left">
-        実績を見る
-      </a>
+      <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-4 max-w-[56ch]">
+        <a href="contact.html" class="primary-button inline-block text-base sm:text-lg w-full sm:w-auto text-center">
+          無料相談はこちら
+        </a>
+        <a href="#works" class="inline-block text-base sm:text-lg font-bold accent-color underline underline-offset-4 text-center sm:text-left">
+          実績を見る
+        </a>
+      </div>
+
+      <p class="text-xs sm:text-sm text-gray-500 mt-6 max-w-[62ch]">
+        ※「最短で公開 → 必要に応じて育てる」運用も可能です（未完成のまま出すのではなく、信頼に必要な情報を揃えて公開します）。
+      </p>
+
     </div>
+  </main>
 
-    <p class="text-xs sm:text-sm text-gray-500 mt-6 max-w-[62ch]">
-      ※「最短で公開 → 必要に応じて育てる」運用も可能です（未完成のまま出すのではなく、信頼に必要な情報を揃えて公開します）。
-    </p>
-
-  </div>
-</main>
   <!-- About -->
   <section id="about" class="py-24 bg-white">
     <div class="max-w-6xl mx-auto px-4 text-center">
@@ -281,7 +286,6 @@
 
         <div class="card-base text-center animated-section" data-delay="0.2">
           <div class="icon-box mx-auto">
-            <!-- Target -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <circle cx="12" cy="12" r="8"/>
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3"/>
@@ -296,7 +300,6 @@
 
         <div class="card-base text-center animated-section" data-delay="0.4">
           <div class="icon-box mx-auto">
-            <!-- Users -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M17 20v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/>
               <circle cx="9" cy="7" r="4"/>
@@ -313,7 +316,6 @@
 
         <div class="card-base text-center animated-section" data-delay="0.6">
           <div class="icon-box mx-auto">
-            <!-- Rocket -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 19l-2 2m0 0l-2-2m2 2V10m12 9l2 2m0 0l2-2m-2 2V10"/>
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 3l3 6H9l3-6Z"/>
@@ -354,7 +356,7 @@
           <h3 class="text-2xl heading-font text-gray-800 mb-3">訪問看護テンプレ（デモ）</h3>
           <p class="text-gray-600 mb-5">
             差し替えだけで量産できるテンプレ構成。
-            「7割で公開→必要に応じて育てる」運用に最適です。
+            「最短で公開 → 必要に応じて育てる」運用に最適です。
           </p>
           <a href="https://kimidesign0418.github.io/houmon-template/" target="_blank" class="primary-button inline-block text-base px-8 py-3">
             デモを見る
@@ -464,7 +466,6 @@
         <p class="text-xs font-bold accent-color mb-2 tracking-wider">STEP 1</p>
         <h3 class="text-2xl heading-font text-gray-800 mb-4 flex items-center">
           <span class="icon-box icon-box-small mr-3">
-            <!-- Chat -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21 15a4 4 0 0 1-4 4H7l-4 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>
             </svg>
@@ -481,7 +482,6 @@
         <p class="text-xs font-bold accent-color mb-2 tracking-wider">STEP 2</p>
         <h3 class="text-2xl heading-font text-gray-800 mb-4 flex items-center">
           <span class="icon-box icon-box-small mr-3">
-            <!-- Layout -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4 5h16M4 12h16M4 19h16"/>
             </svg>
@@ -498,7 +498,6 @@
         <p class="text-xs font-bold accent-color mb-2 tracking-wider">STEP 3</p>
         <h3 class="text-2xl heading-font text-gray-800 mb-4 flex items-center">
           <span class="icon-box icon-box-small mr-3">
-            <!-- Rocket -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 3l3 6H9l3-6Z"/>
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 21l-2 2m0 0l-2-2m2 2V10m12 9l2 2m0 0l2-2m-2 2V10"/>
@@ -560,18 +559,21 @@
     </div>
   </section>
 
-  <!-- Final CTA -->
+  <!-- Final CTA（「7割」を安全に言い換え） -->
   <section class="py-20 bg-white">
     <div class="max-w-5xl mx-auto px-4 text-center">
       <h2 class="text-3xl sm:text-4xl heading-font mb-6">
-        まずは「7割の公開」から始めませんか？
+        まずは最短で公開し、必要に応じて育てませんか？
       </h2>
       <p class="text-lg text-gray-600 mb-10">
-        立ち上げ期は完璧よりスピード。公開してから必要に応じて育てる運用ができます。
+        立ち上げ期は完璧よりスピード。信頼に必要な情報を揃えて公開し、運用しながらページ追加・改善ができます。
       </p>
       <a href="contact.html" class="primary-button inline-block text-lg w-full sm:w-auto">
         無料相談はこちら
       </a>
+      <p class="text-xs text-gray-500 mt-6">
+        ※「未完成のまま出す」のではなく、安心して問い合わせ・応募できる情報を整えた状態で公開します。
+      </p>
     </div>
   </section>
 
