@@ -193,6 +193,16 @@
     @media (min-width: 640px) {
       .hero-h1 { line-height: 1.08; }
     }
+    /* 文字割れ防止（採用/ホームページ等を1塊に） */
+.nowrap {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* 日本語の不自然な改行を減らす（効く環境だけでOK） */
+.hero-h1 {
+  line-break: strict;
+}
   </style>
 </head>
 
