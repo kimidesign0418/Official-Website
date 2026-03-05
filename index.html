@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KimiDesign | 訪問看護ステーション特化 ホームページ制作</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Zen+Maru+Gothic:wght@400;700;800&family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Zen+Maru+Gothic:wght@400;700;800&family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet" />
 
   <meta name="description" content="訪問看護ステーション特化｜採用につながるホームページ制作。採用ページ・LINE導線・SNS導線まで一式で整えます。GitHub Pages運用で軽く速いサイトを実現。" />
 
@@ -46,18 +46,21 @@
     .card-base {
       background-color: #ffffff;
       border-radius: 1rem;
-      padding: 2rem;
-      transition: all 0.4s ease;
+      padding: 1.75rem;
+      transition: all 0.35s ease;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 0 5px rgba(0, 0, 0, 0.02);
     }
+    @media (min-width: 640px) {
+      .card-base { padding: 2rem; }
+    }
     .card-base:hover {
-      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1), 0 0 8px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.10), 0 0 8px rgba(0, 0, 0, 0.04);
       transform: translateY(-3px);
     }
 
     .h2-style {
       position: relative;
-      padding-bottom: 1.5rem;
+      padding-bottom: 1.25rem;
       display: inline-block;
       color: var(--color-heading);
       font-weight: 700;
@@ -66,7 +69,7 @@
       content: '';
       position: absolute;
       left: 0;
-      bottom: 0.75rem;
+      bottom: 0.6rem;
       width: 100%;
       height: 4px;
       background-color: var(--color-primary);
@@ -75,21 +78,25 @@
       transform: scaleX(0.75);
     }
 
+    /* ボタン（スマホで押しやすいサイズに） */
     .primary-button {
       background-color: var(--color-primary);
-      color: white;
-      padding: 1.2rem 3.5rem;
+      color: #fff;
       border-radius: 9999px;
-      font-weight: 700;
-      transition: all 0.4s ease-in-out;
-      letter-spacing: 0.1em;
-      box-shadow: 0 6px 15px rgba(109, 151, 109, 0.5);
-      z-index: 1;
+      font-weight: 800;
+      transition: all 0.3s ease-in-out;
+      letter-spacing: 0.06em;
+      box-shadow: 0 6px 15px rgba(109, 151, 109, 0.45);
+      display: inline-block;
+      padding: 0.95rem 2.0rem; /* mobile */
+    }
+    @media (min-width: 640px) {
+      .primary-button { padding: 1.05rem 2.4rem; }
     }
     .primary-button:hover {
       background-color: #5c825c;
-      transform: translateY(-3px) scale(1.01);
-      box-shadow: 0 10px 25px rgba(109, 151, 109, 0.7);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(109, 151, 109, 0.65);
     }
 
     .icon-box {
@@ -101,7 +108,7 @@
       background-color: var(--color-primary);
       border-radius: 50%;
       margin-bottom: 1rem;
-      box-shadow: 0 3px 8px rgba(109, 151, 109, 0.4);
+      box-shadow: 0 3px 8px rgba(109, 151, 109, 0.35);
     }
     .icon-box svg {
       color: white;
@@ -142,18 +149,10 @@
       visibility: visible;
       opacity: 1;
     }
-    .hamburger-icon {
-      transition: transform 0.3s ease;
-    }
-    .hamburger-icon.open .line-top {
-      transform: translateY(8px) rotate(45deg);
-    }
-    .hamburger-icon.open .line-middle {
-      opacity: 0;
-    }
-    .hamburger-icon.open .line-bottom {
-      transform: translateY(-8px) rotate(-45deg);
-    }
+    .hamburger-icon { transition: transform 0.3s ease; }
+    .hamburger-icon.open .line-top { transform: translateY(8px) rotate(45deg); }
+    .hamburger-icon.open .line-middle { opacity: 0; }
+    .hamburger-icon.open .line-bottom { transform: translateY(-8px) rotate(-45deg); }
     .menu-link-item {
       opacity: 0;
       transform: translateY(10px);
@@ -164,17 +163,15 @@
       transform: translateY(0);
     }
 
+    /* 文章の“変な折れ”を減らす（Tailwindの text-balance/text-pretty が効かない環境の保険） */
+    .balance-wrap { text-wrap: balance; }
+    .pretty-wrap  { text-wrap: pretty; }
+
+    /* 見出しの“欠け”保険（明朝系＋大サイズで起きがち） */
+    .hero-h1 { padding-bottom: 0.08em; overflow: visible; }
+
     @media (max-width: 639px) {
       .mobile-cta-in-header { display: none; }
-    }
-
-    /* ✅ HERO：左右バランスを整える（中央寄りの左配置） */
-    .hero-title { max-width: 22ch; }
-    .hero-wrap  { max-width: 56rem; } /* 文章ブロック全体の幅（左右均等感UP） */
-
-    /* ✅ 動きが苦手な人への配慮（プロ品質） */
-    @media (prefers-reduced-motion: reduce) {
-      .animated-section { transition: none !important; transform: none !important; }
     }
   </style>
 </head>
@@ -183,7 +180,7 @@
 
   <!-- Header -->
   <header class="header-bg sticky top-0 z-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
 
       <!-- Logo -->
       <a href="#main" class="text-2xl font-bold tracking-widest accent-color" id="logo-link">
@@ -200,7 +197,7 @@
         <a href="#flow" class="nav-link text-sm font-medium hover:accent-color">制作の流れ</a>
         <a href="#faq" class="nav-link text-sm font-medium hover:accent-color">FAQ</a>
 
-        <a href="contact.html" class="primary-button inline-block text-sm font-medium px-6 py-2">無料相談</a>
+        <a href="contact.html" class="primary-button text-sm font-medium px-6 py-2">無料相談</a>
       </nav>
 
       <!-- Mobile Button -->
@@ -238,53 +235,58 @@
     </nav>
   </div>
 
-  <!-- HERO（整えた版：中央寄りの左配置） -->
-  <main id="main" class="pt-14 pb-20 sm:pt-20 sm:pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="animated-section is-visible hero-wrap mx-auto" style="transition-delay: 0.2s;">
+  <!-- HERO（モバイル最適化済） -->
+  <main id="main" class="pt-12 pb-16 sm:pt-20 sm:pb-20 lg:pb-24 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+    <div class="animated-section is-visible" style="transition-delay: 0.2s;">
 
       <p class="text-sm sm:text-base accent-color mb-4 font-bold tracking-widest">
         KimiDesign
       </p>
 
-      <h1 class="heading-font hero-title text-gray-800 font-extrabold
-                 text-[44px] sm:text-[58px] lg:text-[72px]
-                 leading-[1.08] sm:leading-[1.06] tracking-[-0.02em]">
+      <h1 class="hero-h1 heading-font text-gray-800 font-extrabold balance-wrap text-balance
+                 text-[40px] sm:text-[58px] lg:text-[72px]
+                 leading-[1.18] sm:leading-[1.12] tracking-[-0.01em]
+                 max-w-[18ch]">
         <span class="block">訪問看護ステーションの</span>
-        <span class="block accent-color">採用につながる導線</span>
-        <span class="block">ホームページを整えます。</span>
+        <span class="block accent-color">採用につながる導線を</span>
+        <span class="block">ホームページで整えます。</span>
       </h1>
 
-      <p class="text-gray-600 mt-6 text-base sm:text-lg leading-relaxed max-w-[56ch]">
-        求職者が安心して応募できる情報設計。<br class="hidden sm:block">
-        採用ページ・LINE/電話導線・SNS導線まで一式で整えます。<br class="hidden sm:block">
+      <p class="pretty-wrap text-pretty text-gray-600 mt-6 text-[15px] sm:text-lg leading-relaxed
+                max-w-none sm:max-w-[56ch]">
+        求職者が安心して応募できる情報設計。採用ページ・LINE/電話導線・SNS導線まで一式で整えます。
+        <br class="hidden sm:block">
         GitHub Pages運用で、軽く速いサイトを実現します。
       </p>
 
-      <div class="mt-10 flex flex-col sm:flex-row sm:items-center gap-4 max-w-[56ch]">
-        <a href="contact.html" class="primary-button inline-block text-base sm:text-lg w-full sm:w-auto text-center">
-          無料相談はこちら
+      <div class="mt-9 flex flex-col sm:flex-row sm:items-center gap-4">
+        <a href="contact.html" class="primary-button w-full sm:w-auto text-center text-base sm:text-lg">
+          まずは無料相談
         </a>
         <a href="#works" class="inline-block text-base sm:text-lg font-bold accent-color underline underline-offset-4 text-center sm:text-left">
           実績を見る
         </a>
       </div>
 
-      <p class="text-xs sm:text-sm text-gray-500 mt-6 max-w-[72ch] mx-auto">
-       ※「最短で公開 → 必要に応じて育てる」運用も可能です。<br>
-      （未完成のまま出すのではなく、信頼に必要な情報を揃えて公開します）
+      <!-- 脚注：スマホは幅制限なし／PCだけ読みやすい幅 -->
+      <p class="pretty-wrap text-pretty text-xs sm:text-sm text-gray-500 mt-6
+                max-w-none sm:max-w-[72ch] sm:mx-auto">
+        ※「最短で公開 → 必要に応じて育てる」運用も可能です。
+        <br class="hidden sm:block">
+        （未完成のまま出すのではなく、信頼に必要な情報を揃えて公開します）
       </p>
 
     </div>
   </main>
 
   <!-- About -->
-  <section id="about" class="py-24 bg-white">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-      <h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
+  <section id="about" class="py-16 sm:py-20 lg:py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6 text-center">
+      <h2 class="text-3xl sm:text-4xl heading-font mb-12 sm:mb-16 h2-style animated-section">
         訪問看護ステーションのための、採用導線設計とサイト制作
       </h2>
 
-      <div class="grid md:grid-cols-3 gap-10 text-left">
+      <div class="grid md:grid-cols-3 gap-8 sm:gap-10 text-left">
 
         <div class="card-base text-center animated-section" data-delay="0.2">
           <div class="icon-box mx-auto">
@@ -294,7 +296,7 @@
             </svg>
           </div>
           <h3 class="text-xl heading-font mb-3 text-gray-700">訪問看護に特化</h3>
-          <p class="text-gray-600">
+          <p class="pretty-wrap text-pretty text-gray-600 leading-relaxed">
             訪問看護ならではの「安心感」「信頼」「説明のわかりやすさ」を重視。
             よくある構成をテンプレ化し、最短で公開できる形にします。
           </p>
@@ -310,7 +312,7 @@
             </svg>
           </div>
           <h3 class="text-xl heading-font mb-3 text-gray-700">採用導線を最初から組み込む</h3>
-          <p class="text-gray-600">
+          <p class="pretty-wrap text-pretty text-gray-600 leading-relaxed">
             採用ページ（募集要項・1日の流れ・見学導線）と、電話/LINE/フォームを最短距離に。
             “見た目”より“応募につながる構造”を作ります。
           </p>
@@ -324,43 +326,44 @@
             </svg>
           </div>
           <h3 class="text-xl heading-font mb-3 text-gray-700">軽く速い運用（GitHub Pages）</h3>
-          <p class="text-gray-600">
+          <p class="pretty-wrap text-pretty text-gray-600 leading-relaxed">
             月額コストを抑え、表示速度も軽快に。
             テンプレを活用するので、追加・更新の相談もスムーズです。
           </p>
         </div>
+
       </div>
     </div>
   </section>
 
   <!-- Works -->
-  <section id="works" class="py-24 bg-subtle">
-    <div class="max-w-6xl mx-auto px-4 text-center">
+  <section id="works" class="py-16 sm:py-20 lg:py-24 bg-subtle">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6 text-center">
 
-      <h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
+      <h2 class="text-3xl sm:text-4xl heading-font mb-12 sm:mb-16 h2-style animated-section">
         制作実績
       </h2>
 
-      <div class="grid lg:grid-cols-2 gap-10 text-left">
+      <div class="grid lg:grid-cols-2 gap-8 sm:gap-10 text-left">
 
         <div class="card-base animated-section" data-delay="0.2">
           <h3 class="text-2xl heading-font text-gray-800 mb-3">Sun＋訪問看護ステーション</h3>
-          <p class="text-gray-600 mb-5">
+          <p class="pretty-wrap text-pretty text-gray-600 mb-5 leading-relaxed">
             立ち上げ期に必要な情報を整理し、信頼感のある構成で公開。
             採用導線（見学・応募）を意識した設計で制作しました。
           </p>
-          <a href="https://sunplus-kango.com" target="_blank" class="primary-button inline-block text-base px-8 py-3">
+          <a href="https://sunplus-kango.com" target="_blank" class="primary-button text-base">
             サイトを見る
           </a>
         </div>
 
         <div class="card-base animated-section" data-delay="0.4">
           <h3 class="text-2xl heading-font text-gray-800 mb-3">訪問看護テンプレ（デモ）</h3>
-          <p class="text-gray-600 mb-5">
+          <p class="pretty-wrap text-pretty text-gray-600 mb-5 leading-relaxed">
             差し替えだけで量産できるテンプレ構成。
-            「最短で公開 → 必要に応じて育てる」運用に最適です。
+            「最短で公開→必要に応じて育てる」運用に最適です。
           </p>
-          <a href="https://kimidesign0418.github.io/houmon-template/" target="_blank" class="primary-button inline-block text-base px-8 py-3">
+          <a href="https://kimidesign0418.github.io/houmon-template/" target="_blank" class="primary-button text-base">
             デモを見る
           </a>
         </div>
@@ -374,13 +377,13 @@
   </section>
 
   <!-- Service -->
-  <section id="service" class="py-24">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-      <h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
+  <section id="service" class="py-16 sm:py-20 lg:py-24">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6 text-center">
+      <h2 class="text-3xl sm:text-4xl heading-font mb-12 sm:mb-16 h2-style animated-section">
         サービス
       </h2>
 
-      <div class="grid md:grid-cols-3 gap-10 text-left">
+      <div class="grid md:grid-cols-3 gap-8 sm:gap-10 text-left">
 
         <div class="card-base animated-section" data-delay="0.2">
           <p class="text-xs font-bold accent-color mb-2 tracking-wider">PLAN 01</p>
@@ -417,37 +420,37 @@
 
       </div>
 
-      <a href="contact.html" class="primary-button inline-block text-lg w-full sm:w-auto mt-16 animated-section" data-delay="0.8">
+      <a href="contact.html" class="primary-button text-lg w-full sm:w-auto mt-12 sm:mt-16 animated-section" data-delay="0.8">
         無料相談を申し込む
       </a>
     </div>
   </section>
 
   <!-- Price -->
-  <section id="price" class="py-24 bg-white">
-    <div class="max-w-6xl mx-auto px-4 text-center">
+  <section id="price" class="py-16 sm:py-20 lg:py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6 text-center">
 
-      <h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
+      <h2 class="text-3xl sm:text-4xl heading-font mb-12 sm:mb-16 h2-style animated-section">
         料金（目安）
       </h2>
 
-      <div class="grid md:grid-cols-3 gap-10 text-left">
+      <div class="grid md:grid-cols-3 gap-8 sm:gap-10 text-left">
         <div class="card-base animated-section" data-delay="0.2">
           <h3 class="text-2xl heading-font text-gray-800 mb-2">テンプレ制作</h3>
           <p class="text-4xl font-extrabold accent-color mb-4">15万円〜</p>
-          <p class="text-gray-600">最短公開。まず形にして育てたい方向け。</p>
+          <p class="pretty-wrap text-pretty text-gray-600 leading-relaxed">最短公開。まず形にして育てたい方向け。</p>
         </div>
 
         <div class="card-base animated-section" data-delay="0.4">
           <h3 class="text-2xl heading-font text-gray-800 mb-2">採用導線強化</h3>
           <p class="text-4xl font-extrabold accent-color mb-4">25万円〜</p>
-          <p class="text-gray-600">採用ページ・導線を整えて応募率UP。</p>
+          <p class="pretty-wrap text-pretty text-gray-600 leading-relaxed">採用ページ・導線を整えて応募率UP。</p>
         </div>
 
         <div class="card-base animated-section" data-delay="0.6">
           <h3 class="text-2xl heading-font text-gray-800 mb-2">採用LP制作</h3>
           <p class="text-4xl font-extrabold accent-color mb-4">35万円〜</p>
-          <p class="text-gray-600">採用のためのLP・内容設計を強化。</p>
+          <p class="pretty-wrap text-pretty text-gray-600 leading-relaxed">採用のためのLP・内容設計を強化。</p>
         </div>
       </div>
 
@@ -458,13 +461,13 @@
   </section>
 
   <!-- Flow -->
-  <section id="flow" class="py-24 bg-subtle">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
+  <section id="flow" class="py-16 sm:py-20 lg:py-24 bg-subtle">
+    <div class="max-w-4xl mx-auto px-5 sm:px-6 text-center">
+      <h2 class="text-3xl sm:text-4xl heading-font mb-12 sm:mb-16 h2-style animated-section">
         制作の流れ
       </h2>
 
-      <div class="card-base text-left mb-10 animated-section" data-delay="0.2">
+      <div class="card-base text-left mb-6 sm:mb-10 animated-section" data-delay="0.2">
         <p class="text-xs font-bold accent-color mb-2 tracking-wider">STEP 1</p>
         <h3 class="text-2xl heading-font text-gray-800 mb-4 flex items-center">
           <span class="icon-box icon-box-small mr-3">
@@ -474,13 +477,13 @@
           </span>
           無料相談（ヒアリング）
         </h3>
-        <p class="text-lg text-gray-600">
+        <p class="pretty-wrap text-pretty text-lg text-gray-600 leading-relaxed">
           現状（採用・問い合わせ）やターゲット、必要なページ構成を整理します。
           「まず公開したい」でもOKです。
         </p>
       </div>
 
-      <div class="card-base text-left mb-10 animated-section" data-delay="0.4">
+      <div class="card-base text-left mb-6 sm:mb-10 animated-section" data-delay="0.4">
         <p class="text-xs font-bold accent-color mb-2 tracking-wider">STEP 2</p>
         <h3 class="text-2xl heading-font text-gray-800 mb-4 flex items-center">
           <span class="icon-box icon-box-small mr-3">
@@ -490,7 +493,7 @@
           </span>
           構成・文章のたたき台作成
         </h3>
-        <p class="text-lg text-gray-600">
+        <p class="pretty-wrap text-pretty text-lg text-gray-600 leading-relaxed">
           訪問看護テンプレをベースに、必要な文章と導線を整えます。
           文章が苦手でもOK（こちらで叩き台を作ります）。
         </p>
@@ -507,28 +510,28 @@
           </span>
           制作・公開（GitHub Pages）
         </h3>
-        <p class="text-lg text-gray-600">
+        <p class="pretty-wrap text-pretty text-lg text-gray-600 leading-relaxed">
           テスト公開→確認→本公開。公開後の改善や追加も相談OKです。
         </p>
       </div>
 
-      <a href="contact.html" class="primary-button inline-block text-lg w-full sm:w-auto mt-16 animated-section" data-delay="0.8">
+      <a href="contact.html" class="primary-button text-lg w-full sm:w-auto mt-12 sm:mt-16 animated-section" data-delay="0.8">
         無料相談してみる
       </a>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section id="faq" class="py-24">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-      <h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
+  <section id="faq" class="py-16 sm:py-20 lg:py-24">
+    <div class="max-w-6xl mx-auto px-5 sm:px-6 text-center">
+      <h2 class="text-3xl sm:text-4xl heading-font mb-12 sm:mb-16 h2-style animated-section">
         よくある質問
       </h2>
 
-      <div class="grid md:grid-cols-2 gap-10 text-left">
+      <div class="grid md:grid-cols-2 gap-8 sm:gap-10 text-left">
         <div class="card-base animated-section" data-delay="0.2">
           <h3 class="text-xl heading-font text-gray-800 mb-3">文章が用意できなくても大丈夫？</h3>
-          <p class="text-gray-600">
+          <p class="pretty-wrap text-pretty text-gray-600 leading-relaxed">
             大丈夫です。ヒアリング内容からこちらでたたき台を作ります。
             最終的に確認・修正して仕上げます。
           </p>
@@ -536,7 +539,7 @@
 
         <div class="card-base animated-section" data-delay="0.4">
           <h3 class="text-xl heading-font text-gray-800 mb-3">WordPressじゃなくて困らない？</h3>
-          <p class="text-gray-600">
+          <p class="pretty-wrap text-pretty text-gray-600 leading-relaxed">
             更新頻度が高くない場合、GitHub Pagesは軽く速く、運用コストも抑えられます。
             ブログ運用が必要なら別途提案します。
           </p>
@@ -544,7 +547,7 @@
 
         <div class="card-base animated-section" data-delay="0.6">
           <h3 class="text-xl heading-font text-gray-800 mb-3">採用に効くページは？</h3>
-          <p class="text-gray-600">
+          <p class="pretty-wrap text-pretty text-gray-600 leading-relaxed">
             「募集要項」だけでなく、「1日の流れ」「見学歓迎」「よくある不安（オンコール等）」を
             丁寧に書くと応募のハードルが下がります。
           </p>
@@ -552,7 +555,7 @@
 
         <div class="card-base animated-section" data-delay="0.8">
           <h3 class="text-xl heading-font text-gray-800 mb-3">制作期間はどれくらい？</h3>
-          <p class="text-gray-600">
+          <p class="pretty-wrap text-pretty text-gray-600 leading-relaxed">
             素材の準備状況にもよりますが、テンプレ制作なら最短で公開まで進められます。
             まずは無料相談でスケジュールを一緒に決めます。
           </p>
@@ -561,27 +564,24 @@
     </div>
   </section>
 
-  <!-- Final CTA（「7割」を安全に言い換え） -->
-  <section class="py-20 bg-white">
-    <div class="max-w-5xl mx-auto px-4 text-center">
-      <h2 class="text-3xl sm:text-4xl heading-font mb-6">
-        まずは最短で公開し、必要に応じて育てませんか？
+  <!-- Final CTA -->
+  <section class="py-14 sm:py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-5 sm:px-6 text-center">
+      <h2 class="text-3xl sm:text-4xl heading-font mb-5 balance-wrap text-balance">
+        まずは「最短で公開」から始めませんか？
       </h2>
-      <p class="text-lg text-gray-600 mb-10">
-        立ち上げ期は完璧よりスピード。信頼に必要な情報を揃えて公開し、運用しながらページ追加・改善ができます。
+      <p class="pretty-wrap text-pretty text-lg text-gray-600 mb-9 leading-relaxed">
+        立ち上げ期は完璧よりスピード。公開してから必要に応じて育てる運用ができます。
       </p>
-      <a href="contact.html" class="primary-button inline-block text-lg w-full sm:w-auto">
+      <a href="contact.html" class="primary-button text-lg w-full sm:w-auto">
         無料相談はこちら
       </a>
-      <p class="text-xs text-gray-500 mt-6">
-        ※「未完成のまま出す」のではなく、安心して問い合わせ・応募できる情報を整えた状態で公開します。
-      </p>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="py-12 bg-[#f0f0e8] text-center text-sm text-gray-500">
-    <div class="max-w-7xl mx-auto px-4">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6">
       <nav class="mb-4 space-x-6">
         <a href="privacy-policy.pdf" target="_blank" class="hover:accent-color">プライバシーポリシー</a>
         <a href="terms-of-service.pdf" target="_blank" class="hover:accent-color">利用規約</a>
