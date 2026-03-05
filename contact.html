@@ -76,40 +76,65 @@
 
 <body>
 
-  <!-- Header -->
-  <header class="header-bg sticky top-0 z-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+  <!-- Header（トップと同じ） -->
+<header class="header-bg sticky top-0 z-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
 
-      <!-- Logo -->
-      <a href="#main" class="text-2xl font-bold tracking-widest accent-color" id="logo-link">
-        <img src="rogo.jpeg" alt="KimiDesign ロゴ" class="h-9 md:h-11"
-          onerror="this.onerror=null; this.src='https://placehold.co/180x44/6d976d/ffffff?text=KimiDesign';" />
-      </a>
+    <!-- Logo -->
+    <a href="index.html#main" class="text-2xl font-bold tracking-widest accent-color" id="logo-link">
+      <img src="rogo.jpeg" alt="KimiDesign ロゴ" class="h-9 md:h-11"
+        onerror="this.onerror=null; this.src='https://placehold.co/180x44/6d976d/ffffff?text=KimiDesign';" />
+    </a>
 
-      <!-- Desktop Nav -->
-      <nav class="space-x-3 sm:space-x-8 hidden sm:flex items-center">
-        <a href="#about" class="nav-link text-sm font-medium hover:accent-color">KimiDesignについて</a>
-        <a href="#works" class="nav-link text-sm font-medium hover:accent-color">実績</a>
-        <a href="#service" class="nav-link text-sm font-medium hover:accent-color">サービス</a>
-        <a href="#price" class="nav-link text-sm font-medium hover:accent-color">料金</a>
-        <a href="#flow" class="nav-link text-sm font-medium hover:accent-color">制作の流れ</a>
-        <a href="#faq" class="nav-link text-sm font-medium hover:accent-color">FAQ</a>
+    <!-- Desktop Nav -->
+    <nav class="space-x-3 sm:space-x-8 hidden sm:flex items-center">
+      <a href="index.html#about" class="nav-link text-sm font-medium hover:accent-color">KimiDesignについて</a>
+      <a href="index.html#works" class="nav-link text-sm font-medium hover:accent-color">実績</a>
+      <a href="index.html#service" class="nav-link text-sm font-medium hover:accent-color">サービス</a>
+      <a href="index.html#price" class="nav-link text-sm font-medium hover:accent-color">料金</a>
+      <a href="index.html#flow" class="nav-link text-sm font-medium hover:accent-color">制作の流れ</a>
+      <a href="index.html#faq" class="nav-link text-sm font-medium hover:accent-color">FAQ</a>
 
-        <a href="contact.html" class="primary-button inline-block text-sm font-medium px-6 py-2">無料相談</a>
-      </nav>
+      <!-- contact.html自身なので「無料相談」はそのまま表示（押してもOK） -->
+      <a href="contact.html" class="primary-button inline-block text-sm font-medium px-6 py-2">無料相談</a>
+    </nav>
 
-      <!-- Mobile Button -->
-      <div class="flex sm:hidden items-center space-x-4">
-        <button id="hamburger-button" aria-label="メニューを開く" class="p-2 focus:outline-none">
-          <div class="hamburger-icon w-6 h-5 flex flex-col justify-between">
-            <span class="line-top block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
-            <span class="line-middle block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
-            <span class="line-bottom block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
-          </div>
-        </button>
-      </div>
+    <!-- Mobile button -->
+    <div class="flex sm:hidden items-center space-x-4">
+      <button id="hamburger-button" aria-label="メニューを開く" class="p-2 focus:outline-none">
+        <div class="hamburger-icon w-6 h-5 flex flex-col justify-between">
+          <span class="line-top block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
+          <span class="line-middle block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
+          <span class="line-bottom block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
+        </div>
+      </button>
     </div>
-  </header>
+
+  </div>
+</header>
+
+<!-- Mobile Menu Overlay（トップと同じ） -->
+<div id="mobile-menu" class="mobile-menu-overlay fixed inset-0 z-30 flex flex-col items-center justify-center p-8">
+
+  <button id="close-menu-button" aria-label="メニューを閉じる" class="absolute top-6 right-6 p-3">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+
+  <nav class="flex flex-col space-y-8 text-center mt-16">
+    <a href="index.html#about" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.1s;">KimiDesignについて</a>
+    <a href="index.html#works" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.2s;">実績</a>
+    <a href="index.html#service" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.3s;">サービス</a>
+    <a href="index.html#price" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.4s;">料金</a>
+    <a href="index.html#flow" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.5s;">制作の流れ</a>
+    <a href="index.html#faq" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.6s;">FAQ</a>
+
+    <a href="contact.html" class="primary-button text-xl mt-8 px-10 py-4 menu-link-item" style="transition-delay: 0.7s;">
+      無料相談
+    </a>
+  </nav>
+</div>
 
   <!-- Mobile Menu -->
   <div id="mobileMenu" class="mobile-menu-overlay hidden">
@@ -253,33 +278,27 @@
   </footer>
 
   <script>
-    // シンプルな表示アニメ（任意）
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('.animated-section').forEach(el => el.classList.add('is-visible'));
+  // Mobile menu
+  const hamburgerButton = document.getElementById('hamburger-button');
+  const closeMenuButton = document.getElementById('close-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
 
-      // Mobile menu
-      const mobileMenuButton = document.getElementById('mobileMenuButton');
-      const closeMenuButton = document.getElementById('closeMenuButton');
-      const mobileMenu = document.getElementById('mobileMenu');
-      const mobileLinks = mobileMenu.querySelectorAll('a');
+  function toggleMenu() {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburgerButton.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
 
-      const openMenu = () => {
-        mobileMenu.classList.remove('hidden');
-        requestAnimationFrame(() => mobileMenu.classList.add('open'));
-        document.body.style.overflow = 'hidden';
-      };
-      const closeMenu = () => {
-        mobileMenu.classList.remove('open');
-        document.body.style.overflow = '';
-        setTimeout(() => mobileMenu.classList.add('hidden'), 400);
-      };
+  hamburgerButton?.addEventListener('click', toggleMenu);
+  closeMenuButton?.addEventListener('click', toggleMenu);
 
-      mobileMenuButton.addEventListener('click', openMenu);
-      closeMenuButton.addEventListener('click', closeMenu);
-
-      mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+  mobileMenu?.querySelectorAll('a')?.forEach(link => {
+    link.addEventListener('click', () => {
+      const isTargetBlank = link.getAttribute('target') === '_blank';
+      if (!isTargetBlank && mobileMenu.classList.contains('open')) toggleMenu();
     });
-  </script>
+  });
+</script>
 
 </body>
 </html>
