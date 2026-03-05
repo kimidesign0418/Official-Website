@@ -171,19 +171,22 @@
     .hero-wrap {
       position: relative;
       isolation: isolate;
+      overflow: hidden; /* ←追加 */
     }
     .hero-bg {
-      position: absolute;
-      inset: -120px -120px auto -120px;
-      height: 520px;
-      z-index: -1;
-      background:
-        radial-gradient(closest-side, rgba(109,151,109,0.18), rgba(109,151,109,0) 70%),
-        radial-gradient(closest-side, rgba(255,255,255,0.55), rgba(255,255,255,0) 65%);
-      pointer-events: none;
-      filter: blur(2px);
-      transform: translateY(-20px);
-    }
+  position: absolute;
+  top: -140px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1100px, 110vw);  /* 端末より少し大きい程度に制限 */
+  height: 560px;
+  z-index: -1;
+  background:
+    radial-gradient(closest-side, rgba(109,151,109,0.18), rgba(109,151,109,0) 70%),
+    radial-gradient(closest-side, rgba(255,255,255,0.55), rgba(255,255,255,0) 65%);
+  pointer-events: none;
+  filter: blur(2px);
+}
 
     /* 見出し：巨大すぎるとモバイルで崩れるので clamp で安全に */
     .hero-h1 {
