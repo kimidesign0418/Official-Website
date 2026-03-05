@@ -77,25 +77,37 @@
 <body>
 
   <!-- Header -->
-  <header class="header-bg sticky top-0 z-10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-      <a href="index.html#main" class="text-2xl font-bold tracking-widest accent-color">
-        <img src="rogo.jpeg" alt="Kimi Design ロゴ" class="h-8 md:h-10"
-          onerror="this.onerror=null; this.src='https://placehold.co/150x40/6d976d/ffffff?text=Kimi+Design';" />
+  <header class="header-bg sticky top-0 z-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+
+      <!-- Logo -->
+      <a href="#main" class="text-2xl font-bold tracking-widest accent-color" id="logo-link">
+        <img src="rogo.jpeg" alt="KimiDesign ロゴ" class="h-9 md:h-11"
+          onerror="this.onerror=null; this.src='https://placehold.co/180x44/6d976d/ffffff?text=KimiDesign';" />
       </a>
 
-      <nav class="hidden sm:flex items-center space-x-6">
-        <a href="index.html#about" class="nav-link text-sm font-medium hover:text-gray-400">私たちについて</a>
-        <a href="index.html#donation" class="nav-link text-sm font-medium hover:text-gray-400">寄付活動</a>
-        <a href="index.html#service" class="nav-link text-sm font-medium hover:text-gray-400">サービス・料金</a>
-        <a href="contact.html" class="nav-link text-sm font-medium primary-button px-4 py-2 rounded-full">お申し込み</a>
+      <!-- Desktop Nav -->
+      <nav class="space-x-3 sm:space-x-8 hidden sm:flex items-center">
+        <a href="#about" class="nav-link text-sm font-medium hover:accent-color">KimiDesignについて</a>
+        <a href="#works" class="nav-link text-sm font-medium hover:accent-color">実績</a>
+        <a href="#service" class="nav-link text-sm font-medium hover:accent-color">サービス</a>
+        <a href="#price" class="nav-link text-sm font-medium hover:accent-color">料金</a>
+        <a href="#flow" class="nav-link text-sm font-medium hover:accent-color">制作の流れ</a>
+        <a href="#faq" class="nav-link text-sm font-medium hover:accent-color">FAQ</a>
+
+        <a href="contact.html" class="primary-button inline-block text-sm font-medium px-6 py-2">無料相談</a>
       </nav>
 
-      <button id="mobileMenuButton" class="sm:hidden hamburger-icon p-2 focus:outline-none" aria-label="メニューを開く">
-        <svg class="w-6 h-6 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
+      <!-- Mobile Button -->
+      <div class="flex sm:hidden items-center space-x-4">
+        <button id="hamburger-button" aria-label="メニューを開く" class="p-2 focus:outline-none">
+          <div class="hamburger-icon w-6 h-5 flex flex-col justify-between">
+            <span class="line-top block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
+            <span class="line-middle block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
+            <span class="line-bottom block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
+          </div>
+        </button>
+      </div>
     </div>
   </header>
 
