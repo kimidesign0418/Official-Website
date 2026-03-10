@@ -1,311 +1,770 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kimi Design | お申し込み・お問い合わせ</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ご相談はこちら | KimiDesign</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Zen+Maru+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Zen+Maru+Gothic:wght@400;500;700;800&family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet" />
+
+  <meta
+    name="description"
+    content="KimiDesignへのご相談ページです。訪問看護ステーションに特化したホームページ制作について、紹介で来てくださった方が安心して相談できる窓口を整えています。"
+  />
 
   <style>
+    :root {
+      --color-primary: #6d976d;
+      --color-primary-dark: #5d845d;
+      --color-secondary: #f7fcf8;
+      --color-background: #fcf8f0;
+      --color-surface: #ffffff;
+      --color-text-dark: #3a3a3a;
+      --color-text-soft: #6b7280;
+      --color-heading: #4d5868;
+      --color-navy: #1f2a44;
+      --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.04), 0 0 5px rgba(0, 0, 0, 0.02);
+      --shadow-hover: 0 15px 45px rgba(0, 0, 0, 0.08), 0 0 8px rgba(0, 0, 0, 0.03);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Zen Maru Gothic', 'Inter', sans-serif;
-      background-color: #fcf8f0;
-      color: #4a4a4a;
+      background-color: var(--color-background);
+      color: var(--color-text-dark);
+      line-height: 1.8;
     }
+
+    .heading-font {
+      font-family: 'Shippori Mincho B1', serif;
+      font-weight: 700;
+    }
+
+    .accent-color {
+      color: var(--color-primary);
+    }
+
     .header-bg {
-      background-color: #ffffff;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      background-color: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
     }
+
+    .nav-link {
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--color-primary);
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.25rem;
+      width: 100%;
+      height: 2px;
+      background-color: var(--color-primary);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+      transform: scaleX(1);
+    }
+
     .primary-button {
-      background-color: #6d976d;
+      background-color: var(--color-primary);
       color: white;
-      padding: 0.75rem 2.5rem;
+      padding: 1rem 2.4rem;
       border-radius: 9999px;
       font-weight: 700;
-      transition: background-color 0.3s, transform 0.1s;
-      letter-spacing: 0.1em;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.06);
+      transition: all 0.3s ease-in-out;
+      letter-spacing: 0.03em;
+      box-shadow: 0 6px 15px rgba(109, 151, 109, 0.35);
+      display: inline-block;
+      text-align: center;
+      border: none;
+      cursor: pointer;
     }
+
     .primary-button:hover {
-      background-color: #5c825c;
-      transform: translateY(-1px);
+      background-color: var(--color-primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(109, 151, 109, 0.45);
     }
-    .accent-color { color: #6d976d; }
-    .bg-subtle { background-color: #f5f0e9; }
 
-    .form-input {
-      width: 100%;
-      padding: 0.75rem;
-      border: 1px solid #d1d5db;
-      border-radius: 0.5rem;
-      transition: border-color 0.3s, box-shadow 0.3s;
-      background-color: white;
-    }
-    .form-input:focus {
-      outline: none;
-      border-color: #6d976d;
-      box-shadow: 0 0 0 3px rgba(109,151,109,0.3);
-    }
-    .required-mark {
-      color: #ef4444;
-      font-size: 0.75rem;
+    .secondary-button {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: var(--color-primary);
+      border: 1px solid rgba(109, 151, 109, 0.3);
+      padding: 1rem 2.2rem;
+      border-radius: 9999px;
       font-weight: 700;
-      margin-left: 0.5rem;
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-align: center;
+      backdrop-filter: blur(8px);
     }
 
-    .animated-section { opacity: 0; transform: translateY(20px); transition: opacity .8s ease-out, transform .8s ease-out; }
-    .animated-section.is-visible { opacity: 1; transform: translateY(0); }
+    .secondary-button:hover {
+      background-color: #f7fcf8;
+      transform: translateY(-2px);
+    }
 
-    /* Mobile Menu */
-    .mobile-menu-overlay {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(252, 248, 240, 0.95);
-      z-index: 50;
-      transform: translateX(100%);
-      transition: transform 0.4s ease-out;
+    .card-base {
+      background-color: var(--color-surface);
+      border-radius: 1.25rem;
       padding: 2rem;
+      transition: all 0.35s ease;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(109, 151, 109, 0.08);
     }
-    .mobile-menu-overlay.open { transform: translateX(0); }
-    .hamburger-icon { cursor: pointer; z-index: 60; }
+
+    .card-base:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-3px);
+    }
+
+    .text-balance {
+      text-wrap: balance;
+    }
+
+    .text-pretty {
+      text-wrap: pretty;
+    }
+
+    .h2-style {
+      position: relative;
+      padding-bottom: 1.4rem;
+      display: inline-block;
+      color: var(--color-heading);
+      font-weight: 700;
+    }
+
+    .h2-style::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0.82);
+      bottom: 0.55rem;
+      width: 100%;
+      height: 4px;
+      background-color: var(--color-primary);
+      border-radius: 9999px;
+    }
+
+    .animated-section {
+      opacity: 0;
+      transform: translateY(22px);
+      transition:
+        opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .animated-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mobile-menu-overlay {
+      background-color: rgba(252, 248, 240, 0.97);
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    .mobile-menu-overlay.open {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .hamburger-icon.open .line-top {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger-icon.open .line-middle {
+      opacity: 0;
+    }
+
+    .hamburger-icon.open .line-bottom {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .menu-link-item {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .mobile-menu-overlay.open .menu-link-item {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-wrap {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding-top: 4.5rem;
+      padding-bottom: 3.5rem;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 50% 12%, rgba(109, 151, 109, 0.12), rgba(109, 151, 109, 0) 30%),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+      pointer-events: none;
+    }
+
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      top: 2%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(760px, 92vw);
+      height: 360px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0) 72%);
+      filter: blur(8px);
+      z-index: -1;
+    }
+
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-kicker {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--color-primary);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-h1 {
+      font-family: 'Shippori Mincho B1', serif;
+      font-size: clamp(2.3rem, 5.8vw, 4.8rem);
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      color: var(--color-navy);
+      max-width: 12ch;
+      margin: 0 auto;
+      line-break: strict;
+    }
+
+    .hero-h1 .accent {
+      color: #7ca276;
+    }
+
+    .hero-lead {
+      max-width: 760px;
+      margin: 1.7rem auto 0;
+      font-size: clamp(1rem, 1.4vw, 1.12rem);
+      line-height: 1.95;
+      color: #55627a;
+    }
+
+    .hero-lead strong {
+      color: var(--color-primary);
+      font-weight: 800;
+    }
+
+    .soft-note {
+      background: #fff;
+      border: 1px solid rgba(109, 151, 109, 0.15);
+      border-radius: 1rem;
+      padding: 1.25rem 1.25rem;
+    }
+
+    .point-chip {
+      display: inline-block;
+      padding: 0.45rem 0.85rem;
+      border-radius: 9999px;
+      background: rgba(109, 151, 109, 0.1);
+      color: var(--color-primary);
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin: 0.25rem;
+    }
+
+    .icon-circle {
+      width: 2.4rem;
+      height: 2.4rem;
+      flex-shrink: 0;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(109, 151, 109, 0.12);
+      color: var(--color-primary);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #4b5563;
+      margin-bottom: 0.6rem;
+    }
+
+    .required-badge {
+      display: inline-block;
+      margin-left: 0.45rem;
+      padding: 0.1rem 0.45rem;
+      font-size: 0.72rem;
+      line-height: 1.4;
+      border-radius: 9999px;
+      background: rgba(207, 72, 72, 0.08);
+      color: #b44a4a;
+      vertical-align: middle;
+    }
+
+    .optional-badge {
+      display: inline-block;
+      margin-left: 0.45rem;
+      padding: 0.1rem 0.45rem;
+      font-size: 0.72rem;
+      line-height: 1.4;
+      border-radius: 9999px;
+      background: rgba(109, 151, 109, 0.1);
+      color: var(--color-primary);
+      vertical-align: middle;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      background: #fff;
+      border: 1px solid rgba(109, 151, 109, 0.18);
+      border-radius: 1rem;
+      padding: 0.95rem 1rem;
+      font-size: 1rem;
+      color: #374151;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+      outline: none;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      border-color: rgba(109, 151, 109, 0.55);
+      box-shadow: 0 0 0 4px rgba(109, 151, 109, 0.12);
+      background-color: #fff;
+    }
+
+    .form-textarea {
+      min-height: 180px;
+      resize: vertical;
+    }
+
+    .helper-text {
+      margin-top: 0.45rem;
+      font-size: 0.85rem;
+      color: #6b7280;
+      line-height: 1.7;
+    }
+
+    .check-list li {
+      position: relative;
+      padding-left: 1.8rem;
+    }
+
+    .check-list li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+
+    .note-box {
+      background: linear-gradient(180deg, rgba(247, 252, 248, 0.9), rgba(255, 255, 255, 0.95));
+      border: 1px solid rgba(109, 151, 109, 0.12);
+      border-radius: 1rem;
+      padding: 1.15rem 1.15rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: 2rem;
+      align-items: start;
+    }
+
+    @media (max-width: 960px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-wrap {
+        padding-top: 3.3rem;
+        padding-bottom: 2.8rem;
+      }
+
+      .hero-h1 {
+        max-width: 10ch;
+        font-size: clamp(2.1rem, 9vw, 3.7rem);
+        line-height: 1.22;
+      }
+
+      .hero-lead {
+        margin-top: 1.3rem;
+        font-size: 1rem;
+        line-height: 1.85;
+        padding: 0 0.2rem;
+      }
+    }
   </style>
 </head>
 
 <body>
+  <header class="header-bg sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+      <a href="index.html#main" class="shrink-0">
+        <img
+          src="rogo.jpeg"
+          alt="KimiDesign ロゴ"
+          class="h-9 md:h-11"
+          onerror="this.onerror=null; this.src='https://placehold.co/180x44/6d976d/ffffff?text=KimiDesign';"
+        />
+      </a>
 
-  <!-- Header（トップと同じ） -->
-<header class="header-bg sticky top-0 z-20">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+      <nav class="space-x-3 sm:space-x-7 hidden sm:flex items-center">
+        <a href="index.html#about" class="nav-link text-sm font-medium">KimiDesignについて</a>
+        <a href="index.html#for-referral" class="nav-link text-sm font-medium">はじめての方へ</a>
+        <a href="index.html#works" class="nav-link text-sm font-medium">実績</a>
+        <a href="index.html#service" class="nav-link text-sm font-medium">サービス</a>
+        <a href="index.html#price" class="nav-link text-sm font-medium">料金</a>
+        <a href="index.html#faq" class="nav-link text-sm font-medium">FAQ</a>
+        <a href="contact.html" class="primary-button inline-block text-sm px-6 py-2">ご相談はこちら</a>
+      </nav>
 
-    <!-- Logo -->
-    <a href="index.html#main" class="text-2xl font-bold tracking-widest accent-color" id="logo-link">
-      <img src="rogo.jpeg" alt="KimiDesign ロゴ" class="h-9 md:h-11"
-        onerror="this.onerror=null; this.src='https://placehold.co/180x44/6d976d/ffffff?text=KimiDesign';" />
-    </a>
-
-    <!-- Desktop Nav -->
-    <nav class="space-x-3 sm:space-x-8 hidden sm:flex items-center">
-      <a href="index.html#about" class="nav-link text-sm font-medium hover:accent-color">KimiDesignについて</a>
-      <a href="index.html#works" class="nav-link text-sm font-medium hover:accent-color">実績</a>
-      <a href="index.html#service" class="nav-link text-sm font-medium hover:accent-color">サービス</a>
-      <a href="index.html#price" class="nav-link text-sm font-medium hover:accent-color">料金</a>
-      <a href="index.html#flow" class="nav-link text-sm font-medium hover:accent-color">制作の流れ</a>
-      <a href="index.html#faq" class="nav-link text-sm font-medium hover:accent-color">FAQ</a>
-
-      <!-- contact.html自身なので「無料相談」はそのまま表示（押してもOK） -->
-      <a href="contact.html" class="primary-button inline-block text-sm font-medium px-6 py-2">無料相談</a>
-    </nav>
-
-    <!-- Mobile button -->
-    <div class="flex sm:hidden items-center space-x-4">
-      <button id="hamburger-button" aria-label="メニューを開く" class="p-2 focus:outline-none">
-        <div class="hamburger-icon w-6 h-5 flex flex-col justify-between">
-          <span class="line-top block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
-          <span class="line-middle block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
-          <span class="line-bottom block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
-        </div>
-      </button>
-    </div>
-
-  </div>
-</header>
-
-<!-- Mobile Menu Overlay（トップと同じ） -->
-<div id="mobile-menu" class="mobile-menu-overlay fixed inset-0 z-30 flex flex-col items-center justify-center p-8">
-
-  <button id="close-menu-button" aria-label="メニューを閉じる" class="absolute top-6 right-6 p-3">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-    </svg>
-  </button>
-
-  <nav class="flex flex-col space-y-8 text-center mt-16">
-    <a href="index.html#about" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.1s;">KimiDesignについて</a>
-    <a href="index.html#works" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.2s;">実績</a>
-    <a href="index.html#service" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.3s;">サービス</a>
-    <a href="index.html#price" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.4s;">料金</a>
-    <a href="index.html#flow" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.5s;">制作の流れ</a>
-    <a href="index.html#faq" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.6s;">FAQ</a>
-
-    <a href="contact.html" class="primary-button text-xl mt-8 px-10 py-4 menu-link-item" style="transition-delay: 0.7s;">
-      無料相談
-    </a>
-  </nav>
-</div>
-
-  <!-- Mobile Menu -->
-  <div id="mobileMenu" class="mobile-menu-overlay hidden">
-    <div class="flex justify-end mb-8">
-      <button id="closeMenuButton" class="p-2 focus:outline-none" aria-label="メニューを閉じる">
-        <svg class="w-6 h-6 accent-color" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
-      </button>
-    </div>
-    <nav class="flex flex-col space-y-6 text-center text-xl font-bold">
-      <a href="index.html#about" class="hover:text-[#6d976d]">私たちについて</a>
-      <a href="index.html#donation" class="hover:text-[#6d976d]">寄付活動</a>
-      <a href="index.html#service" class="hover:text-[#6d976d]">サービス・料金</a>
-      <div class="pt-6">
-        <a href="contact.html" class="primary-button text-base px-6 py-3">お申し込み</a>
+      <div class="flex sm:hidden items-center">
+        <button id="hamburger-button" aria-label="メニューを開く" class="p-2 focus:outline-none">
+          <div class="hamburger-icon w-6 h-5 flex flex-col justify-between">
+            <span class="line-top block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
+            <span class="line-middle block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
+            <span class="line-bottom block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
+          </div>
+        </button>
       </div>
+    </div>
+  </header>
+
+  <div id="mobile-menu" class="mobile-menu-overlay fixed inset-0 z-40 flex flex-col items-center justify-center p-8">
+    <button id="close-menu-button" aria-label="メニューを閉じる" class="absolute top-6 right-6 p-3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <nav class="flex flex-col space-y-8 text-center mt-16">
+      <a href="index.html#about" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.1s;">KimiDesignについて</a>
+      <a href="index.html#for-referral" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.2s;">はじめての方へ</a>
+      <a href="index.html#works" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.3s;">実績</a>
+      <a href="index.html#service" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.4s;">サービス</a>
+      <a href="index.html#price" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.5s;">料金</a>
+      <a href="index.html#faq" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.6s;">FAQ</a>
+      <a href="contact.html" class="primary-button text-xl mt-8 px-10 py-4 menu-link-item" style="transition-delay: 0.7s;">ご相談はこちら</a>
     </nav>
   </div>
 
-  <!-- Main -->
-  <main class="py-20 px-4">
-    <div class="max-w-3xl mx-auto bg-white p-6 sm:p-10 rounded-2xl shadow-xl animated-section is-visible">
-      <h1 class="text-3xl md:text-4xl font-bold text-center accent-color mb-4">お申し込み・お問い合わせ</h1>
-      <p class="text-center text-gray-600 mb-10">下記フォームにご入力いただき、「送信する」ボタンを押してください。</p>
+  <main class="hero-wrap px-4 sm:px-6 lg:px-8">
+    <div class="hero-bg"></div>
 
-      <!-- ✅ Formspreeに送るフォーム（ここが最重要） -->
-      <form
-  id="contactForm"
-  class="space-y-8"
-  action="https://formspree.io/f/mqeyzeww"
-  method="POST"
->
+    <div class="hero-inner animated-section is-visible" style="transition-delay: 0.2s;">
+      <p class="hero-kicker">CONTACT</p>
 
-  <!-- 送信後の遷移先 -->
-  <input type="hidden" name="_next" value="https://kimidesign0418.github.io/Official-Website/thanks.html">
+      <h1 class="hero-h1 text-balance">
+        ご紹介で来てくださった方が、
+        <span class="accent">安心して相談できる</span>
+        窓口です。
+      </h1>
 
-  <!-- メール件名 -->
-  <input type="hidden" name="_subject" value="【KimiDesign】お問い合わせが届きました">
-
-        <!-- 送信後に戻すページ（任意：thanks.htmlを作ると完璧） -->
-        <input type="hidden" name="_next" value="https://kimidesign0418.github.io/Official-Website/thanks.html">
-        <!-- 件名（任意） -->
-        <input type="hidden" name="_subject" value="【Kimi Design】お問い合わせが届きました">
-        <!-- スパム対策（任意：Formspree側の設定に合わせて） -->
-        <input type="text" name="_gotcha" style="display:none">
-
-        <!-- 1. お名前 -->
-        <div>
-          <label for="name" class="block text-lg font-medium text-[#5c5c5c] mb-2">
-            お名前 <span class="required-mark">必須</span>
-          </label>
-          <input type="text" id="name" name="name" required class="form-input" placeholder="例：山田花子">
-        </div>
-
-        <!-- 2. メールアドレス -->
-        <div>
-          <label for="email" class="block text-lg font-medium text-[#5c5c5c] mb-2">
-            メールアドレス <span class="required-mark">必須</span>
-          </label>
-          <input type="email" id="email" name="email" required class="form-input" placeholder="例：email@example.com">
-          <p class="text-xs text-gray-500 mt-1">※携帯電話のアドレスをご利用の場合、PCからのメールが受信できるよう設定をご確認ください。</p>
-        </div>
-
-        <!-- 3. ご希望のプラン -->
-        <!-- 3. ご希望のプラン（KimiDesign現行） -->
-<div>
-  <label for="plan" class="block text-lg font-medium text-[#5c5c5c] mb-2">
-    ご希望のプラン <span class="required-mark">必須</span>
-  </label>
-
-  <select id="plan" name="plan" required class="form-input appearance-none">
-    <option value="" disabled selected>選択してください</option>
-
-    <option value="PLAN01_テンプレ制作_15万円〜">
-      PLAN 01｜テンプレ制作（最短公開）｜15万円〜
-    </option>
-
-    <option value="PLAN02_採用導線強化_25万円〜">
-      PLAN 02｜採用導線強化（おすすめ）｜25万円〜
-    </option>
-
-    <option value="PLAN03_採用LP制作_35万円〜">
-      PLAN 03｜採用LP制作（本気の採用）｜35万円〜
-    </option>
-
-    <option value="相談のみ_未定">
-      まずは相談したい（プラン未定）
-    </option>
-  </select>
-
-  <p class="text-xs text-gray-500 mt-1">
-    ※料金は目安です。ページ数・素材準備・導線設計の範囲で前後します。
-  </p>
-</div>
-
-        <!-- 4. ご相談内容 -->
-        <div>
-          <label for="content" class="block text-lg font-medium text-[#5c5c5c] mb-2">
-            ご相談内容 <span class="required-mark">必須</span>
-          </label>
-          <textarea id="content" name="content" rows="6" required class="form-input"
-  placeholder="例：
-・ステーション名／エリア
-・採用で困っている点（応募が少ない等）
-・必要ページ（採用ページ／サービス／FAQ等）
-・既存サイトURL（あれば）
-・希望公開時期
-・LINE/電話/フォーム導線の希望">
-</textarea>
-        </div>
-
-        <!-- 5. プライバシーポリシー同意 -->
-        <div class="flex items-center pt-4">
-          <input id="privacy" name="privacy_agree" type="checkbox" required
-            class="w-5 h-5 accent-color text-[#6d976d] border-gray-300 rounded focus:ring-[#6d976d]">
-          <label for="privacy" class="ml-3 text-sm text-gray-700">
-            <a href="privacy-policy.pdf" target="_blank" class="accent-color underline hover:text-[#5c825c]">プライバシーポリシー</a>に同意する
-            <span class="required-mark">必須</span>
-          </label>
-        </div>
-
-        <!-- 送信ボタン -->
-        <div class="pt-6 flex justify-center">
-          <button type="submit" class="primary-button text-xl">
-            送信する
-          </button>
-        </div>
-      </form>
-
-      <!-- 補足（本番運用向け） -->
-      <p class="text-xs text-gray-500 mt-8 text-center leading-relaxed">
-        送信後、確認画面または完了ページへ遷移します。うまく送れない場合は、通信環境をご確認のうえ再度お試しください。
+      <p class="hero-lead text-pretty">
+        まだ依頼するか決めていない段階でも大丈夫です。<br class="hidden sm:block" />
+        「まずは話を聞いてみたい」「何が必要か整理したい」というご相談も、落ち着いて伺います。
       </p>
+
+      <div class="mt-6">
+        <span class="point-chip">紹介ベースのご相談</span>
+        <span class="point-chip">無理な営業なし</span>
+        <span class="point-chip">文章づくりも相談可</span>
+      </div>
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="py-8 bg-[#f5f5f5] text-center text-sm text-gray-500">
+  <section class="pb-24">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="contact-grid">
+        <div class="card-base animated-section is-visible" style="transition-delay: 0.25s;">
+          <h2 class="text-2xl sm:text-3xl heading-font text-gray-800 mb-6">
+            ご相談フォーム
+          </h2>
+
+          <div class="note-box mb-8">
+            <p class="text-gray-600 leading-relaxed">
+              ご相談内容がまだまとまっていなくても大丈夫です。<br />
+              分かる範囲でお書きいただければ、こちらで整理しながら進めます。
+            </p>
+          </div>
+
+          <form
+            action="https://formspree.io/f/your-form-id"
+            method="POST"
+            class="space-y-6"
+          >
+            <div>
+              <label for="name" class="form-label">
+                お名前
+                <span class="required-badge">必須</span>
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-input"
+                placeholder="例）山田 花子"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="company" class="form-label">
+                事業所名・会社名
+                <span class="optional-badge">任意</span>
+              </label>
+              <input
+                type="text"
+                id="company"
+                name="company"
+                class="form-input"
+                placeholder="例）〇〇訪問看護ステーション"
+              />
+            </div>
+
+            <div>
+              <label for="email" class="form-label">
+                メールアドレス
+                <span class="required-badge">必須</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-input"
+                placeholder="例）sample@example.com"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="referral" class="form-label">
+                ご紹介者さま・きっかけ
+                <span class="optional-badge">任意</span>
+              </label>
+              <input
+                type="text"
+                id="referral"
+                name="referral"
+                class="form-input"
+                placeholder="例）〇〇さんのご紹介 / 以前の制作実績を見て"
+              />
+              <p class="helper-text">
+                ご紹介の場合は、差し支えなければご紹介者さまのお名前やご関係を書いていただけるとスムーズです。
+              </p>
+            </div>
+
+            <div>
+              <label for="consultation-type" class="form-label">
+                ご相談内容
+                <span class="required-badge">必須</span>
+              </label>
+              <select
+                id="consultation-type"
+                name="consultation_type"
+                class="form-select"
+                required
+              >
+                <option value="">選択してください</option>
+                <option value="公式サイトを作りたい">公式サイトを作りたい</option>
+                <option value="採用ページを整えたい">採用ページを整えたい</option>
+                <option value="今あるサイトを見直したい">今あるサイトを見直したい</option>
+                <option value="まず何が必要か相談したい">まず何が必要か相談したい</option>
+                <option value="その他">その他</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="status" class="form-label">
+                現在の状況
+                <span class="optional-badge">任意</span>
+              </label>
+              <select id="status" name="status" class="form-select">
+                <option value="">選択してください</option>
+                <option value="これから立ち上げ予定">これから立ち上げ予定</option>
+                <option value="開業したばかり">開業したばかり</option>
+                <option value="すでに運営中">すでに運営中</option>
+                <option value="採用を強化したい">採用を強化したい</option>
+                <option value="まだ整理中">まだ整理中</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="message" class="form-label">
+                ご相談内容の詳細
+                <span class="required-badge">必須</span>
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                class="form-textarea"
+                placeholder="例）開業に合わせて、まずは信頼感のあるホームページを作りたいです。採用にもつながる形にできたらと考えています。まだ文章はまとまっていませんが、相談しながら進めたいです。"
+                required
+              ></textarea>
+              <p class="helper-text">
+                箇条書きでも大丈夫です。まとまっていなくても問題ありません。
+              </p>
+            </div>
+
+            <div>
+              <label class="inline-flex items-start gap-3 text-sm text-gray-600 leading-relaxed">
+                <input type="checkbox" name="privacy_agreement" required class="mt-1 h-4 w-4 rounded border-gray-300 text-green-700" />
+                <span>
+                  プライバシーポリシーをご確認のうえ、内容に同意して送信します。
+                </span>
+              </label>
+            </div>
+
+            <div class="pt-2">
+              <button type="submit" class="primary-button w-full sm:w-auto text-base sm:text-lg">
+                相談内容を送信する
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <aside class="space-y-6">
+          <div class="card-base animated-section is-visible" style="transition-delay: 0.35s;">
+            <h2 class="text-2xl heading-font text-gray-800 mb-5">
+              こんな方も安心してご相談ください
+            </h2>
+            <ul class="check-list space-y-3 text-gray-600">
+              <li>まだ依頼するか決めていない</li>
+              <li>ホームページに何を書けば良いか分からない</li>
+              <li>忙しくて文章をまとめる時間がない</li>
+              <li>まずは必要十分な形で公開したい</li>
+              <li>採用につながる見せ方を相談したい</li>
+            </ul>
+          </div>
+
+          <div class="card-base animated-section is-visible" style="transition-delay: 0.45s;">
+            <h2 class="text-2xl heading-font text-gray-800 mb-5">
+              ご相談の前に
+            </h2>
+
+            <div class="space-y-4 text-gray-600">
+              <div class="flex items-start gap-3">
+                <span class="icon-circle">1</span>
+                <p>ご相談内容がまとまっていなくても大丈夫です。分かる範囲で問題ありません。</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="icon-circle">2</span>
+                <p>無理にプランをおすすめすることはありません。必要に応じてご提案します。</p>
+              </div>
+              <div class="flex items-start gap-3">
+                <span class="icon-circle">3</span>
+                <p>返信まで少しお時間をいただく場合がありますが、順番に丁寧にお返事します。</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="soft-note animated-section is-visible" style="transition-delay: 0.55s;">
+            <h2 class="text-xl heading-font text-gray-800 mb-3">
+              送信前の確認
+            </h2>
+            <p class="text-gray-600 leading-relaxed mb-3">
+              フォーム送信先は現在、仮の設定になっています。
+            </p>
+            <p class="text-gray-600 leading-relaxed">
+              この部分を、あなたの Formspree のURLに変更してください。
+            </p>
+            <div class="mt-4 bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-700 overflow-x-auto">
+              <code>action="https://formspree.io/f/mqeyzeww"</code>
+            </div>
+          </div>
+
+          <div class="card-base animated-section is-visible" style="transition-delay: 0.65s;">
+            <h2 class="text-2xl heading-font text-gray-800 mb-4">
+              まずは話してみたい方へ
+            </h2>
+            <p class="text-gray-600 leading-relaxed mb-5">
+              まだ依頼を決めていなくても、
+              「今の状況だと何が必要か知りたい」というご相談でも大丈夫です。
+            </p>
+            <a href="index.html" class="secondary-button w-full text-base">
+              トップページへ戻る
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-12 bg-[#f0f0e8] text-center text-sm text-gray-500">
     <div class="max-w-7xl mx-auto px-4">
       <nav class="mb-4 space-x-6">
-        <a href="privacy-policy.pdf" class="hover:text-[#6d976d]">プライバシーポリシー</a>
-        <a href="terms-of-service.pdf" class="hover:text-[#6d976d]">利用規約</a>
-        <a href="commerce-act.pdf" class="hover:text-[#6d976d]">特定商取引法に基づく表記</a>
+        <a href="privacy-policy.pdf" target="_blank" rel="noopener noreferrer" class="hover:accent-color">プライバシーポリシー</a>
+        <a href="terms-of-service.pdf" target="_blank" rel="noopener noreferrer" class="hover:accent-color">利用規約</a>
+        <a href="commerce-act.pdf" target="_blank" rel="noopener noreferrer" class="hover:accent-color">特定商取引法に基づく表記</a>
       </nav>
-      <p>&copy; 2026 Kimi Design. All rights reserved.</p>
+      <p>&copy; 2026 KimiDesign. All rights reserved.</p>
     </div>
   </footer>
 
   <script>
-  // Mobile menu
-  const hamburgerButton = document.getElementById('hamburger-button');
-  const closeMenuButton = document.getElementById('close-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerButton = document.getElementById('hamburger-button');
+    const closeMenuButton = document.getElementById('close-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = mobileMenu.querySelectorAll('a');
 
-  function toggleMenu() {
-    const isOpen = mobileMenu.classList.toggle('open');
-    hamburgerButton.classList.toggle('open', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  }
+    function toggleMenu() {
+      const isOpen = mobileMenu.classList.toggle('open');
+      hamburgerButton.querySelector('.hamburger-icon').classList.toggle('open', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
 
-  hamburgerButton?.addEventListener('click', toggleMenu);
-  closeMenuButton?.addEventListener('click', toggleMenu);
+    hamburgerButton.addEventListener('click', toggleMenu);
+    closeMenuButton.addEventListener('click', toggleMenu);
 
-  mobileMenu?.querySelectorAll('a')?.forEach(link => {
-    link.addEventListener('click', () => {
-      const isTargetBlank = link.getAttribute('target') === '_blank';
-      if (!isTargetBlank && mobileMenu.classList.contains('open')) toggleMenu();
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const isTargetBlank = link.getAttribute('target') === '_blank';
+        if (!isTargetBlank && mobileMenu.classList.contains('open')) {
+          toggleMenu();
+        }
+      });
     });
-  });
-</script>
-
+  </script>
 </body>
 </html>
