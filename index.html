@@ -17,255 +17,374 @@
   />
 
   <style>
-    :root {
-      --color-primary: #6d976d;
-      --color-secondary: #f7fcf8;
-      --color-background: #fcf8f0;
-      --color-text-dark: #3a3a3a;
-      --color-heading: #5c5c5c;
-    }
+:root {
+  --color-primary: #6d976d;
+  --color-secondary: #f7fcf8;
+  --color-background: #fcf8f0;
+  --color-text-dark: #3a3a3a;
+  --color-heading: #5c5c5c;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+html {
+  scroll-behavior: smooth;
+}
 
-    body {
-      font-family: 'Zen Maru Gothic', 'Inter', sans-serif;
-      background-color: var(--color-background);
-      color: var(--color-text-dark);
-    }
+body {
+  font-family: 'Zen Maru Gothic', 'Inter', sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-text-dark);
+}
 
-    .heading-font {
-      font-family: 'Shippori Mincho B1', serif;
-      font-weight: 700;
-    }
+.heading-font {
+  font-family: 'Shippori Mincho B1', serif;
+  font-weight: 700;
+}
 
-    .accent-color {
-      color: var(--color-primary);
-    }
+.accent-color {
+  color: var(--color-primary);
+}
 
-    .bg-subtle {
-      background-color: var(--color-secondary);
-    }
+.bg-subtle {
+  background-color: var(--color-secondary);
+}
 
-    .header-bg {
-      background-color: #ffffffd8;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
-    }
+.header-bg {
+  background-color: #ffffffd8;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
+}
 
-    .card-base {
-      background-color: #ffffff;
-      border-radius: 1rem;
-      padding: 2rem;
-      transition: all 0.35s ease;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 0 5px rgba(0, 0, 0, 0.02);
-    }
+.card-base {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  padding: 2rem;
+  transition: all 0.35s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 0 5px rgba(0, 0, 0, 0.02);
+}
 
-    .card-base:hover {
-      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08), 0 0 8px rgba(0, 0, 0, 0.03);
-      transform: translateY(-3px);
-    }
+.card-base:hover {
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08), 0 0 8px rgba(0, 0, 0, 0.03);
+  transform: translateY(-3px);
+}
 
-    .h2-style {
-      position: relative;
-      padding-bottom: 1.5rem;
-      display: inline-block;
-      color: var(--color-heading);
-      font-weight: 700;
-    }
+.h2-style {
+  position: relative;
+  padding-bottom: 1.5rem;
+  display: inline-block;
+  color: var(--color-heading);
+  font-weight: 700;
+}
 
-    .h2-style::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0.75rem;
-      width: 100%;
-      height: 4px;
-      background-color: var(--color-primary);
-      border-radius: 9999px;
-      transform-origin: left;
-      transform: scaleX(0.78);
-    }
+.h2-style::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0.75rem;
+  width: 100%;
+  height: 4px;
+  background-color: var(--color-primary);
+  border-radius: 9999px;
+  transform-origin: left;
+  transform: scaleX(0.78);
+}
 
-    .primary-button {
-      background-color: var(--color-primary);
-      color: white;
-      padding: 1rem 2.4rem;
-      border-radius: 9999px;
-      font-weight: 700;
-      transition: all 0.3s ease-in-out;
-      letter-spacing: 0.04em;
-      box-shadow: 0 6px 15px rgba(109, 151, 109, 0.35);
-      display: inline-block;
-      text-align: center;
-    }
+.primary-button {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 1rem 2.4rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  transition: all 0.3s ease-in-out;
+  letter-spacing: 0.04em;
+  box-shadow: 0 6px 15px rgba(109, 151, 109, 0.35);
+  display: inline-block;
+  text-align: center;
+}
 
-    .primary-button:hover {
-      background-color: #5c825c;
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(109, 151, 109, 0.45);
-    }
+.primary-button:hover {
+  background-color: #5c825c;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(109, 151, 109, 0.45);
+}
 
-    .secondary-button {
-      background-color: #ffffff;
-      color: var(--color-primary);
-      border: 1px solid rgba(109, 151, 109, 0.35);
-      padding: 1rem 2.2rem;
-      border-radius: 9999px;
-      font-weight: 700;
-      transition: all 0.3s ease;
-      display: inline-block;
-      text-align: center;
-    }
+.secondary-button {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1.5px solid rgba(109, 151, 109, 0.36);
+  padding: 1.05rem 2.4rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  letter-spacing: 0.03em;
+  display: inline-block;
+  text-align: center;
+}
 
-    .secondary-button:hover {
-      background-color: #f7fcf8;
-      transform: translateY(-2px);
-    }
+.secondary-button:hover {
+  background-color: rgba(255, 255, 255, 0.72);
+  transform: translateY(-2px);
+}
 
-    .icon-box {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 56px;
-      height: 56px;
-      background-color: var(--color-primary);
-      border-radius: 50%;
-      margin-bottom: 1rem;
-      box-shadow: 0 3px 8px rgba(109, 151, 109, 0.35);
-    }
+.icon-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  box-shadow: 0 3px 8px rgba(109, 151, 109, 0.35);
+}
 
-    .icon-box svg {
-      color: white;
-      width: 24px;
-      height: 24px;
-      stroke-width: 2.5;
-    }
+.icon-box svg {
+  color: white;
+  width: 24px;
+  height: 24px;
+  stroke-width: 2.5;
+}
 
-    .icon-box-small {
-      width: 32px;
-      height: 32px;
-      margin-bottom: 0;
-      flex-shrink: 0;
-    }
+.icon-box-small {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
 
-    .icon-box-small svg {
-      width: 16px;
-      height: 16px;
-    }
+.icon-box-small svg {
+  width: 16px;
+  height: 16px;
+}
 
-    .animated-section {
-      opacity: 0;
-      transform: translateY(20px);
-      transition:
-        opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
+.animated-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
 
-    .animated-section.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+.animated-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    .mobile-menu-overlay {
-      background-color: rgba(252, 248, 240, 0.97);
-      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-      visibility: hidden;
-      opacity: 0;
-    }
+.mobile-menu-overlay {
+  background-color: rgba(252, 248, 240, 0.97);
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  visibility: hidden;
+  opacity: 0;
+}
 
-    .mobile-menu-overlay.open {
-      visibility: visible;
-      opacity: 1;
-    }
+.mobile-menu-overlay.open {
+  visibility: visible;
+  opacity: 1;
+}
 
-    .hamburger-icon {
-      transition: transform 0.3s ease;
-    }
+.hamburger-icon {
+  transition: transform 0.3s ease;
+}
 
-    .hamburger-icon.open .line-top {
-      transform: translateY(8px) rotate(45deg);
-    }
+.hamburger-icon.open .line-top {
+  transform: translateY(8px) rotate(45deg);
+}
 
-    .hamburger-icon.open .line-middle {
-      opacity: 0;
-    }
+.hamburger-icon.open .line-middle {
+  opacity: 0;
+}
 
-    .hamburger-icon.open .line-bottom {
-      transform: translateY(-8px) rotate(-45deg);
-    }
+.hamburger-icon.open .line-bottom {
+  transform: translateY(-8px) rotate(-45deg);
+}
 
-    .menu-link-item {
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
+.menu-link-item {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
 
-    .mobile-menu-overlay.open .menu-link-item {
-      opacity: 1;
-      transform: translateY(0);
-    }
+.mobile-menu-overlay.open .menu-link-item {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-    .text-balance {
-      text-wrap: balance;
-    }
+.text-balance {
+  text-wrap: balance;
+}
 
-    .text-pretty {
-      text-wrap: pretty;
-    }
+.text-pretty {
+  text-wrap: pretty;
+}
 
-    .hero-wrap {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-    }
+/* ===== HERO ===== */
+.hero-wrap {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-top: 4.5rem;
+  padding-bottom: 5.5rem;
+}
 
-    .hero-bg {
-      position: absolute;
-      top: -140px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(1100px, 110vw);
-      height: 560px;
-      z-index: -1;
-      background:
-        radial-gradient(closest-side, rgba(109, 151, 109, 0.18), rgba(109, 151, 109, 0) 70%),
-        radial-gradient(closest-side, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 65%);
-      pointer-events: none;
-      filter: blur(2px);
-    }
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 50% 22%, rgba(109, 151, 109, 0.12), rgba(109, 151, 109, 0) 32%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
 
-    .hero-h1 {
-      font-size: clamp(34px, 7.8vw, 68px);
-      line-height: 1.12;
-      letter-spacing: -0.02em;
-      line-break: strict;
-    }
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(760px, 92vw);
+  height: 420px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 72%);
+  filter: blur(8px);
+  z-index: -1;
+}
 
-    .label-chip {
-      display: inline-block;
-      padding: 0.45rem 0.9rem;
-      border-radius: 9999px;
-      background: rgba(109, 151, 109, 0.1);
-      color: var(--color-primary);
-      font-size: 0.85rem;
-      font-weight: 700;
-      margin: 0.25rem;
-    }
+.hero-inner {
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center;
+}
 
-    .soft-note {
-      background: #fff;
-      border: 1px solid rgba(109, 151, 109, 0.15);
-      border-radius: 1rem;
-      padding: 1.2rem 1.2rem;
-    }
+.hero-kicker {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--color-primary);
+  margin-bottom: 1.2rem;
+}
 
-    @media (max-width: 639px) {
-      .hero-h1 {
-        line-height: 1.18;
-      }
-    }
+.hero-h1 {
+  font-family: 'Shippori Mincho B1', serif;
+  font-size: clamp(2.7rem, 6.2vw, 5.4rem);
+  line-height: 1.16;
+  letter-spacing: -0.03em;
+  color: #1f2a44;
+  max-width: 11.5ch;
+  margin: 0 auto;
+  line-break: strict;
+}
+
+.hero-h1 .accent {
+  color: #7ca276;
+  display: inline;
+}
+
+.hero-lead {
+  max-width: 720px;
+  margin: 2rem auto 0;
+  font-size: clamp(1rem, 1.45vw, 1.2rem);
+  line-height: 1.95;
+  color: #55627a;
+}
+
+.hero-lead strong {
+  color: var(--color-primary);
+  font-weight: 800;
+}
+
+.hero-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-top: 1.8rem;
+}
+
+.hero-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(109, 151, 109, 0.14);
+  color: #6f8f6f;
+  font-size: 0.93rem;
+  font-weight: 700;
+  backdrop-filter: blur(6px);
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2.2rem;
+  flex-wrap: wrap;
+}
+
+.hero-subnote {
+  margin-top: 1.8rem;
+  font-size: 0.92rem;
+  line-height: 1.9;
+  color: #7a8396;
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.label-chip {
+  display: inline-block;
+  padding: 0.45rem 0.9rem;
+  border-radius: 9999px;
+  background: rgba(109, 151, 109, 0.1);
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin: 0.25rem;
+}
+
+.soft-note {
+  background: #fff;
+  border: 1px solid rgba(109, 151, 109, 0.15);
+  border-radius: 1rem;
+  padding: 1.2rem 1.2rem;
+}
+
+@media (max-width: 640px) {
+  .hero-wrap {
+    padding-top: 3.4rem;
+    padding-bottom: 4.2rem;
+  }
+
+  .hero-h1 {
+    max-width: 9.8ch;
+    font-size: clamp(2.45rem, 10vw, 4rem);
+    line-height: 1.2;
+  }
+
+  .hero-lead {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.85;
+    padding: 0 0.4rem;
+  }
+
+  .hero-chip {
+    font-size: 0.82rem;
+    padding: 0.62rem 0.9rem;
+  }
+
+  .hero-actions {
+    gap: 0.85rem;
+    margin-top: 1.9rem;
+  }
+
+  .hero-subnote {
+    font-size: 0.82rem;
+    margin-top: 1.4rem;
+    line-height: 1.8;
+  }
+}
   </style>
 </head>
 
@@ -332,47 +451,46 @@
   </div>
 
   <!-- HERO -->
-  <main id="main" class="hero-wrap pt-14 pb-16 sm:pt-20 sm:pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="hero-bg"></div>
+<main id="main" class="hero-wrap px-4 sm:px-6 lg:px-8">
+  <div class="hero-bg"></div>
 
-    <div class="animated-section is-visible text-center" style="transition-delay: 0.2s;">
-      <p class="text-sm sm:text-base accent-color mb-5 font-bold tracking-widest">
-        KimiDesign
-      </p>
+  <div class="hero-inner animated-section is-visible" style="transition-delay: 0.2s;">
+    <p class="hero-kicker">KimiDesign</p>
 
-      <h1 class="heading-font hero-h1 text-balance text-gray-800 font-extrabold mx-auto max-w-[20ch]">
-        訪問看護ステーションの想いを、
-        <span class="accent-color">安心して伝わるホームページに。</span>
-      </h1>
+    <h1 class="hero-h1 text-balance">
+      訪問看護ステーションの想いを、
+      <span class="accent">安心して伝わる</span>
+      ホームページに。
+    </h1>
 
-      <p class="text-gray-600 mt-7 text-pretty mx-auto max-w-[60ch] text-base sm:text-lg leading-relaxed">
-        KimiDesignは、訪問看護ステーションに特化したホームページ制作を行っています。<br class="hidden sm:block" />
-        ご紹介でご相談いただく方が、安心してご依頼を検討できるよう、
-        <span class="accent-color font-bold">信頼感・わかりやすさ・採用導線</span>を大切に整えています。
-      </p>
+    <p class="hero-lead text-pretty">
+      KimiDesignは、訪問看護ステーションに特化したホームページ制作を行っています。  
+      ご紹介でご相談いただく方が、安心してご依頼を検討できるよう、  
+      <strong>信頼感・わかりやすさ・採用導線</strong>を大切に整えています。
+    </p>
 
-      <div class="mt-6">
-        <span class="label-chip">訪問看護に特化</span>
-        <span class="label-chip">紹介ベースのご相談</span>
-        <span class="label-chip">採用導線の整理</span>
-        <span class="label-chip">LINE導線対応</span>
-      </div>
-
-      <div class="mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-center gap-4">
-        <a href="contact.html" class="primary-button text-base sm:text-lg w-full sm:w-auto">
-          ご相談はこちら
-        </a>
-        <a href="#for-referral" class="secondary-button text-base sm:text-lg w-full sm:w-auto">
-          はじめての方へ
-        </a>
-      </div>
-
-      <p class="text-xs sm:text-sm text-gray-500 mt-7 text-pretty mx-auto max-w-[64ch] leading-relaxed">
-        ※現在は、主にご紹介やご縁のある方からのご相談を中心にお受けしています。<br class="hidden sm:block" />
-        「まずは形にしたい」「必要に応じて育てたい」というご相談にも対応しています。
-      </p>
+    <div class="hero-chips">
+      <span class="hero-chip">訪問看護に特化</span>
+      <span class="hero-chip">紹介ベースのご相談</span>
+      <span class="hero-chip">採用導線の整理</span>
+      <span class="hero-chip">LINE導線対応</span>
     </div>
-  </main>
+
+    <div class="hero-actions">
+      <a href="contact.html" class="primary-button text-base sm:text-lg w-full sm:w-auto">
+        ご相談はこちら
+      </a>
+      <a href="#for-referral" class="secondary-button text-base sm:text-lg w-full sm:w-auto">
+        はじめての方へ
+      </a>
+    </div>
+
+    <p class="hero-subnote text-pretty">
+      ※現在は、主にご紹介やご縁のある方からのご相談を中心にお受けしています。  
+      「まずは形にしたい」「必要に応じて育てたい」というご相談にも対応しています。
+    </p>
+  </div>
+</main>
 
   <!-- About -->
   <section id="about" class="py-24 bg-white">
