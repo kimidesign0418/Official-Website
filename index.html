@@ -5,11 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KimiDesign | 訪問看護ステーション特化 ホームページ制作</title>
 
-  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Zen+Maru+Gothic:wght@400;700;800&family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Zen+Maru+Gothic:wght@400;500;700;800&family=Shippori+Mincho+B1:wght@400;700&display=swap" rel="stylesheet" />
 
   <meta
     name="description"
@@ -17,383 +15,420 @@
   />
 
   <style>
-:root {
-  --color-primary: #6d976d;
-  --color-secondary: #f7fcf8;
-  --color-background: #fcf8f0;
-  --color-text-dark: #3a3a3a;
-  --color-heading: #5c5c5c;
-}
+    :root {
+      --color-primary: #6d976d;
+      --color-primary-dark: #5d845d;
+      --color-secondary: #f7fcf8;
+      --color-background: #fcf8f0;
+      --color-surface: #ffffff;
+      --color-text-dark: #3a3a3a;
+      --color-text-soft: #6b7280;
+      --color-heading: #4d5868;
+      --color-navy: #1f2a44;
+      --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.04), 0 0 5px rgba(0, 0, 0, 0.02);
+      --shadow-hover: 0 15px 45px rgba(0, 0, 0, 0.08), 0 0 8px rgba(0, 0, 0, 0.03);
+    }
 
-html {
-  scroll-behavior: smooth;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-body {
-  font-family: 'Zen Maru Gothic', 'Inter', sans-serif;
-  background-color: var(--color-background);
-  color: var(--color-text-dark);
-}
+    body {
+      font-family: 'Zen Maru Gothic', 'Inter', sans-serif;
+      background-color: var(--color-background);
+      color: var(--color-text-dark);
+      line-height: 1.8;
+    }
 
-.heading-font {
-  font-family: 'Shippori Mincho B1', serif;
-  font-weight: 700;
-}
+    .heading-font {
+      font-family: 'Shippori Mincho B1', serif;
+      font-weight: 700;
+    }
 
-.accent-color {
-  color: var(--color-primary);
-}
+    .accent-color {
+      color: var(--color-primary);
+    }
 
-.bg-subtle {
-  background-color: var(--color-secondary);
-}
+    .bg-subtle {
+      background-color: var(--color-secondary);
+    }
 
-.header-bg {
-  background-color: #ffffffd8;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
-}
+    .text-balance {
+      text-wrap: balance;
+    }
 
-.card-base {
-  background-color: #ffffff;
-  border-radius: 1rem;
-  padding: 2rem;
-  transition: all 0.35s ease;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 0 5px rgba(0, 0, 0, 0.02);
-}
+    .text-pretty {
+      text-wrap: pretty;
+    }
 
-.card-base:hover {
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08), 0 0 8px rgba(0, 0, 0, 0.03);
-  transform: translateY(-3px);
-}
+    .header-bg {
+      background-color: rgba(255, 255, 255, 0.86);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
+    }
 
-.h2-style {
-  position: relative;
-  padding-bottom: 1.5rem;
-  display: inline-block;
-  color: var(--color-heading);
-  font-weight: 700;
-}
+    .nav-link {
+      position: relative;
+      transition: color 0.3s ease;
+    }
 
-.h2-style::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0.75rem;
-  width: 100%;
-  height: 4px;
-  background-color: var(--color-primary);
-  border-radius: 9999px;
-  transform-origin: left;
-  transform: scaleX(0.78);
-}
+    .nav-link:hover {
+      color: var(--color-primary);
+    }
 
-.primary-button {
-  background-color: var(--color-primary);
-  color: white;
-  padding: 1rem 2.4rem;
-  border-radius: 9999px;
-  font-weight: 700;
-  transition: all 0.3s ease-in-out;
-  letter-spacing: 0.04em;
-  box-shadow: 0 6px 15px rgba(109, 151, 109, 0.35);
-  display: inline-block;
-  text-align: center;
-}
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -0.25rem;
+      width: 100%;
+      height: 2px;
+      background-color: var(--color-primary);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.3s ease;
+    }
 
-.primary-button:hover {
-  background-color: #5c825c;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(109, 151, 109, 0.45);
-}
+    .nav-link:hover::after {
+      transform: scaleX(1);
+    }
 
-.secondary-button {
-  background-color: transparent;
-  color: var(--color-primary);
-  border: 1.5px solid rgba(109, 151, 109, 0.36);
-  padding: 1.05rem 2.4rem;
-  border-radius: 9999px;
-  font-weight: 700;
-  transition: all 0.3s ease;
-  letter-spacing: 0.03em;
-  display: inline-block;
-  text-align: center;
-}
+    .primary-button {
+      background-color: var(--color-primary);
+      color: white;
+      padding: 1rem 2.4rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      transition: all 0.3s ease-in-out;
+      letter-spacing: 0.03em;
+      box-shadow: 0 6px 15px rgba(109, 151, 109, 0.35);
+      display: inline-block;
+      text-align: center;
+    }
 
-.secondary-button:hover {
-  background-color: rgba(255, 255, 255, 0.72);
-  transform: translateY(-2px);
-}
+    .primary-button:hover {
+      background-color: var(--color-primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(109, 151, 109, 0.45);
+    }
 
-.icon-box {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  background-color: var(--color-primary);
-  border-radius: 50%;
-  margin-bottom: 1rem;
-  box-shadow: 0 3px 8px rgba(109, 151, 109, 0.35);
-}
+    .secondary-button {
+      background-color: rgba(255, 255, 255, 0.9);
+      color: var(--color-primary);
+      border: 1px solid rgba(109, 151, 109, 0.3);
+      padding: 1rem 2.2rem;
+      border-radius: 9999px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      display: inline-block;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
 
-.icon-box svg {
-  color: white;
-  width: 24px;
-  height: 24px;
-  stroke-width: 2.5;
-}
+    .secondary-button:hover {
+      background-color: #f7fcf8;
+      transform: translateY(-2px);
+    }
 
-.icon-box-small {
-  width: 32px;
-  height: 32px;
-  margin-bottom: 0;
-  flex-shrink: 0;
-}
+    .card-base {
+      background-color: var(--color-surface);
+      border-radius: 1.25rem;
+      padding: 2rem;
+      transition: all 0.35s ease;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(109, 151, 109, 0.08);
+    }
 
-.icon-box-small svg {
-  width: 16px;
-  height: 16px;
-}
+    .card-base:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-3px);
+    }
 
-.animated-section {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
+    .h2-style {
+      position: relative;
+      padding-bottom: 1.4rem;
+      display: inline-block;
+      color: var(--color-heading);
+      font-weight: 700;
+    }
 
-.animated-section.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+    .h2-style::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%) scaleX(0.82);
+      bottom: 0.55rem;
+      width: 100%;
+      height: 4px;
+      background-color: var(--color-primary);
+      border-radius: 9999px;
+    }
 
-.mobile-menu-overlay {
-  background-color: rgba(252, 248, 240, 0.97);
-  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-  visibility: hidden;
-  opacity: 0;
-}
+    .icon-box {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      background-color: var(--color-primary);
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      box-shadow: 0 3px 8px rgba(109, 151, 109, 0.35);
+    }
 
-.mobile-menu-overlay.open {
-  visibility: visible;
-  opacity: 1;
-}
+    .icon-box svg {
+      color: white;
+      width: 24px;
+      height: 24px;
+      stroke-width: 2.4;
+    }
 
-.hamburger-icon {
-  transition: transform 0.3s ease;
-}
+    .icon-box-small {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 0;
+      flex-shrink: 0;
+    }
 
-.hamburger-icon.open .line-top {
-  transform: translateY(8px) rotate(45deg);
-}
+    .icon-box-small svg {
+      width: 16px;
+      height: 16px;
+    }
 
-.hamburger-icon.open .line-middle {
-  opacity: 0;
-}
+    .animated-section {
+      opacity: 0;
+      transform: translateY(22px);
+      transition:
+        opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
 
-.hamburger-icon.open .line-bottom {
-  transform: translateY(-8px) rotate(-45deg);
-}
+    .animated-section.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-.menu-link-item {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
-}
+    .mobile-menu-overlay {
+      background-color: rgba(252, 248, 240, 0.97);
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+      visibility: hidden;
+      opacity: 0;
+    }
 
-.mobile-menu-overlay.open .menu-link-item {
-  opacity: 1;
-  transform: translateY(0);
-}
+    .mobile-menu-overlay.open {
+      visibility: visible;
+      opacity: 1;
+    }
 
-.text-balance {
-  text-wrap: balance;
-}
+    .hamburger-icon.open .line-top {
+      transform: translateY(8px) rotate(45deg);
+    }
 
-.text-pretty {
-  text-wrap: pretty;
-}
+    .hamburger-icon.open .line-middle {
+      opacity: 0;
+    }
 
-/* ===== HERO ===== */
-.hero-wrap {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  padding-top: 4.5rem;
-  padding-bottom: 5.5rem;
-}
+    .hamburger-icon.open .line-bottom {
+      transform: translateY(-8px) rotate(-45deg);
+    }
 
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  background:
-    radial-gradient(circle at 50% 22%, rgba(109, 151, 109, 0.12), rgba(109, 151, 109, 0) 32%),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0));
-  pointer-events: none;
-}
+    .menu-link-item {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
 
-.hero-bg::after {
-  content: "";
-  position: absolute;
-  top: 6%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(760px, 92vw);
-  height: 420px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0) 72%);
-  filter: blur(8px);
-  z-index: -1;
-}
+    .mobile-menu-overlay.open .menu-link-item {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-.hero-inner {
-  max-width: 980px;
-  margin: 0 auto;
-  text-align: center;
-}
+    .hero-wrap {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding-top: 4.5rem;
+      padding-bottom: 5.5rem;
+    }
 
-.hero-kicker {
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  color: var(--color-primary);
-  margin-bottom: 1.2rem;
-}
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(109, 151, 109, 0.13), rgba(109, 151, 109, 0) 34%),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+      pointer-events: none;
+    }
 
-.hero-h1 {
-  font-family: 'Shippori Mincho B1', serif;
-  font-size: clamp(2.7rem, 6.2vw, 5.4rem);
-  line-height: 1.16;
-  letter-spacing: -0.03em;
-  color: #1f2a44;
-  max-width: 11.5ch;
-  margin: 0 auto;
-  line-break: strict;
-}
+    .hero-bg::after {
+      content: "";
+      position: absolute;
+      top: 4%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(820px, 92vw);
+      height: 430px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0) 72%);
+      filter: blur(8px);
+      z-index: -1;
+    }
 
-.hero-h1 .accent {
-  color: #7ca276;
-  display: inline;
-}
+    .hero-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      text-align: center;
+    }
 
-.hero-lead {
-  max-width: 720px;
-  margin: 2rem auto 0;
-  font-size: clamp(1rem, 1.45vw, 1.2rem);
-  line-height: 1.95;
-  color: #55627a;
-}
+    .hero-kicker {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--color-primary);
+      margin-bottom: 1.2rem;
+    }
 
-.hero-lead strong {
-  color: var(--color-primary);
-  font-weight: 800;
-}
+    .hero-h1 {
+      font-family: 'Shippori Mincho B1', serif;
+      font-size: clamp(2.7rem, 6.2vw, 5.4rem);
+      line-height: 1.16;
+      letter-spacing: -0.03em;
+      color: var(--color-navy);
+      max-width: 11.6ch;
+      margin: 0 auto;
+      line-break: strict;
+    }
 
-.hero-chips {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.7rem;
-  margin-top: 1.8rem;
-}
+    .hero-h1 .accent {
+      color: #7ca276;
+    }
 
-.hero-chip {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.7rem 1rem;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(109, 151, 109, 0.14);
-  color: #6f8f6f;
-  font-size: 0.93rem;
-  font-weight: 700;
-  backdrop-filter: blur(6px);
-}
+    .hero-lead {
+      max-width: 760px;
+      margin: 2rem auto 0;
+      font-size: clamp(1rem, 1.45vw, 1.18rem);
+      line-height: 1.95;
+      color: #55627a;
+    }
 
-.hero-actions {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 2.2rem;
-  flex-wrap: wrap;
-}
+    .hero-lead strong {
+      color: var(--color-primary);
+      font-weight: 800;
+    }
 
-.hero-subnote {
-  margin-top: 1.8rem;
-  font-size: 0.92rem;
-  line-height: 1.9;
-  color: #7a8396;
-  max-width: 780px;
-  margin-left: auto;
-  margin-right: auto;
-}
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.7rem;
+      margin-top: 1.8rem;
+    }
 
-.label-chip {
-  display: inline-block;
-  padding: 0.45rem 0.9rem;
-  border-radius: 9999px;
-  background: rgba(109, 151, 109, 0.1);
-  color: var(--color-primary);
-  font-size: 0.85rem;
-  font-weight: 700;
-  margin: 0.25rem;
-}
+    .hero-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(109, 151, 109, 0.14);
+      color: #6f8f6f;
+      font-size: 0.93rem;
+      font-weight: 700;
+      backdrop-filter: blur(6px);
+    }
 
-.soft-note {
-  background: #fff;
-  border: 1px solid rgba(109, 151, 109, 0.15);
-  border-radius: 1rem;
-  padding: 1.2rem 1.2rem;
-}
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2.2rem;
+      flex-wrap: wrap;
+    }
 
-@media (max-width: 640px) {
-  .hero-wrap {
-    padding-top: 3.4rem;
-    padding-bottom: 4.2rem;
-  }
+    .hero-subnote {
+      margin-top: 1.8rem;
+      font-size: 0.92rem;
+      line-height: 1.9;
+      color: #7a8396;
+      max-width: 780px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-  .hero-h1 {
-    max-width: 9.8ch;
-    font-size: clamp(2.45rem, 10vw, 4rem);
-    line-height: 1.2;
-  }
+    .profile-note {
+      background: #fff;
+      border: 1px solid rgba(109, 151, 109, 0.12);
+      border-radius: 1rem;
+      padding: 1.1rem 1.2rem;
+    }
 
-  .hero-lead {
-    margin-top: 1.5rem;
-    font-size: 1rem;
-    line-height: 1.85;
-    padding: 0 0.4rem;
-  }
+    .soft-note {
+      background: #fff;
+      border: 1px solid rgba(109, 151, 109, 0.15);
+      border-radius: 1rem;
+      padding: 1.25rem 1.25rem;
+    }
 
-  .hero-chip {
-    font-size: 0.82rem;
-    padding: 0.62rem 0.9rem;
-  }
+    .price-card-highlight {
+      border: 1.5px solid rgba(109, 151, 109, 0.28);
+      box-shadow: 0 15px 35px rgba(109, 151, 109, 0.08);
+    }
 
-  .hero-actions {
-    gap: 0.85rem;
-    margin-top: 1.9rem;
-  }
+    .badge-recommend {
+      display: inline-block;
+      margin-bottom: 0.85rem;
+      padding: 0.38rem 0.8rem;
+      background: rgba(109, 151, 109, 0.12);
+      color: var(--color-primary);
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
 
-  .hero-subnote {
-    font-size: 0.82rem;
-    margin-top: 1.4rem;
-    line-height: 1.8;
-  }
-}
+    @media (max-width: 640px) {
+      .hero-wrap {
+        padding-top: 3.4rem;
+        padding-bottom: 4.2rem;
+      }
+
+      .hero-h1 {
+        max-width: 9.8ch;
+        font-size: clamp(2.4rem, 10vw, 4rem);
+        line-height: 1.2;
+      }
+
+      .hero-lead {
+        margin-top: 1.5rem;
+        font-size: 1rem;
+        line-height: 1.85;
+        padding: 0 0.4rem;
+      }
+
+      .hero-chip {
+        font-size: 0.82rem;
+        padding: 0.62rem 0.9rem;
+      }
+
+      .hero-actions {
+        gap: 0.85rem;
+        margin-top: 1.9rem;
+      }
+
+      .hero-subnote {
+        font-size: 0.82rem;
+        margin-top: 1.4rem;
+        line-height: 1.8;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <!-- Header -->
-  <header class="header-bg sticky top-0 z-20">
+  <header class="header-bg sticky top-0 z-30">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-      <!-- Logo -->
-      <a href="#main" class="text-2xl font-bold tracking-widest accent-color" id="logo-link">
+      <a href="#main" id="logo-link" class="shrink-0">
         <img
           src="rogo.jpeg"
           alt="KimiDesign ロゴ"
@@ -402,20 +437,18 @@ body {
         />
       </a>
 
-      <!-- Desktop Nav -->
-      <nav class="space-x-3 sm:space-x-8 hidden sm:flex items-center">
-        <a href="#about" class="text-sm font-medium hover:accent-color">KimiDesignについて</a>
-        <a href="#for-referral" class="text-sm font-medium hover:accent-color">ご紹介で来てくださった方へ</a>
-        <a href="#works" class="text-sm font-medium hover:accent-color">実績</a>
-        <a href="#service" class="text-sm font-medium hover:accent-color">サービス</a>
-        <a href="#price" class="text-sm font-medium hover:accent-color">料金</a>
-        <a href="#flow" class="text-sm font-medium hover:accent-color">制作の流れ</a>
-        <a href="#faq" class="text-sm font-medium hover:accent-color">FAQ</a>
+      <nav class="space-x-3 sm:space-x-7 hidden sm:flex items-center">
+        <a href="#about" class="nav-link text-sm font-medium">KimiDesignについて</a>
+        <a href="#for-referral" class="nav-link text-sm font-medium">はじめての方へ</a>
+        <a href="#works" class="nav-link text-sm font-medium">実績</a>
+        <a href="#service" class="nav-link text-sm font-medium">サービス</a>
+        <a href="#price" class="nav-link text-sm font-medium">料金</a>
+        <a href="#flow" class="nav-link text-sm font-medium">制作の流れ</a>
+        <a href="#faq" class="nav-link text-sm font-medium">FAQ</a>
         <a href="contact.html" class="primary-button inline-block text-sm px-6 py-2">ご相談はこちら</a>
       </nav>
 
-      <!-- Mobile Button -->
-      <div class="flex sm:hidden items-center space-x-4">
+      <div class="flex sm:hidden items-center">
         <button id="hamburger-button" aria-label="メニューを開く" class="p-2 focus:outline-none">
           <div class="hamburger-icon w-6 h-5 flex flex-col justify-between">
             <span class="line-top block h-0.5 bg-gray-600 rounded-full w-full transition duration-300 ease-in-out"></span>
@@ -427,8 +460,7 @@ body {
     </div>
   </header>
 
-  <!-- Mobile Menu -->
-  <div id="mobile-menu" class="mobile-menu-overlay fixed inset-0 z-30 flex flex-col items-center justify-center p-8">
+  <div id="mobile-menu" class="mobile-menu-overlay fixed inset-0 z-40 flex flex-col items-center justify-center p-8">
     <button id="close-menu-button" aria-label="メニューを閉じる" class="absolute top-6 right-6 p-3">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -437,62 +469,57 @@ body {
 
     <nav class="flex flex-col space-y-8 text-center mt-16">
       <a href="#about" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.1s;">KimiDesignについて</a>
-      <a href="#for-referral" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.2s;">ご紹介で来てくださった方へ</a>
+      <a href="#for-referral" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.2s;">はじめての方へ</a>
       <a href="#works" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.3s;">実績</a>
       <a href="#service" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.4s;">サービス</a>
       <a href="#price" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.5s;">料金</a>
       <a href="#flow" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.6s;">制作の流れ</a>
       <a href="#faq" class="menu-link-item text-3xl heading-font text-gray-700 hover:accent-color" style="transition-delay: 0.7s;">FAQ</a>
-
-      <a href="contact.html" class="primary-button text-xl mt-8 px-10 py-4 menu-link-item" style="transition-delay: 0.8s;">
-        ご相談はこちら
-      </a>
+      <a href="contact.html" class="primary-button text-xl mt-8 px-10 py-4 menu-link-item" style="transition-delay: 0.8s;">ご相談はこちら</a>
     </nav>
   </div>
 
-  <!-- HERO -->
-<main id="main" class="hero-wrap px-4 sm:px-6 lg:px-8">
-  <div class="hero-bg"></div>
+  <main id="main" class="hero-wrap px-4 sm:px-6 lg:px-8">
+    <div class="hero-bg"></div>
 
-  <div class="hero-inner animated-section is-visible" style="transition-delay: 0.2s;">
-    <p class="hero-kicker">KimiDesign</p>
+    <div class="hero-inner animated-section is-visible" style="transition-delay: 0.2s;">
+      <p class="hero-kicker">KimiDesign</p>
 
-    <h1 class="hero-h1 text-balance">
-      訪問看護ステーションの想いを、
-      <span class="accent">安心して伝わる</span>
-      ホームページに。
-    </h1>
+      <h1 class="hero-h1 text-balance">
+        訪問看護ステーションの想いを、
+        <span class="accent">安心して伝わる</span>
+        ホームページに。
+      </h1>
 
-    <p class="hero-lead text-pretty">
-      KimiDesignは、訪問看護ステーションに特化したホームページ制作を行っています。  
-      ご紹介でご相談いただく方が、安心してご依頼を検討できるよう、  
-      <strong>信頼感・わかりやすさ・採用導線</strong>を大切に整えています。
-    </p>
+      <p class="hero-lead text-pretty">
+        KimiDesignは、訪問看護ステーションに特化したホームページ制作を行っています。<br class="hidden sm:block" />
+        ご紹介でご相談いただく方が、安心してご依頼を検討できるよう、
+        <strong>信頼感・わかりやすさ・採用導線</strong>を大切に整えています。
+      </p>
 
-    <div class="hero-chips">
-      <span class="hero-chip">訪問看護に特化</span>
-      <span class="hero-chip">紹介ベースのご相談</span>
-      <span class="hero-chip">採用導線の整理</span>
-      <span class="hero-chip">LINE導線対応</span>
+      <div class="hero-chips">
+        <span class="hero-chip">訪問看護に特化</span>
+        <span class="hero-chip">紹介ベースのご相談</span>
+        <span class="hero-chip">採用導線の整理</span>
+        <span class="hero-chip">LINE導線対応</span>
+      </div>
+
+      <div class="hero-actions">
+        <a href="contact.html" class="primary-button text-base sm:text-lg w-full sm:w-auto">
+          ご相談はこちら
+        </a>
+        <a href="#for-referral" class="secondary-button text-base sm:text-lg w-full sm:w-auto">
+          はじめての方へ
+        </a>
+      </div>
+
+      <p class="hero-subnote text-pretty">
+        ※現在は、主にご紹介やご縁のある方からのご相談を中心にお受けしています。<br class="hidden sm:block" />
+        「まずは形にしたい」「必要に応じて育てたい」というご相談にも対応しています。
+      </p>
     </div>
+  </main>
 
-    <div class="hero-actions">
-      <a href="contact.html" class="primary-button text-base sm:text-lg w-full sm:w-auto">
-        ご相談はこちら
-      </a>
-      <a href="#for-referral" class="secondary-button text-base sm:text-lg w-full sm:w-auto">
-        はじめての方へ
-      </a>
-    </div>
-
-    <p class="hero-subnote text-pretty">
-      ※現在は、主にご紹介やご縁のある方からのご相談を中心にお受けしています。  
-      「まずは形にしたい」「必要に応じて育てたい」というご相談にも対応しています。
-    </p>
-  </div>
-</main>
-
-  <!-- About -->
   <section id="about" class="py-24 bg-white">
     <div class="max-w-6xl mx-auto px-4 text-center">
       <h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
@@ -555,17 +582,33 @@ body {
               </p>
             </div>
           </div>
+
+          <div class="profile-note mt-8">
+            <p class="text-gray-600 text-sm leading-relaxed">
+              <span class="font-bold text-gray-700">こんな方に向いています：</span><br />
+              紹介でサイトを見に来た方／まずは信頼感のある公式サイトを整えたい方／
+              文章や構成も一緒に相談したい方／採用ページを後から育てたい方
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- For referral -->
   <section id="for-referral" class="py-24 bg-subtle">
     <div class="max-w-6xl mx-auto px-4 text-center">
       <h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
-        ご紹介で来てくださった方へ
+        はじめての方へ
       </h2>
+
+      <div class="max-w-4xl mx-auto mb-12 animated-section">
+        <p class="text-lg text-gray-600 leading-relaxed text-pretty">
+          KimiDesignは、今のところ
+          <span class="font-bold accent-color">ご紹介やご縁のある方からのご相談</span>
+          を中心にお受けしています。<br class="hidden sm:block" />
+          強い営業ではなく、信頼の流れの中で長く役に立つことを大切にしています。
+        </p>
+      </div>
 
       <div class="grid md:grid-cols-3 gap-10 text-left">
         <div class="card-base text-center animated-section" data-delay="0.2">
@@ -580,7 +623,7 @@ body {
           <h3 class="text-xl heading-font mb-3 text-gray-700">無理な営業はしていません</h3>
           <p class="text-gray-600 leading-relaxed">
             ご相談内容を伺ったうえで、必要な場合にだけご提案します。
-            「まだ依頼するか決めていない」という段階でも大丈夫です。
+            まだ依頼するか決めていない段階でも大丈夫です。
           </p>
         </div>
 
@@ -593,7 +636,7 @@ body {
           </div>
           <h3 class="text-xl heading-font mb-3 text-gray-700">忙しい現場でも進めやすく</h3>
           <p class="text-gray-600 leading-relaxed">
-            訪問看護の現場は日々忙しいものです。文章がまとまっていなくても大丈夫なように、
+            訪問看護の現場は日々忙しいものです。文章がまとまっていなくても進められるよう、
             ヒアリングをもとに叩き台をご用意します。
           </p>
         </div>
@@ -607,14 +650,14 @@ body {
           </div>
           <h3 class="text-xl heading-font mb-3 text-gray-700">まずは必要十分から</h3>
           <p class="text-gray-600 leading-relaxed">
-            はじめから大がかりに作り込まなくても大丈夫です。
-            まずは信頼に必要な情報を整え、必要に応じて採用導線やページを追加できます。
+            最初から大がかりに作り込まなくても大丈夫です。まずは信頼に必要な情報を整え、
+            必要に応じて採用導線やページを追加できます。
           </p>
         </div>
       </div>
 
       <div class="soft-note mt-12 animated-section text-left max-w-4xl mx-auto" data-delay="0.8">
-        <h3 class="text-xl heading-font text-gray-800 mb-3">こんな方からのご相談が多いです</h3>
+        <h3 class="text-xl heading-font text-gray-800 mb-3">こんなご相談が多いです</h3>
         <div class="grid sm:grid-cols-2 gap-4 text-gray-600">
           <p>・知り合いに勧められてサイトを見に来た</p>
           <p>・開業初期で、まずは公式サイトを整えたい</p>
@@ -627,7 +670,6 @@ body {
     </div>
   </section>
 
-  <!-- Works -->
   <section id="works" class="py-24 bg-white">
     <div class="max-w-6xl mx-auto px-4 text-center">
       <h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
@@ -637,10 +679,7 @@ body {
       <div class="grid lg:grid-cols-2 gap-10 text-left">
         <div class="card-base animated-section" data-delay="0.2">
           <p class="text-xs font-bold accent-color mb-2 tracking-wider">WORK 01</p>
-          <h3 class="text-2xl heading-font text-gray-800 mb-3">
-            Sun＋訪問看護ステーション
-          </h3>
-
+          <h3 class="text-2xl heading-font text-gray-800 mb-3">Sun＋訪問看護ステーション</h3>
           <p class="text-gray-600 mb-4 leading-relaxed">
             新規開業の訪問看護ステーションのため、地域の関係機関や求職者に向けて、
             まずは安心して見てもらえる公式ホームページを制作しました。
@@ -656,12 +695,7 @@ body {
             「まず信頼に必要な情報を整える」ことを優先した事例です。
           </p>
 
-          <a
-            href="https://sunplus-kango.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="primary-button inline-block text-base px-8 py-3"
-          >
+          <a href="https://sunplus-kango.com" target="_blank" rel="noopener noreferrer" class="primary-button inline-block text-base px-8 py-3">
             サイトを見る
           </a>
         </div>
@@ -681,12 +715,7 @@ body {
             <li>紹介時の信頼確認サイトとして使いやすい</li>
           </ul>
 
-          <a
-            href="https://kimidesign0418.github.io/houmon-template/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="primary-button inline-block text-base px-8 py-3"
-          >
+          <a href="https://kimidesign0418.github.io/houmon-template/" target="_blank" rel="noopener noreferrer" class="primary-button inline-block text-base px-8 py-3">
             デモを見る
           </a>
         </div>
@@ -698,7 +727,6 @@ body {
     </div>
   </section>
 
-  <!-- Service -->
   <section id="service" class="py-24 bg-subtle">
     <div class="max-w-6xl mx-auto px-4 text-center">
       <h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
@@ -714,18 +742,19 @@ body {
             <li class="flex items-start"><span class="accent-color mr-2 text-xl leading-none">✓</span>スマホ最適化 / 基本SEO</li>
             <li class="flex items-start"><span class="accent-color mr-2 text-xl leading-none">✓</span>電話・LINE・フォーム導線</li>
           </ul>
-          <p class="text-sm text-gray-500 mt-4">「まずは信頼できる公式サイトを整えたい」方向けです。</p>
+          <p class="text-sm text-gray-500 mt-4">まずは信頼できる公式サイトを整えたい方向けです。</p>
         </div>
 
-        <div class="card-base animated-section" data-delay="0.4">
+        <div class="card-base price-card-highlight animated-section" data-delay="0.4">
+          <span class="badge-recommend">おすすめ</span>
           <p class="text-xs font-bold accent-color mb-2 tracking-wider">PLAN 02</p>
           <h3 class="text-2xl heading-font text-gray-800 mb-4">採用導線強化</h3>
           <ul class="text-gray-700 space-y-2 leading-relaxed">
             <li class="flex items-start"><span class="accent-color mr-2 text-xl leading-none">✓</span>採用ページの整理・充実</li>
-            <li class="flex items-start"><span class="accent-color mr-2 text-xl leading-none">✓</span>よくある不安の見える化</li>
+            <li class="flex items-start"><span class="accent-color mr-2 text-xl leading-none">✓</span>応募前の不安を言語化</li>
             <li class="flex items-start"><span class="accent-color mr-2 text-xl leading-none">✓</span>SNS/LINE導線の設計</li>
           </ul>
-          <p class="text-sm text-gray-500 mt-4">「応募前の不安を減らしたい」方向けです。</p>
+          <p class="text-sm text-gray-500 mt-4">紹介サイトとしての信頼感と採用導線を両立したい方向けです。</p>
         </div>
 
         <div class="card-base animated-section" data-delay="0.6">
@@ -734,7 +763,7 @@ body {
           <ul class="text-gray-700 space-y-2 leading-relaxed">
             <li class="flex items-start"><span class="accent-color mr-2 text-xl leading-none">✓</span>1日の流れ / スタッフの声</li>
             <li class="flex items-start"><span class="accent-color mr-2 text-xl leading-none">✓</span>見学歓迎導線・応募前FAQ</li>
-            <li class="flex items-start"><span class="accent-color mr-2 text-xl leading-none">✓</span>求人媒体・SNSからの着地ページ最適化</li>
+            <li class="flex items-start"><span class="accent-color mr-2 text-xl leading-none">✓</span>求人媒体・SNSからの着地最適化</li>
           </ul>
           <p class="text-sm text-gray-500 mt-4">採用を強く意識した見せ方にしたい方向けです。</p>
         </div>
@@ -746,7 +775,6 @@ body {
     </div>
   </section>
 
-  <!-- Price -->
   <section id="price" class="py-24 bg-white">
     <div class="max-w-6xl mx-auto px-4 text-center">
       <h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
@@ -762,7 +790,8 @@ body {
           </p>
         </div>
 
-        <div class="card-base animated-section" data-delay="0.4">
+        <div class="card-base price-card-highlight animated-section" data-delay="0.4">
+          <span class="badge-recommend">おすすめ</span>
           <h3 class="text-2xl heading-font text-gray-800 mb-2">採用導線強化</h3>
           <p class="text-4xl font-extrabold accent-color mb-4">25万円〜</p>
           <p class="text-gray-600 leading-relaxed">
@@ -789,7 +818,6 @@ body {
     </div>
   </section>
 
-  <!-- Flow -->
   <section id="flow" class="py-24 bg-subtle">
     <div class="max-w-4xl mx-auto px-4 text-center">
       <h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
@@ -808,7 +836,7 @@ body {
         </h3>
         <p class="text-lg text-gray-600 leading-relaxed">
           現状の課題や、誰に何を伝えたいかを整理します。
-          「まだ方向性がはっきりしていない」という段階でも大丈夫です。
+          まだ方向性がはっきりしていない段階でも大丈夫です。
         </p>
       </div>
 
@@ -850,7 +878,6 @@ body {
     </div>
   </section>
 
-  <!-- FAQ -->
   <section id="faq" class="py-24 bg-white">
     <div class="max-w-6xl mx-auto px-4 text-center">
       <h2 class="text-3xl sm:text-4xl heading-font mb-16 h2-style animated-section">
@@ -862,7 +889,7 @@ body {
           <h3 class="text-xl heading-font text-gray-800 mb-3">まだお願いするか決めていなくても相談できますか？</h3>
           <p class="text-gray-600 leading-relaxed">
             はい、大丈夫です。ご紹介で来てくださる方の中には、
-            「まず話を聞いてみたい」「何が必要か整理したい」という段階の方も多いです。
+            まず話を聞いてみたい、何が必要か整理したいという段階の方も多いです。
             無理におすすめすることはありません。
           </p>
         </div>
@@ -895,7 +922,6 @@ body {
     </div>
   </section>
 
-  <!-- Final CTA -->
   <section class="py-20">
     <div class="max-w-5xl mx-auto px-4 text-center">
       <div class="card-base">
@@ -914,7 +940,6 @@ body {
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="py-12 bg-[#f0f0e8] text-center text-sm text-gray-500">
     <div class="max-w-7xl mx-auto px-4">
       <nav class="mb-4 space-x-6">
@@ -927,7 +952,6 @@ body {
   </footer>
 
   <script>
-    // Mobile menu
     const hamburgerButton = document.getElementById('hamburger-button');
     const closeMenuButton = document.getElementById('close-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -951,7 +975,6 @@ body {
       });
     });
 
-    // Intersection Observer
     document.addEventListener('DOMContentLoaded', () => {
       const animatedElements = document.querySelectorAll('.animated-section');
 
@@ -973,8 +996,7 @@ body {
         }
       });
 
-      // Smooth scroll
-      document.querySelectorAll('nav a[href^="#"], a#logo-link, a[href^="#for-referral"]').forEach(anchor => {
+      document.querySelectorAll('nav a[href^="#"], a#logo-link').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
           const href = this.getAttribute('href');
           if (href && href.startsWith('#') && href.length > 1) {
