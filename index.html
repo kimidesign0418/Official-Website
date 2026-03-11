@@ -245,338 +245,7 @@
       transform: translateY(0);
     }
 
-    /* HERO */
-    .hero-wrap {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-      padding-top: 5rem;
-      padding-bottom: 6.5rem;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      z-index: -3;
-      background:
-        radial-gradient(circle at 50% 10%, rgba(109, 151, 109, 0.18), rgba(109, 151, 109, 0) 28%),
-        radial-gradient(circle at 15% 30%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0) 30%),
-        radial-gradient(circle at 85% 25%, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0) 24%),
-        linear-gradient(180deg, #f8fbf7 0%, #fcf8f0 55%, #fcf8f0 100%);
-    }
-
-    .hero-grid {
-      max-width: 1180px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap: 2.5rem;
-      align-items: center;
-    }
-
-    .hero-copy {
-      text-align: left;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.55rem 0.95rem;
-      border-radius: 9999px;
-      background: rgba(255, 255, 255, 0.78);
-      border: 1px solid rgba(109, 151, 109, 0.18);
-      color: var(--color-primary);
-      font-size: 0.84rem;
-      font-weight: 800;
-      letter-spacing: 0.08em;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 24px rgba(80, 110, 80, 0.05);
-      margin-bottom: 1.3rem;
-    }
-
-    .hero-badge-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 9999px;
-      background: var(--color-primary);
-    }
-
-    .hero-h1 {
-      font-family: 'Shippori Mincho B1', serif;
-      font-size: clamp(2.45rem, 5vw, 5rem);
-      line-height: 1.24;
-      letter-spacing: -0.02em;
-      color: var(--color-navy);
-      margin: 0;
-      max-width: 12.5ch;
-    }
-
-    .hero-h1 .accent {
-      color: #739c74;
-    }
-
-    .hero-lead {
-      max-width: 700px;
-      margin-top: 1.6rem;
-      font-size: clamp(1rem, 1.35vw, 1.14rem);
-      line-height: 1.95;
-      color: #55627a;
-    }
-
-    .hero-lead strong {
-      color: var(--color-primary);
-      font-weight: 800;
-    }
-
-    .hero-points {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.9rem;
-      margin-top: 1.8rem;
-      max-width: 760px;
-    }
-
-    .hero-point {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      padding: 1rem 1rem;
-      background: rgba(255, 255, 255, 0.82);
-      border: 1px solid rgba(109, 151, 109, 0.12);
-      border-radius: 1rem;
-      box-shadow: 0 10px 24px rgba(40, 60, 50, 0.04);
-      backdrop-filter: blur(10px);
-    }
-
-    .hero-point-icon {
-      width: 34px;
-      height: 34px;
-      flex-shrink: 0;
-      border-radius: 9999px;
-      background: var(--color-primary-light);
-      color: var(--color-primary);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .hero-point-icon svg {
-      width: 18px;
-      height: 18px;
-      stroke-width: 2.4;
-    }
-
-    .hero-point-text {
-      color: #5d6474;
-      font-size: 0.94rem;
-      line-height: 1.7;
-      font-weight: 700;
-    }
-
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-top: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .hero-mini-note {
-      margin-top: 1.2rem;
-      color: #7a8396;
-      font-size: 0.88rem;
-      line-height: 1.8;
-    }
-
-    .hero-card {
-      position: relative;
-      background: rgba(255, 255, 255, 0.82);
-      border: 1px solid rgba(109, 151, 109, 0.12);
-      border-radius: 1.6rem;
-      padding: 1.5rem;
-      box-shadow: var(--shadow-hero);
-      backdrop-filter: blur(12px);
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(180deg, rgba(109, 151, 109, 0.25), rgba(109, 151, 109, 0.04));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-    }
-
-    .hero-card-label {
-      display: inline-block;
-      padding: 0.35rem 0.8rem;
-      background: rgba(109, 151, 109, 0.1);
-      color: var(--color-primary);
-      border-radius: 9999px;
-      font-size: 0.8rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-    }
-
-    .hero-card-title {
-      font-size: 1.65rem;
-      line-height: 1.5;
-      color: var(--color-heading);
-      margin-bottom: 1rem;
-    }
-
-    .hero-card-copy {
-      font-size: 0.98rem;
-      line-height: 1.9;
-      color: #627086;
-      margin-bottom: 1.3rem;
-    }
-
-    .hero-card-list {
-      display: grid;
-      gap: 0.85rem;
-      margin-bottom: 1.4rem;
-    }
-
-    .hero-card-item {
-      display: flex;
-      gap: 0.85rem;
-      align-items: flex-start;
-      padding: 0.95rem 1rem;
-      border-radius: 1rem;
-      background: #fff;
-      border: 1px solid rgba(109, 151, 109, 0.08);
-    }
-
-    .hero-card-item strong {
-      display: block;
-      color: #4c5769;
-      font-size: 0.96rem;
-      margin-bottom: 0.12rem;
-    }
-
-    .hero-card-item span {
-      display: block;
-      color: #748094;
-      font-size: 0.86rem;
-      line-height: 1.6;
-    }
-
-    .hero-card-bottom {
-      padding: 1rem 1.05rem;
-      border-radius: 1rem;
-      background: linear-gradient(180deg, rgba(237, 246, 238, 0.95), rgba(255, 255, 255, 0.96));
-      border: 1px solid rgba(109, 151, 109, 0.14);
-      color: #5a6678;
-      font-size: 0.92rem;
-      line-height: 1.8;
-    }
-
-    .section-lead {
-      max-width: 780px;
-      margin: 0 auto 3rem;
-      color: #6a7280;
-      font-size: 1.05rem;
-      line-height: 1.95;
-    }
-
-    .profile-note {
-      background: #fff;
-      border: 1px solid rgba(109, 151, 109, 0.12);
-      border-radius: 1rem;
-      padding: 1.1rem 1.2rem;
-    }
-
-    .soft-note {
-      background: #fff;
-      border: 1px solid rgba(109, 151, 109, 0.15);
-      border-radius: 1rem;
-      padding: 1.25rem 1.25rem;
-    }
-
-    .price-card-highlight {
-      border: 1.5px solid rgba(109, 151, 109, 0.28);
-      box-shadow: 0 15px 35px rgba(109, 151, 109, 0.08);
-    }
-
-    .badge-recommend {
-      display: inline-block;
-      margin-bottom: 0.85rem;
-      padding: 0.38rem 0.8rem;
-      background: rgba(109, 151, 109, 0.12);
-      color: var(--color-primary);
-      border-radius: 9999px;
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-
-    .price-sub {
-      color: #7a8392;
-      font-size: 0.92rem;
-      line-height: 1.8;
-      margin-top: 0.65rem;
-    }
-
-    .cta-box {
-      background:
-        radial-gradient(circle at top, rgba(109, 151, 109, 0.1), rgba(109, 151, 109, 0) 35%),
-        #ffffff;
-      border: 1px solid rgba(109, 151, 109, 0.12);
-      border-radius: 1.5rem;
-      box-shadow: var(--shadow-soft);
-      padding: 3rem 1.5rem;
-    }
-
-    @media (max-width: 1024px) {
-      .hero-wrap {
-        padding-top: 4.4rem;
-        padding-bottom: 5rem;
-      }
-
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-
-      .hero-copy {
-        text-align: center;
-      }
-
-      .hero-h1 {
-        margin-left: auto;
-        margin-right: auto;
-        max-width: 12ch;
-      }
-
-      .hero-lead {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-points {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-actions {
-        justify-content: center;
-      }
-
-      .hero-mini-note {
-        text-align: center;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .hero-wrap {
-        padding-top: 3.2rem;
-        padding-bottom: 4.2rem;
-      }
+   /* HERO */
 
       .hero-h1 {
         max-width: 10.8ch;
@@ -672,140 +341,60 @@
   </div>
 
   <main id="main" class="hero-wrap px-4 sm:px-6 lg:px-8">
-    <div class="hero-bg"></div>
+  <div class="hero-bg"></div>
 
-    <div class="hero-grid">
-      <div class="hero-copy animated-section is-visible" style="transition-delay: 0.15s;">
-        <div class="hero-badge">
-          <span class="hero-badge-dot"></span>
-          訪問看護ステーション専門のホームページ制作
-        </div>
+  <div class="hero-inner animated-section is-visible" style="transition-delay: 0.15s;">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      訪問看護ステーション専門
+    </div>
 
-        <h1 class="hero-h1 text-balance">
-          訪問看護ステーションの
-          <span class="accent">信頼と採用</span>を、
-          やさしく整えるホームページを。
-        </h1>
+    <h1 class="hero-h1 text-balance">
+      ホームページで
+      <span class="accent">信頼と採用</span>を
+      整える。
+    </h1>
 
-        <p class="hero-lead text-pretty">
-          KimiDesignは、訪問看護ステーションに特化して
-          <strong>「安心して見てもらえる公式サイト」</strong>を制作しています。<br class="hidden sm:block" />
-          ご紹介でサイトを見に来た方や、応募を考えている方に向けて、
-          <strong>信頼感・わかりやすさ・採用導線</strong>を丁寧に整えます。
-        </p>
+    <p class="hero-subcopy text-pretty">
+      信頼感のある公式サイトと、採用につながる導線を整えます。
+    </p>
 
-        <div class="hero-points">
-          <div class="hero-point">
-            <span class="hero-point-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21c4.97-4.21 8-7.58 8-11a5 5 0 0 0-9-3 5 5 0 0 0-9 3c0 3.42 3.03 6.79 8 11Z" />
-              </svg>
-            </span>
-            <p class="hero-point-text">医療・介護分野に合う、安心感のある見せ方</p>
-          </div>
+    <p class="hero-lead text-pretty">
+      ご紹介でサイトを見に来た方や、応募を考えている方に向けて、
+      安心して見てもらえるホームページを丁寧に制作しています。
+    </p>
 
-          <div class="hero-point">
-            <span class="hero-point-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3M5 11h14M5 21h14a1 1 0 0 0 1-1V8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a1 1 0 0 0 1 1Z" />
-              </svg>
-            </span>
-            <p class="hero-point-text">開業初期でも始めやすい、必要十分な構成</p>
-          </div>
+    <div class="hero-actions">
+      <a href="contact.html" class="primary-button text-base sm:text-lg w-full sm:w-auto">
+        ご相談はこちら
+      </a>
+      <a href="#works" class="secondary-button text-base sm:text-lg w-full sm:w-auto">
+        実績を見る
+      </a>
+    </div>
 
-          <div class="hero-point">
-            <span class="hero-point-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h18M3 12h18M3 19h18" />
-              </svg>
-            </span>
-            <p class="hero-point-text">文章や構成の整理から、一緒に相談できる</p>
-          </div>
-
-          <div class="hero-point">
-            <span class="hero-point-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17 7h.01M7 7h10M7 12h10M7 17h6" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 0 1 2-2h11.17a2 2 0 0 1 1.41.59l2.83 2.82a2 2 0 0 1 .59 1.42V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5Z" />
-              </svg>
-            </span>
-            <p class="hero-point-text">採用ページ・LINE導線も後から育てやすい</p>
-          </div>
-        </div>
-
-        <div class="hero-actions">
-          <a href="contact.html" class="primary-button text-base sm:text-lg w-full sm:w-auto">無料相談をしてみる</a>
-          <a href="#about" class="secondary-button text-base sm:text-lg w-full sm:w-auto">KimiDesignについて</a>
-        </div>
-
-        <p class="hero-mini-note text-pretty">
-          ※現在は、主にご紹介やご縁のある方からのご相談を中心にお受けしています。<br class="hidden sm:block" />
-          「まずは形にしたい」「あとから育てたい」というご相談にも対応しています。
-        </p>
+    <div class="hero-features">
+      <div class="hero-feature">
+        <p class="hero-feature-title">訪問看護に特化</p>
+        <p class="hero-feature-text">医療・介護分野に合う、安心感のある見せ方を大切にしています。</p>
       </div>
 
-      <div class="animated-section is-visible" style="transition-delay: 0.3s;">
-        <div class="hero-card">
-          <span class="hero-card-label">KimiDesignの考え方</span>
-          <h2 class="hero-card-title heading-font">
-            まずは信頼される形を整え、
-            必要に応じて育てていく。
-          </h2>
-          <p class="hero-card-copy">
-            訪問看護ステーションのホームページは、
-            最初から大きく作り込みすぎなくても大丈夫です。<br />
-            大切なのは、利用者さま・ご家族・関係機関・求職者に向けて、
-            <span class="font-bold text-gray-700">必要な安心がきちんと伝わること</span>です。
-          </p>
+      <div class="hero-feature">
+        <p class="hero-feature-title">採用導線に対応</p>
+        <p class="hero-feature-text">応募前の不安を減らし、見学や相談につながる流れを整えます。</p>
+      </div>
 
-          <div class="hero-card-list">
-            <div class="hero-card-item">
-              <div class="hero-point-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-                </svg>
-              </div>
-              <div>
-                <strong>公式サイトとしての信頼感</strong>
-                <span>紹介で見に来た方に、安心してもらえる土台を整えます。</span>
-              </div>
-            </div>
-
-            <div class="hero-card-item">
-              <div class="hero-point-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM12 14c-4.418 0-8 2.239-8 5h16c0-2.761-3.582-5-8-5Z" />
-                </svg>
-              </div>
-              <div>
-                <strong>応募前の不安を減らす採用導線</strong>
-                <span>見学や相談につながる導線づくりも一緒に考えます。</span>
-              </div>
-            </div>
-
-            <div class="hero-card-item">
-              <div class="hero-point-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16M12 4v16" />
-                </svg>
-              </div>
-              <div>
-                <strong>文章づくりもサポート</strong>
-                <span>忙しい現場でも進めやすいよう、叩き台づくりから対応します。</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-card-bottom">
-            KimiDesignは、派手に見せるよりも
-            <span class="font-bold text-gray-700">「この事業所なら安心できそう」</span>
-            と感じてもらえることを大切にしています。
-          </div>
-        </div>
+      <div class="hero-feature">
+        <p class="hero-feature-title">小さく始めて育てられる</p>
+        <p class="hero-feature-text">最初から作り込みすぎず、必要に応じて後から育てていけます。</p>
       </div>
     </div>
-  </main>
 
+    <p class="hero-note text-pretty">
+      ※現在は、主にご紹介やご縁のある方からのご相談を中心にお受けしています。
+    </p>
+  </div>
+</main>
   <section id="about" class="py-24 bg-white">
     <div class="max-w-6xl mx-auto px-4 text-center">
       <h2 class="text-3xl sm:text-4xl heading-font mb-6 h2-style animated-section">
