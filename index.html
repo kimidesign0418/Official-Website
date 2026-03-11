@@ -17,7 +17,6 @@
     :root {
       --color-primary: #6d976d;
       --color-primary-dark: #5d845d;
-      --color-primary-light: #edf6ee;
       --color-secondary: #f7fcf8;
       --color-background: #fcf8f0;
       --color-surface: #ffffff;
@@ -25,10 +24,8 @@
       --color-text-soft: #6b7280;
       --color-heading: #4d5868;
       --color-navy: #1f2a44;
-      --color-line: rgba(109, 151, 109, 0.12);
       --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.04), 0 0 5px rgba(0, 0, 0, 0.02);
       --shadow-hover: 0 15px 45px rgba(0, 0, 0, 0.08), 0 0 8px rgba(0, 0, 0, 0.03);
-      --shadow-hero: 0 25px 60px rgba(60, 90, 70, 0.08);
     }
 
     html {
@@ -40,6 +37,7 @@
       background-color: var(--color-background);
       color: var(--color-text-dark);
       line-height: 1.8;
+      margin: 0;
     }
 
     .heading-font {
@@ -106,6 +104,8 @@
       box-shadow: 0 6px 15px rgba(109, 151, 109, 0.35);
       display: inline-block;
       text-align: center;
+      text-decoration: none;
+      border: none;
     }
 
     .primary-button:hover {
@@ -117,13 +117,14 @@
     .secondary-button {
       background-color: rgba(255, 255, 255, 0.92);
       color: var(--color-primary);
-      border: 1px solid rgba(109, 151, 109, 0.28);
+      border: 1px solid rgba(109, 151, 109, 0.3);
       padding: 1rem 2.2rem;
       border-radius: 9999px;
       font-weight: 700;
       transition: all 0.3s ease;
       display: inline-block;
       text-align: center;
+      text-decoration: none;
       backdrop-filter: blur(8px);
     }
 
@@ -134,7 +135,7 @@
 
     .card-base {
       background-color: var(--color-surface);
-      border-radius: 1.35rem;
+      border-radius: 1.25rem;
       padding: 2rem;
       transition: all 0.35s ease;
       box-shadow: var(--shadow-soft);
@@ -245,42 +246,200 @@
       transform: translateY(0);
     }
 
-   /* HERO */
+    /* ===== HERO PROFESSIONAL SIMPLE ===== */
+    .hero-wrap {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding-top: 5.5rem;
+      padding-bottom: 5.5rem;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 50% 12%, rgba(109, 151, 109, 0.12), rgba(109, 151, 109, 0) 30%),
+        linear-gradient(180deg, #f8fbf7 0%, #fcf8f0 60%, #fcf8f0 100%);
+    }
+
+    .hero-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 0.95rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(109, 151, 109, 0.16);
+      color: var(--color-primary);
+      font-size: 0.84rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      margin-bottom: 1.3rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 9999px;
+      background: var(--color-primary);
+    }
+
+    .hero-h1 {
+      font-family: 'Shippori Mincho B1', serif;
+      font-size: clamp(2.7rem, 5vw, 4.8rem);
+      line-height: 1.32;
+      letter-spacing: -0.02em;
+      color: var(--color-navy);
+      margin: 0 auto;
+      max-width: 9.5ch;
+    }
+
+    .hero-h1 .accent {
+      color: #7ca276;
+    }
+
+    .hero-subcopy {
+      margin: 1.3rem auto 0;
+      font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+      line-height: 1.9;
+      color: #5d687c;
+      max-width: 760px;
+    }
+
+    .hero-lead {
+      margin: 1rem auto 0;
+      font-size: 1rem;
+      line-height: 1.9;
+      color: #748094;
+      max-width: 760px;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-features {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 2.4rem;
+    }
+
+    .hero-feature {
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(109, 151, 109, 0.12);
+      border-radius: 1rem;
+      padding: 1.15rem 1rem;
+      box-shadow: 0 10px 24px rgba(40, 60, 50, 0.04);
+      text-align: left;
+    }
+
+    .hero-feature-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #55627a;
+      margin-bottom: 0.35rem;
+    }
+
+    .hero-feature-text {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #7a8396;
+    }
+
+    .hero-note {
+      margin-top: 1.35rem;
+      font-size: 0.84rem;
+      line-height: 1.8;
+      color: #7d8798;
+    }
+
+    .section-lead {
+      max-width: 760px;
+      margin: 0 auto 3rem;
+      color: #6b7280;
+      line-height: 1.9;
+    }
+
+    .profile-note {
+      background: #fff;
+      border: 1px solid rgba(109, 151, 109, 0.12);
+      border-radius: 1rem;
+      padding: 1.1rem 1.2rem;
+    }
+
+    .soft-note {
+      background: #fff;
+      border: 1px solid rgba(109, 151, 109, 0.15);
+      border-radius: 1rem;
+      padding: 1.25rem 1.25rem;
+    }
+
+    .price-card-highlight {
+      border: 1.5px solid rgba(109, 151, 109, 0.28);
+      box-shadow: 0 15px 35px rgba(109, 151, 109, 0.08);
+    }
+
+    .badge-recommend {
+      display: inline-block;
+      margin-bottom: 0.85rem;
+      padding: 0.38rem 0.8rem;
+      background: rgba(109, 151, 109, 0.12);
+      color: var(--color-primary);
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+      .hero-wrap {
+        padding-top: 3.8rem;
+        padding-bottom: 4.2rem;
+      }
 
       .hero-h1 {
-        max-width: 10.8ch;
-        font-size: clamp(2.1rem, 8.6vw, 3.45rem);
-        line-height: 1.3;
+        max-width: 8.8ch;
+        font-size: clamp(2.15rem, 8vw, 3.5rem);
+        line-height: 1.38;
+      }
+
+      .hero-subcopy {
+        font-size: 1rem;
+        line-height: 1.8;
       }
 
       .hero-lead {
-        margin-top: 1.25rem;
-        font-size: 1rem;
-        line-height: 1.85;
+        font-size: 0.95rem;
+        line-height: 1.8;
       }
 
-      .hero-points {
+      .hero-features {
         grid-template-columns: 1fr;
-        gap: 0.75rem;
-        margin-top: 1.4rem;
+        gap: 0.8rem;
+        margin-top: 1.8rem;
       }
 
-      .hero-card {
-        padding: 1.2rem;
-      }
-
-      .hero-card-title {
-        font-size: 1.4rem;
+      .hero-feature {
+        text-align: center;
       }
 
       .hero-actions {
-        gap: 0.85rem;
-        margin-top: 1.6rem;
-      }
-
-      .section-lead {
-        font-size: 1rem;
-        margin-bottom: 2.4rem;
+        gap: 0.8rem;
+        margin-top: 1.7rem;
       }
     }
   </style>
@@ -341,60 +500,67 @@
   </div>
 
   <main id="main" class="hero-wrap px-4 sm:px-6 lg:px-8">
-  <div class="hero-bg"></div>
+    <div class="hero-bg"></div>
 
-  <div class="hero-inner animated-section is-visible" style="transition-delay: 0.15s;">
-    <div class="hero-badge">
-      <span class="hero-badge-dot"></span>
-      訪問看護ステーション専門
-    </div>
-
-    <h1 class="hero-h1 text-balance">
-      ホームページで
-      <span class="accent">信頼と採用</span>を
-      整える。
-    </h1>
-
-    <p class="hero-subcopy text-pretty">
-      信頼感のある公式サイトと、採用につながる導線を整えます。
-    </p>
-
-    <p class="hero-lead text-pretty">
-      ご紹介でサイトを見に来た方や、応募を考えている方に向けて、
-      安心して見てもらえるホームページを丁寧に制作しています。
-    </p>
-
-    <div class="hero-actions">
-      <a href="contact.html" class="primary-button text-base sm:text-lg w-full sm:w-auto">
-        ご相談はこちら
-      </a>
-      <a href="#works" class="secondary-button text-base sm:text-lg w-full sm:w-auto">
-        実績を見る
-      </a>
-    </div>
-
-    <div class="hero-features">
-      <div class="hero-feature">
-        <p class="hero-feature-title">訪問看護に特化</p>
-        <p class="hero-feature-text">医療・介護分野に合う、安心感のある見せ方を大切にしています。</p>
+    <div class="hero-inner animated-section is-visible" style="transition-delay: 0.15s;">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        訪問看護ステーション専門
       </div>
 
-      <div class="hero-feature">
-        <p class="hero-feature-title">採用導線に対応</p>
-        <p class="hero-feature-text">応募前の不安を減らし、見学や相談につながる流れを整えます。</p>
+      <h1 class="hero-h1 text-balance">
+        ホームページで
+        <span class="accent">信頼と採用</span>を
+        整える。
+      </h1>
+
+      <p class="hero-subcopy text-pretty">
+        信頼感のある公式サイトと、採用につながる導線を整えます。
+      </p>
+
+      <p class="hero-lead text-pretty">
+        ご紹介でサイトを見に来た方や、応募を考えている方に向けて、
+        安心して見てもらえるホームページを丁寧に制作しています。
+      </p>
+
+      <div class="hero-actions">
+        <a href="contact.html" class="primary-button text-base sm:text-lg w-full sm:w-auto">
+          ご相談はこちら
+        </a>
+        <a href="#works" class="secondary-button text-base sm:text-lg w-full sm:w-auto">
+          実績を見る
+        </a>
       </div>
 
-      <div class="hero-feature">
-        <p class="hero-feature-title">小さく始めて育てられる</p>
-        <p class="hero-feature-text">最初から作り込みすぎず、必要に応じて後から育てていけます。</p>
+      <div class="hero-features">
+        <div class="hero-feature">
+          <p class="hero-feature-title">訪問看護に特化</p>
+          <p class="hero-feature-text">
+            医療・介護分野に合う、安心感のある見せ方を大切にしています。
+          </p>
+        </div>
+
+        <div class="hero-feature">
+          <p class="hero-feature-title">採用導線に対応</p>
+          <p class="hero-feature-text">
+            応募前の不安を減らし、見学や相談につながる流れを整えます。
+          </p>
+        </div>
+
+        <div class="hero-feature">
+          <p class="hero-feature-title">小さく始めて育てられる</p>
+          <p class="hero-feature-text">
+            最初から作り込みすぎず、必要に応じて後から育てていけます。
+          </p>
+        </div>
       </div>
+
+      <p class="hero-note text-pretty">
+        ※現在は、主にご紹介やご縁のある方からのご相談を中心にお受けしています。
+      </p>
     </div>
+  </main>
 
-    <p class="hero-note text-pretty">
-      ※現在は、主にご紹介やご縁のある方からのご相談を中心にお受けしています。
-    </p>
-  </div>
-</main>
   <section id="about" class="py-24 bg-white">
     <div class="max-w-6xl mx-auto px-4 text-center">
       <h2 class="text-3xl sm:text-4xl heading-font mb-6 h2-style animated-section">
@@ -409,8 +575,8 @@
         <div class="card-base animated-section" data-delay="0.2">
           <p class="text-sm font-bold accent-color mb-3 tracking-wider">MESSAGE</p>
           <h3 class="text-2xl heading-font mb-5 text-gray-800">
-            想いがあるのに、<br />
-            うまく伝わっていない事業所の力になりたい。
+            ただ作るのではなく、<br />
+            “その事業所らしさ”が伝わる形を大切にしています。
           </h3>
           <p class="text-gray-600 leading-relaxed mb-4">
             はじめまして。KimiDesignです。<br />
@@ -425,7 +591,7 @@
           </p>
           <p class="text-gray-600 leading-relaxed">
             私は派手な営業よりも、
-            <span class="font-bold text-gray-700">丁寧に想いを汲み取り、言葉と形にすること</span>
+            <span class="font-bold text-gray-700">丁寧に想いを汲み取って、言葉と形にすること</span>
             を大切にしています。ご紹介で来てくださる方に、まず安心していただける制作を心がけています。
           </p>
         </div>
@@ -480,8 +646,9 @@
         はじめての方へ
       </h2>
       <p class="section-lead animated-section">
-        KimiDesignは、強く売り込むよりも、信頼の流れの中で長く役に立てる関係を大切にしています。
-        まだ依頼するか決まっていない段階でも、安心してご相談ください。
+        KimiDesignは、今のところ
+        <span class="font-bold accent-color">ご紹介やご縁のある方からのご相談</span>
+        を中心にお受けしています。強い営業ではなく、信頼の流れの中で長く役に立つことを大切にしています。
       </p>
 
       <div class="grid md:grid-cols-3 gap-10 text-left">
@@ -558,9 +725,8 @@
           <p class="text-xs font-bold accent-color mb-2 tracking-wider">WORK 01</p>
           <h3 class="text-2xl heading-font text-gray-800 mb-3">Sun＋訪問看護ステーション</h3>
           <p class="text-gray-600 mb-4 leading-relaxed">
-            新規開業の訪問看護ステーションの公式ホームページを制作しました。
-            地域の関係機関や求職者に向けて、
-            <span class="font-bold text-gray-700">まずは安心して見てもらえる情報設計</span>を大切に整えています。
+            新規開業の訪問看護ステーションのため、地域の関係機関や求職者に向けて、
+            まずは安心して見てもらえる公式ホームページを制作しました。
           </p>
 
           <ul class="text-gray-600 mb-6 space-y-2 list-disc list-inside">
@@ -669,9 +835,8 @@
       <div class="grid md:grid-cols-3 gap-10 text-left">
         <div class="card-base animated-section" data-delay="0.2">
           <h3 class="text-2xl heading-font text-gray-800 mb-2">公式サイト制作</h3>
-          <p class="text-4xl font-extrabold accent-color mb-2">15万円〜</p>
-          <p class="price-sub">最短公開 / 基本導線つき</p>
-          <p class="text-gray-600 leading-relaxed mt-4">
+          <p class="text-4xl font-extrabold accent-color mb-4">15万円〜</p>
+          <p class="text-gray-600 leading-relaxed">
             まずは必要な情報を整えて公開したい方向け。
           </p>
         </div>
@@ -679,18 +844,16 @@
         <div class="card-base price-card-highlight animated-section" data-delay="0.4">
           <span class="badge-recommend">おすすめ</span>
           <h3 class="text-2xl heading-font text-gray-800 mb-2">採用導線強化</h3>
-          <p class="text-4xl font-extrabold accent-color mb-2">25万円〜</p>
-          <p class="price-sub">応募につながる構成設計</p>
-          <p class="text-gray-600 leading-relaxed mt-4">
+          <p class="text-4xl font-extrabold accent-color mb-4">25万円〜</p>
+          <p class="text-gray-600 leading-relaxed">
             採用ページや導線を見直し、応募前の不安を減らしたい方向け。
           </p>
         </div>
 
         <div class="card-base animated-section" data-delay="0.6">
           <h3 class="text-2xl heading-font text-gray-800 mb-2">採用LP制作</h3>
-          <p class="text-4xl font-extrabold accent-color mb-2">35万円〜</p>
-          <p class="price-sub">採用特化ページ制作</p>
-          <p class="text-gray-600 leading-relaxed mt-4">
+          <p class="text-4xl font-extrabold accent-color mb-4">35万円〜</p>
+          <p class="text-gray-600 leading-relaxed">
             採用の見せ方をしっかり整えたい方向け。
           </p>
         </div>
@@ -818,8 +981,8 @@
 
   <section class="py-20">
     <div class="max-w-5xl mx-auto px-4 text-center">
-      <div class="cta-box animated-section is-visible">
-        <h2 class="text-3xl sm:text-4xl heading-font mb-6 text-gray-800">
+      <div class="card-base">
+        <h2 class="text-3xl sm:text-4xl heading-font mb-6">
           ご紹介でつながったご縁を、<br class="hidden sm:block" />
           安心につながる形に整えませんか？
         </h2>
